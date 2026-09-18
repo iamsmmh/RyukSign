@@ -385,6 +385,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 		// Idempotent, no-op after first run.
 		RyukSignAPI.migrateIfNeeded()
 
+		// Attach the premium repository API key to every manifest fetch/decrypt request.
+		FR.registerRepositoryKeyProvider()
+
 		DownloadManager.shared.errorDelegate = self
 
 		return true

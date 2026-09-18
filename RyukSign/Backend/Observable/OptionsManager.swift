@@ -102,6 +102,9 @@ struct Options: Codable, Equatable {
 	var changeLanguageFilesForCustomDisplayName: Bool
 	/// If tweaks should be injected into all app extensions (PlugIns and Extensions)
 	var injectIntoExtensions: Bool
+	/// If app extensions (PlugIns/ and Extensions/) should be stripped from the app bundle.
+	/// Defaults to `false` so widget/app extensions are preserved when signing.
+	var removeAppExtensions: Bool
 	/// Gives each signed app a keychain group derived from its bundle id so apps can't read each other's entries
 	var keychainIsolation: Bool
 	/// Injects the bundled fix that makes the document picker import files into the app's own container
@@ -158,6 +161,7 @@ struct Options: Codable, Equatable {
 		removeProvisioning: true,
 		changeLanguageFilesForCustomDisplayName: false,
 		injectIntoExtensions: false,
+		removeAppExtensions: false,
 		keychainIsolation: false,
 		fixFilePicker: false,
 
@@ -286,6 +290,7 @@ extension Options {
 		removeProvisioning = try c.decodeIfPresent(Bool.self, forKey: .removeProvisioning) ?? d.removeProvisioning
 		changeLanguageFilesForCustomDisplayName = try c.decodeIfPresent(Bool.self, forKey: .changeLanguageFilesForCustomDisplayName) ?? d.changeLanguageFilesForCustomDisplayName
 		injectIntoExtensions = try c.decodeIfPresent(Bool.self, forKey: .injectIntoExtensions) ?? d.injectIntoExtensions
+		removeAppExtensions = try c.decodeIfPresent(Bool.self, forKey: .removeAppExtensions) ?? d.removeAppExtensions
 		keychainIsolation = try c.decodeIfPresent(Bool.self, forKey: .keychainIsolation) ?? d.keychainIsolation
 		fixFilePicker = try c.decodeIfPresent(Bool.self, forKey: .fixFilePicker) ?? d.fixFilePicker
 		// try? so a stale per-sign blob drops instead of resetting the whole struct.

@@ -111,6 +111,8 @@ final class SigningHandler: NSObject {
 
 		try await _removePresetFiles(for: movedAppPath)
 		try await _removeWatchIfNeeded(for: movedAppPath)
+		// Opt-in only: default false leaves PlugIns/ and Extensions/ untouched.
+		try await _removeAppExtensionsIfNeeded(for: movedAppPath)
 
 		if _options.experiment_supportLiquidGlass {
 			SigningLog.shared.info(.localized("Patching for Liquid Glass"))
@@ -373,6 +375,11 @@ extension SigningHandler {
 		new newIdentifier: String,
 		for app: URL
 	) async throws {
+		// Only skip the plugin bundle-id rewrite when extensions are being stripped.
+		// When extensions are preserved (default), their bundle ids are still rewritten
+		// so they remain children of the new app identifier — the original behavior.
+		guard !_options.removeAppExtensions else { return }
+
 		let pluginBundles = _enumerateFiles(at: app) {
 			$0.hasSuffix(".app") || $0.hasSuffix(".appex")
 		}
@@ -454,8 +461,25 @@ extension SigningHandler {
 		}
 	}
 	
+	// Removes every .appex from PlugIns/ and Extensions/ — only when opted in via `removeAppExtensions`.
+	// Default (false) keeps them so widget/share/action extensions survive signing and stay installable.
+	private func _removeAppExtensionsIfNeeded(for app: URL) async throws {
+		guard _options.removeAppExtensions else { return }
+
+		let appexes = AppExtensionEnumerator.appexBundles(in: app)
+		guard !appexes.isEmpty else { return }
+
+		SigningLog.shared.info(.localized("Removing %lld app extension(s)", arguments: appexes.count))
+		for appex in appexes {
+			try _fileManager.removeFileIfNeeded(at: appex)
+			Logger.misc.info("[\(self._uuid)] Removed app extension: \(appex.lastPathComponent)")
+		}
+	}
+
 	// horrible edge-case
 	private func _removeWatchIfNeeded(for app: URL) async throws {
+		// A watch app is an app extension; keep it unless extensions are stripped on purpose.
+		guard !_options.removeAppExtensions else { return }
 		let watchDir = app.appendingPathComponent("Watch")
 		guard _fileManager.fileExists(atPath: watchDir.path) else { return }
 		
@@ -468,7 +492,7 @@ extension SigningHandler {
 			}
 		}
 	}
-	
+
 	private func _removeFiles(for app: URL, from appendingComponent: [String]) async throws {
 		let filesToRemove = appendingComponent.map {
 			app.appendingPathComponent($0)
