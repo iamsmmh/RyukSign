@@ -2,43 +2,120 @@ name: Create New Release
 
 on:
   workflow_dispatch:
+    inputs:
+      xcode:
+        description: >-
+          Xcode version to build with (e.g. "26.3", "16.4"). Leave empty to use
+          the newest Xcode installed on the runner image.
+        required: false
+        default: ''
 
 permissions:
   contents: write
+
+# Only one release build at a time; never cancel a run that is already
+# uploading assets.
+concurrency:
+  group: create-release
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: macos-15
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v7
         with:
-          submodules: 'true'
-      
-      - name: Use Xcode 16.4
+          # Zsign and IDeviceKitten are git submodules and are required to build.
+          submodules: recursive
+          # agvtool and `git rev-parse HEAD` both need the real git history.
+          fetch-depth: 0
+
+      - name: Select Xcode
+        env:
+          REQUESTED_XCODE: ${{ inputs.xcode }}
         run: |
-          sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
+          set -euo pipefail
+
+          # Runner images ship several Xcodes side by side and rotate them over
+          # time, so resolve a bundle instead of hardcoding an absolute path.
+          shopt -s nullglob
+          if [ -n "${REQUESTED_XCODE}" ]; then
+            candidates=(/Applications/Xcode_"${REQUESTED_XCODE}"*.app)
+          else
+            candidates=(/Applications/Xcode_*.app)
+          fi
+
+          if [ "${#candidates[@]}" -eq 0 ]; then
+            echo "::error::No Xcode matching '${REQUESTED_XCODE:-*}' is installed on this runner."
+            echo "Installed Xcodes:"
+            ls -d /Applications/Xcode*.app || true
+            exit 1
+          fi
+
+          # Highest version wins when we auto-select. Plain lexicographic sort
+          # is used because BSD sort on macOS has no portable `-V`.
+          if [ -n "${REQUESTED_XCODE}" ]; then
+            XCODE_APP="${candidates[0]}"
+          else
+            XCODE_APP="$(printf '%s\n' "${candidates[@]}" | sort | tail -n 1)"
+          fi
+
+          echo "Using ${XCODE_APP}"
+          sudo xcode-select -s "${XCODE_APP}/Contents/Developer"
+          xcodebuild -version
+          echo "iOS SDK: $(xcrun --sdk iphoneos --show-sdk-version)"
 
       - name: Compile RyukSign
-        run: | 
-          agvtool new-version -all $(git rev-parse HEAD)
+        run: |
+          set -euo pipefail
+
+          BUILD_NUMBER="$(git rev-parse HEAD)"
+          if ! agvtool new-version -all "${BUILD_NUMBER}"; then
+            echo "::warning::agvtool could not stamp the build number (${BUILD_NUMBER}); continuing with the committed CURRENT_PROJECT_VERSION."
+          fi
+
           make
-          mkdir upload
-          mv packages/* upload/
+
+          if ! ls packages/*.ipa >/dev/null 2>&1; then
+            echo "::error::make finished but produced no .ipa in packages/."
+            exit 1
+          fi
+
+          mkdir -p upload
+          mv packages/*.ipa upload/
 
       - name: Get Version
         id: get_version
         run: |
-          VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" Payload/*.app/Info.plist)
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          set -euo pipefail
+
+          # `make` leaves a Payload -> <build dir>/Payload symlink next to the
+          # project so the staged .app can be inspected after the build.
+          shopt -s nullglob
+          plists=(Payload/*.app/Info.plist)
+          if [ "${#plists[@]}" -eq 0 ]; then
+            echo "::error::No built app bundle found under Payload/ - did the build succeed?"
+            exit 1
+          fi
+
+          VERSION="$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' "${plists[0]}")"
+          if [ -z "${VERSION}" ]; then
+            echo "::error::Could not read CFBundleShortVersionString from ${plists[0]}."
+            exit 1
+          fi
+
+          echo "Building release for version ${VERSION}"
+          echo "VERSION=${VERSION}" >> "$GITHUB_ENV"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: RyukSign v${{ env.VERSION }}
           tag_name: v${{ env.VERSION }}
           files: |
-            upload/*ipa
+            upload/*.ipa
           generate_release_notes: true
           fail_on_unmatched_files: true
           draft: false

@@ -1,7 +1,9 @@
 NAME := RyukSign
 PLATFORM := iphoneos
 SCHEMES := RyukSign
-TMP := $(TMPDIR)/$(NAME)
+# TMPDIR is unset in some environments (plain Linux CI, bare shells); without a
+# fallback the paths below would resolve to "/$(NAME)" and fail on permissions.
+TMP := $(if $(TMPDIR),$(TMPDIR),/tmp)/$(NAME)
 STAGE := $(TMP)/stage
 APP := $(TMP)/Build/Products/Release-$(PLATFORM)
 CERT_JSON_URL := https://ryuksign-install.ryuksign.workers.dev/pack.json
