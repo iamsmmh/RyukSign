@@ -31,7 +31,9 @@ struct IPAFileViewerView: View {
 	@State private var _promptText = ""
 
 	init(workspace: IPAWorkspace, entry: IPAFileEntry) {
-		self._workspace = ObservedObject(wrappedValue: workspace)
+		// The property is itself named `_workspace` (house style), so assigning the
+		// wrapped value here initializes the `@ObservedObject` storage.
+		self._workspace = workspace
 		self.entry = entry
 		__kind = State(initialValue: entry.kind)
 	}
@@ -50,7 +52,7 @@ struct IPAFileViewerView: View {
 			Button(.localized("Cancel"), role: .cancel) {}
 			Button(.localized("Rename")) { _rename() }
 		}
-		.onAppear(perform: _load)
+		.onAppear { _load() }
 	}
 }
 

@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 import Security
+#if canImport(AltSourceKit)
+import AltSourceKit
+#endif
 
 enum RyukSignAPI {
 	// MARK: - Contact
