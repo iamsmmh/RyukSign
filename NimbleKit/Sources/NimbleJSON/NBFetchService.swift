@@ -16,7 +16,14 @@ public class NBFetchService {
 	/// Dependency-free hook the host app registers once at startup to supply the
 	/// premium repository API key (e.g. `{ EsignSourceKey.customApiKey }`).
 	/// When it returns a non-empty string, every request receives it as `X-API-Key`.
-	public static var apiKeyProvider: (() -> String)? = nil
+	///
+	/// `nonisolated(unsafe)` keeps this building in Swift 6 language mode (this
+	/// package declares swift-tools-version 6.0, which rejects unsynchronized
+	/// shared mutable state outright). It is safe here because the property is
+	/// assigned exactly once — on the main thread at launch, via
+	/// `FR.registerRepositoryKeyProvider()` — before any fetch runs; afterwards
+	/// the background queues in `fetch(from:headers:completion:)` only read it.
+	nonisolated(unsafe) public static var apiKeyProvider: (() -> String)? = nil
 
 	public enum NBFetchServiceError: Error, LocalizedError {
 		case invalidURL
