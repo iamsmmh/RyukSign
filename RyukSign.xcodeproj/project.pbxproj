@@ -10,8 +10,6 @@
 		3305BBAC2DB8944200660D45 /* Vapor in Frameworks */ = {isa = PBXBuildFile; productRef = 3305BBAB2DB8944200660D45 /* Vapor */; };
 		330F68FC2DBF7C8600D8C35D /* NimbleExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 330F68FB2DBF7C8600D8C35D /* NimbleExtensions */; };
 		330F68FE2DBF7C8600D8C35D /* NimbleViews in Frameworks */ = {isa = PBXBuildFile; productRef = 330F68FD2DBF7C8600D8C35D /* NimbleViews */; };
-		330F69012DC03DF500D8C35D /* NimbleExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 330F69002DC03DF500D8C35D /* NimbleExtensions */; };
-		330F69032DC03DF500D8C35D /* NimbleViews in Frameworks */ = {isa = PBXBuildFile; productRef = 330F69022DC03DF500D8C35D /* NimbleViews */; };
 		3346F5C22DC329A200C7D508 /* ZsignSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3346F5C12DC329A200C7D508 /* ZsignSwift */; };
 		3346F83B2DC6C6D100C7D508 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 3346F83A2DC6C6D100C7D508 /* NukeUI */; };
 		3346F8492DC6D64800C7D508 /* NimbleJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 3346F8482DC6D64800C7D508 /* NimbleJSON */; };
@@ -24,7 +22,6 @@
 		3A2F0EE72E96DA5A009DE4CE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A2F0EC02E96DA0B009DE4CE /* SwiftUI.framework */; };
 		3A2F0EF62E96DA5D009DE4CE /* RyukSignWidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3A2F0EE52E96DA5A009DE4CE /* RyukSignWidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3A2F0F0D2E976B67009DE4CE /* IDevice in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2F0F0C2E976B67009DE4CE /* IDevice */; };
-		3A2F0F0F2E976B67009DE4CE /* IDeviceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3A2F0F0E2E976B67009DE4CE /* IDeviceSwift */; };
 		FADE000100000000000F0001 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = FADE000100000000000F0002 /* ZIPFoundation */; };
 /* End PBXBuildFile section */
 
@@ -114,11 +111,6 @@
 			path = RyukSign;
 			sourceTree = "<group>";
 		};
-		3A2F0EC22E96DA0B009DE4CE /* RyukSignWidgetExtension */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RyukSignWidgetExtension;
-			sourceTree = "<group>";
-		};
 		3A2F0EE82E96DA5A009DE4CE /* RyukSignWidgetExtension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -143,18 +135,15 @@
 				330F68FC2DBF7C8600D8C35D /* NimbleExtensions in Frameworks */,
 				3346F5C22DC329A200C7D508 /* ZsignSwift in Frameworks */,
 				3346F8492DC6D64800C7D508 /* NimbleJSON in Frameworks */,
-				330F69012DC03DF500D8C35D /* NimbleExtensions in Frameworks */,
 				3349E7672DEFB46F00E317ED /* IDeviceSwift in Frameworks */,
 				33CF13392DB5ACFB0021D4C5 /* SWCompression in Frameworks */,
 				33693A082DC8BF5B00730215 /* AltSourceKit in Frameworks */,
 				3A2F0F0D2E976B67009DE4CE /* IDevice in Frameworks */,
 				3371F7322DA9ECDD00281AC6 /* Zip in Frameworks */,
 				FADE000100000000000F0001 /* ZIPFoundation in Frameworks */,
-				330F69032DC03DF500D8C35D /* NimbleViews in Frameworks */,
 				3305BBAC2DB8944200660D45 /* Vapor in Frameworks */,
 				3346F83B2DC6C6D100C7D508 /* NukeUI in Frameworks */,
 				336D43982DB7454A00206400 /* MobileCoreServices.framework in Frameworks */,
-				3A2F0F0F2E976B67009DE4CE /* IDeviceSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +181,6 @@
 			children = (
 				3379C1BB2DA869A1004372DA /* RyukSign */,
 				AABA5D1A2DB3C87800BFCD2C /* RyukSignTests */,
-				3A2F0EC22E96DA0B009DE4CE /* RyukSignWidgetExtension */,
 				3A2F0EE82E96DA5A009DE4CE /* RyukSignWidgetExtension */,
 				3371F7302DA9ECDD00281AC6 /* Frameworks */,
 				3379C1BA2DA869A1004372DA /* Products */,
@@ -240,15 +228,12 @@
 				3305BBAB2DB8944200660D45 /* Vapor */,
 				330F68FB2DBF7C8600D8C35D /* NimbleExtensions */,
 				330F68FD2DBF7C8600D8C35D /* NimbleViews */,
-				330F69002DC03DF500D8C35D /* NimbleExtensions */,
-				330F69022DC03DF500D8C35D /* NimbleViews */,
 				3346F5C12DC329A200C7D508 /* ZsignSwift */,
 				3346F83A2DC6C6D100C7D508 /* NukeUI */,
 				3346F8482DC6D64800C7D508 /* NimbleJSON */,
 				33693A072DC8BF5B00730215 /* AltSourceKit */,
 				3349E7662DEFB46F00E317ED /* IDeviceSwift */,
 				3A2F0F0C2E976B67009DE4CE /* IDevice */,
-				3A2F0F0E2E976B67009DE4CE /* IDeviceSwift */,
 			);
 			productName = RyukSign;
 			productReference = 3379C1B92DA869A1004372DA /* RyukSign.app */;
@@ -1370,14 +1355,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = NimbleViews;
 		};
-		330F69002DC03DF500D8C35D /* NimbleExtensions */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NimbleExtensions;
-		};
-		330F69022DC03DF500D8C35D /* NimbleViews */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NimbleViews;
-		};
 		3346F5C12DC329A200C7D508 /* ZsignSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ZsignSwift;
@@ -1417,10 +1394,6 @@
 		3A2F0F0C2E976B67009DE4CE /* IDevice */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = IDevice;
-		};
-		3A2F0F0E2E976B67009DE4CE /* IDeviceSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = IDeviceSwift;
 		};
 		FADE000100000000000F0002 /* ZIPFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
