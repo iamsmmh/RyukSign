@@ -24,6 +24,9 @@ struct LibraryCellView: View {
 	}
 	
 	var app: AppInfoPresentable
+	/// Presented from the context menu; kept local so every cell owns its own explorer.
+	@State private var _explorerApp: AnyApp?
+
 	@Binding var selectedInfoAppPresenting: AnyApp?
 	@Binding var selectedSigningAppPresenting: AnyApp?
 	@Binding var selectedAppUUIDs: Set<String>
@@ -87,6 +90,9 @@ struct LibraryCellView: View {
 			if !isEditing {
 				_actions(for: app)
 			}
+		}
+		.sheet(item: $_explorerApp) { app in
+			IPALibraryExplorerView(app: app.base)
 		}
 		.contextMenu {
 			if !isEditing {
@@ -179,6 +185,10 @@ extension LibraryCellView {
 	
 	@ViewBuilder
 	private func _contextActionsExtra(for app: AppInfoPresentable) -> some View {
+		Button(.localized("Browse Files"), systemImage: "doc.text.magnifyingglass") {
+			Presentation.afterDismiss { _explorerApp = AnyApp(base: app) }
+		}
+
 		if app.isSigned {
 			if let id = app.identifier {
 				Button(.localized("Open"), systemImage: "app.badge.checkmark") {

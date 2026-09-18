@@ -107,6 +107,9 @@ extension LibraryInfoView {
 	@ViewBuilder
 	private func _bundleSection(for app: AppInfoPresentable) -> some View {
 		NBSection(.localized("Bundle")) {
+			NavigationLink(.localized("Browse Files")) {
+				IPALibraryExplorerView(app: app, embedded: true)
+			}
 			NavigationLink(.localized("Alternative Icons")) {
 				SigningAlternativeIconView(app: app, appIcon: .constant(nil), isModifing: false)
 			}

@@ -55,8 +55,17 @@ final class AutoSignManager {
 
 		guard case .success(let signed) = result else { return result }
 
-		// The unsigned copy only existed to feed the signer.
+		// The unsigned copy only existed to feed the signer. Deleted before the cleanup runs so
+		// nothing below reads an already deleted object.
 		Storage.shared.deleteApp(for: app)
+
+		// Auto cleanup: drops the signed copy when it isn't being installed and sweeps the
+		// storage toggles (caches, temporary files, leftovers, exported IPAs).
+		CleanupManager.shared.runAfterSign(
+			source: nil,
+			signed: signed,
+			keepsSignedApp: options.post_installAppAfterSigned
+		)
 
 		if options.post_installAppAfterSigned {
 			InstallQueue.shared.enqueue(signed)

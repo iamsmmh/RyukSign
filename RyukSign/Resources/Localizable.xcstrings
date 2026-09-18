@@ -1,6 +1,1469 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text"
+          }
+        }
+      }
+    },
+    "Image" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image"
+          }
+        }
+      }
+    },
+    "PDF" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PDF"
+          }
+        }
+      }
+    },
+    "Archive" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archive"
+          }
+        }
+      }
+    },
+    "Database" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Database"
+          }
+        }
+      }
+    },
+    "Binary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Binary"
+          }
+        }
+      }
+    },
+    "No Payload folder was found inside this IPA. It may not be an app archive." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Payload folder was found inside this IPA. It may not be an app archive."
+          }
+        }
+      }
+    },
+    "No .app bundle was found inside the Payload folder." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No .app bundle was found inside the Payload folder."
+          }
+        }
+      }
+    },
+    "The IPA could not be opened: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The IPA could not be opened: %@"
+          }
+        }
+      }
+    },
+    "The IPA could not be rebuilt: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The IPA could not be rebuilt: %@"
+          }
+        }
+      }
+    },
+    "Nothing to save yet." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to save yet."
+          }
+        }
+      }
+    },
+    "Signing needs a certificate. Import one in Settings → Certificates, or sign with the default signing option." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing needs a certificate. Import one in Settings → Certificates, or sign with the default signing option."
+          }
+        }
+      }
+    },
+    "Signed App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed App"
+          }
+        }
+      }
+    },
+    "Imported App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imported App"
+          }
+        }
+      }
+    },
+    "Cleanup freed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleanup freed %@"
+          }
+        }
+      }
+    },
+    "%lld apps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld apps"
+          }
+        }
+      }
+    },
+    "Cleanup removed %@ and freed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleanup removed %@ and freed %@"
+          }
+        }
+      }
+    },
+    "Cleanup removed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleanup removed %@"
+          }
+        }
+      }
+    },
+    "Delete %@?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete %@?"
+          }
+        }
+      }
+    },
+    "Preview truncated at %lld characters." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview truncated at %lld characters."
+          }
+        }
+      }
+    },
+    "Linked Libraries (%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linked Libraries (%lld)"
+          }
+        }
+      }
+    },
+    "Added %lld items" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added %lld items"
+          }
+        }
+      }
+    },
+    "Clean up after signing and installing automatically, check what is using space, back up your setup, or reset the app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean up after signing and installing automatically, check what is using space, back up your setup, or reset the app."
+          }
+        }
+      }
+    },
+    "All Auto Cleanup Options" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Auto Cleanup Options"
+          }
+        }
+      }
+    },
+    "Frees cached icons and web data every time an install finishes. They rebuild as you browse. Open Auto Cleanup to also delete signed and installed apps, temporary files and leftovers by themselves." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frees cached icons and web data every time an install finishes. They rebuild as you browse. Open Auto Cleanup to also delete signed and installed apps, temporary files and leftovers by themselves."
+          }
+        }
+      }
+    },
+    "Auto Cleanup Options" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto Cleanup Options"
+          }
+        }
+      }
+    },
+    "Delete After Installing drops the signed app from your library once it finishes installing. It stays installed on your device. Auto Cleanup Options also clears caches, temporary files and leftovers automatically." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete After Installing drops the signed app from your library once it finishes installing. It stays installed on your device. Auto Cleanup Options also clears caches, temporary files and leftovers automatically."
+          }
+        }
+      }
+    },
+    "Open in IPA Explorer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open in IPA Explorer"
+          }
+        }
+      }
+    },
+    "Browse Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse Files"
+          }
+        }
+      }
+    },
+    "Auto Cleanup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto Cleanup"
+          }
+        }
+      }
+    },
+    "Runs the options below by itself every time signing or installing finishes, so nothing has to be deleted or cleaned up by hand. Turn this off to keep every app and cache." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Runs the options below by itself every time signing or installing finishes, so nothing has to be deleted or cleaned up by hand. Turn this off to keep every app and cache."
+          }
+        }
+      }
+    },
+    "Automation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automation"
+          }
+        }
+      }
+    },
+    "One-Tap Install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "One-Tap Install"
+          }
+        }
+      }
+    },
+    "Import or download an app and RyukSign signs it, installs it, deletes the app from your library and clears the caches — no taps in between." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import or download an app and RyukSign signs it, installs it, deletes the app from your library and clears the caches — no taps in between."
+          }
+        }
+      }
+    },
+    "Import a certificate first, otherwise signing cannot run on its own." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import a certificate first, otherwise signing cannot run on its own."
+          }
+        }
+      }
+    },
+    "After Installing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Installing"
+          }
+        }
+      }
+    },
+    "Delete Installed App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Installed App"
+          }
+        }
+      }
+    },
+    "Delete Downloaded IPA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Downloaded IPA"
+          }
+        }
+      }
+    },
+    "The app stays installed on your device — only the copy in RyukSign's library is removed. The IPA is the file RyukSign downloaded or imported before signing." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app stays installed on your device — only the copy in RyukSign's library is removed. The IPA is the file RyukSign downloaded or imported before signing."
+          }
+        }
+      }
+    },
+    "After Signing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "After Signing"
+          }
+        }
+      }
+    },
+    "Delete Unsigned App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Unsigned App"
+          }
+        }
+      }
+    },
+    "Delete Signed App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Signed App"
+          }
+        }
+      }
+    },
+    "The unsigned app is the file you imported; it is only needed to produce the signed copy." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The unsigned app is the file you imported; it is only needed to produce the signed copy."
+          }
+        }
+      }
+    },
+    "Delete Signed App only applies when the app is not being installed or exported right after signing, and removes the signed copy from your library." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Signed App only applies when the app is not being installed or exported right after signing, and removes the signed copy from your library."
+          }
+        }
+      }
+    },
+    "Clear Caches" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Caches"
+          }
+        }
+      }
+    },
+    "Clear Temporary Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Temporary Files"
+          }
+        }
+      }
+    },
+    "Remove Leftovers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Leftovers"
+          }
+        }
+      }
+    },
+    "Delete Exported IPAs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Exported IPAs"
+          }
+        }
+      }
+    },
+    "Caches are icons and web data, rebuilt as you browse. Temporary files and leftovers are work files from imports and signings. Exported IPAs are the ones saved every time you export or share an app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caches are icons and web data, rebuilt as you browse. Temporary files and leftovers are work files from imports and signings. Exported IPAs are the ones saved every time you export or share an app."
+          }
+        }
+      }
+    },
+    "Clean Now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean Now"
+          }
+        }
+      }
+    },
+    "Clean Storage Now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean Storage Now"
+          }
+        }
+      }
+    },
+    "Clear IPA Explorer Workspaces?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear IPA Explorer Workspaces?"
+          }
+        }
+      }
+    },
+    "Every IPA you unpacked in the IPA Explorer will be deleted. Apps in your library are not touched." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every IPA you unpacked in the IPA Explorer will be deleted. Apps in your library are not touched."
+          }
+        }
+      }
+    },
+    "Workspaces cleared" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Workspaces cleared"
+          }
+        }
+      }
+    },
+    "Clear IPA Explorer Workspaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear IPA Explorer Workspaces"
+          }
+        }
+      }
+    },
+    "Clears the storage options above straight away. Nothing installed on your device is ever touched." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clears the storage options above straight away. Nothing installed on your device is ever touched."
+          }
+        }
+      }
+    },
+    "Last Cleanup" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last Cleanup"
+          }
+        }
+      }
+    },
+    "Never" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Never"
+          }
+        }
+      }
+    },
+    "Nothing to clean up" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to clean up"
+          }
+        }
+      }
+    },
+    "Folder name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder name"
+          }
+        }
+      }
+    },
+    "New name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New name"
+          }
+        }
+      }
+    },
+    "Search files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search files"
+          }
+        }
+      }
+    },
+    "Edited" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edited"
+          }
+        }
+      }
+    },
+    "files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "files"
+          }
+        }
+      }
+    },
+    "Path" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path"
+          }
+        }
+      }
+    },
+    "Browse From IPA Root" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse From IPA Root"
+          }
+        }
+      }
+    },
+    "This bundle could not be read." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This bundle could not be read."
+          }
+        }
+      }
+    },
+    "Everything here is edited in place. Rebuild the IPA when you are done, or sign and install this app straight away — RyukSign signs a copy, so your edits stay in the workspace until you rebuild." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everything here is edited in place. Rebuild the IPA when you are done, or sign and install this app straight away — RyukSign signs a copy, so your edits stay in the workspace until you rebuild."
+          }
+        }
+      }
+    },
+    "Rebuilding IPA…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebuilding IPA…"
+          }
+        }
+      }
+    },
+    "Replace" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replace"
+          }
+        }
+      }
+    },
+    "Copy Path" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copy Path"
+          }
+        }
+      }
+    },
+    "Add Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Files"
+          }
+        }
+      }
+    },
+    "Rebuild IPA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebuild IPA"
+          }
+        }
+      }
+    },
+    "Show Hidden Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Hidden Files"
+          }
+        }
+      }
+    },
+    "Reveal in Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reveal in Files"
+          }
+        }
+      }
+    },
+    "Nothing was added — a file with that name already exists here." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing was added — a file with that name already exists here."
+          }
+        }
+      }
+    },
+    "The folder and everything inside it will be removed from the app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The folder and everything inside it will be removed from the app."
+          }
+        }
+      }
+    },
+    "Share IPA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share IPA"
+          }
+        }
+      }
+    },
+    "IPA Ready" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IPA Ready"
+          }
+        }
+      }
+    },
+    "Installing…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installing…"
+          }
+        }
+      }
+    },
+    "Discard Changes?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard Changes?"
+          }
+        }
+      }
+    },
+    "The IPA has not been rebuilt, so your edits are only in this workspace." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The IPA has not been rebuilt, so your edits are only in this workspace."
+          }
+        }
+      }
+    },
+    "Edit Keys" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Keys"
+          }
+        }
+      }
+    },
+    "Edit Raw Plist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Raw Plist"
+          }
+        }
+      }
+    },
+    "Edit as Text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit as Text"
+          }
+        }
+      }
+    },
+    "Property List" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Property List"
+          }
+        }
+      }
+    },
+    "Changes are written straight into the app bundle. Rebuild the IPA (or re-sign) for them to take effect." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes are written straight into the app bundle. Rebuild the IPA (or re-sign) for them to take effect."
+          }
+        }
+      }
+    },
+    "Edit File" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit File"
+          }
+        }
+      }
+    },
+    "This image could not be decoded." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This image could not be decoded."
+          }
+        }
+      }
+    },
+    "Preview" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        }
+      }
+    },
+    "First bytes of the file. Binary content cannot be edited here, but it can be replaced." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First bytes of the file. Binary content cannot be edited here, but it can be replaced."
+          }
+        }
+      }
+    },
+    "Nothing to preview." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to preview."
+          }
+        }
+      }
+    },
+    "Contents" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contents"
+          }
+        }
+      }
+    },
+    "Kind" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kind"
+          }
+        }
+      }
+    },
+    "Modified" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modified"
+          }
+        }
+      }
+    },
+    "File" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File"
+          }
+        }
+      }
+    },
+    "Reload" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reload"
+          }
+        }
+      }
+    },
+    "That text could not be saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "That text could not be saved"
+          }
+        }
+      }
+    },
+    "Saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved"
+          }
+        }
+      }
+    },
+    "Unreadable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unreadable"
+          }
+        }
+      }
+    },
+    "Couldn't Open This App" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't Open This App"
+          }
+        }
+      }
+    },
+    "IPA Explorer" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IPA Explorer"
+          }
+        }
+      }
+    },
+    "Choose an IPA…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose an IPA…"
+          }
+        }
+      }
+    },
+    "Browse a Library App…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse a Library App…"
+          }
+        }
+      }
+    },
+    "An IPA is unpacked into a private workspace, so nothing is touched until you rebuild it or sign and install it. Library apps are edited in place." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An IPA is unpacked into a private workspace, so nothing is touched until you rebuild it or sign and install it. Library apps are edited in place."
+          }
+        }
+      }
+    },
+    "What You Can Do" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What You Can Do"
+          }
+        }
+      }
+    },
+    "See every file" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See every file"
+          }
+        }
+      }
+    },
+    "Browse Payload and the app bundle, including hidden files." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Browse Payload and the app bundle, including hidden files."
+          }
+        }
+      }
+    },
+    "Edit property lists" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit property lists"
+          }
+        }
+      }
+    },
+    "Change bundle identifier, name, version, capabilities and any other key, or edit the raw XML." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change bundle identifier, name, version, capabilities and any other key, or edit the raw XML."
+          }
+        }
+      }
+    },
+    "Edit text files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit text files"
+          }
+        }
+      }
+    },
+    "Themes, configs, .strings localizations and anything else that is plain text." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Themes, configs, .strings localizations and anything else that is plain text."
+          }
+        }
+      }
+    },
+    "Swap images and icons" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swap images and icons"
+          }
+        }
+      }
+    },
+    "Replace icons, launch images or any asset with one from Files." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replace icons, launch images or any asset with one from Files."
+          }
+        }
+      }
+    },
+    "Add, rename, delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add, rename, delete"
+          }
+        }
+      }
+    },
+    "Drop new dylibs, frameworks or bundles in, rename or remove what the app ships with." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drop new dylibs, frameworks or bundles in, rename or remove what the app ships with."
+          }
+        }
+      }
+    },
+    "Rebuild or install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebuild or install"
+          }
+        }
+      }
+    },
+    "Rebuild the edited IPA, or sign and install it straight away." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rebuild the edited IPA, or sign and install it straight away."
+          }
+        }
+      }
+    },
+    "Couldn't Open That IPA" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't Open That IPA"
+          }
+        }
+      }
+    },
+    "Recent" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent"
+          }
+        }
+      }
+    },
+    "Clear Workspaces?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Workspaces?"
+          }
+        }
+      }
+    },
+    "Every unpacked IPA waiting here will be deleted. Apps already in your library are not touched." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every unpacked IPA waiting here will be deleted. Apps already in your library are not touched."
+          }
+        }
+      }
+    },
+    "Clear All Workspaces" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear All Workspaces"
+          }
+        }
+      }
+    },
+    "Workspaces are kept so you can come back to an edit later. They use space, so clear them when you are done." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Workspaces are kept so you can come back to an edit later. They use space, so clear them when you are done."
+          }
+        }
+      }
+    },
+    "Unpacking IPA…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpacking IPA…"
+          }
+        }
+      }
+    },
+    "Enter a folder name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a folder name"
+          }
+        }
+      }
+    },
+    "Something with that name already exists here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Something with that name already exists here"
+          }
+        }
+      }
+    },
+    "Folder created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder created"
+          }
+        }
+      }
+    },
+    "Renamed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Renamed"
+          }
+        }
+      }
+    },
+    "File replaced" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File replaced"
+          }
+        }
+      }
+    },
+    "Deleted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deleted"
+          }
+        }
+      }
+    },
+    "Couldn't prepare that file for sharing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't prepare that file for sharing"
+          }
+        }
+      }
+    },
+    "Path copied" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Path copied"
+          }
+        }
+      }
+    },
     "Frees cached icons and web data every time an install finishes. They rebuild as you browse." : {
       "extractionState" : "manual",
       "localizations" : {

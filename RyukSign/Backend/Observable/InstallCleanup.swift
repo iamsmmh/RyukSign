@@ -2,44 +2,33 @@
 //  InstallCleanup.swift
 //  RyukSign
 //
-//  Created by Ryuk
+//  Compatibility shim: the actual cleanup logic now lives in `CleanupManager`, which also runs
+//  after signing, downloads and on demand. These constants and calls are kept so the older
+//  toggles (Signing Options → Delete After Installing, Storage → Clear Cache After Installing)
+//  and every existing call site keep working unchanged.
 //
 
 import Foundation
 
 @MainActor
 enum InstallCleanup {
-	static let deleteKey = "Feather.deleteAppAfterInstall"
-	static let clearCacheKey = "Feather.clearCacheAfterInstall"
-	private static let pendingKey = "Feather.installCleanupPending"
+	/// Kept for the toggles that were already shipped with these keys.
+	static let deleteKey = CleanupManager.Key.deleteAfterInstall
+	static let clearCacheKey = CleanupManager.Key.clearCache
 
-	/// Deleting now would pull the app out from under the card still showing it. On disk so a kill
-	/// before `flush()` still cleans up.
+	/// Parks the app until the install UI is gone.
 	static func stage(_ app: AppInfoPresentable) {
-		guard let uuid = app.uuid, !_pending.contains(uuid) else { return }
-		_pending.append(uuid)
+		CleanupManager.shared.stage(app)
 	}
 
-	/// Only safe once the install UI is gone.
+	/// Runs every toggle in Settings → Auto Cleanup that applies to a finished install.
 	static func flush() {
-		let uuids = _pending
-		guard !uuids.isEmpty else { return }
-		_pending = []
-
-		let defaults = UserDefaults.standard
-
-		if defaults.bool(forKey: deleteKey) {
-			let apps = Storage.shared.getAllApps().filter { uuids.contains($0.uuid ?? "") }
-			Storage.shared.deleteApps(apps)
-		}
-
-		if defaults.bool(forKey: clearCacheKey) {
-			StorageManager.purgeCaches()
-		}
+		CleanupManager.shared.flush()
 	}
 
-	private static var _pending: [String] {
-		get { UserDefaults.standard.stringArray(forKey: pendingKey) ?? [] }
-		set { UserDefaults.standard.set(newValue, forKey: pendingKey) }
+	/// Same sweep at cold launch, where a toast would be noise: a job killed mid-install left
+	/// apps behind and they are removed quietly.
+	static func flushOnLaunch() {
+		CleanupManager.shared.flush(silent: true)
 	}
 }

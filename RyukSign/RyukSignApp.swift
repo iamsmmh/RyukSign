@@ -40,14 +40,17 @@ struct RyukSignApp: App {
     }
     
     init() {
-        UserDefaults.standard.register(defaults: [
+		UserDefaults.standard.register(defaults: [
             "Feather.serverMethod": 0, // Fully Local signing
             "Feather.backgroundDownloadHeaderStartState": "collapsed",
             "Feather.showDownloadHeaderInSourcesTab": true,
             "Feather.downloadDisplayMode": "floating", // Default to floating icon
 			"Feather.sourcesShowUpdatesAsTab": true,
             "Feather.downloadOverlayTheme": "darkGrey",
-            "Feather.dynamicOverlaySize": true
+            "Feather.dynamicOverlaySize": true,
+            // Master cleanup switch: on, with every sub-toggle off, so updating the app
+            // never changes what gets deleted. See Settings → Auto Cleanup.
+            CleanupManager.Key.enabled: true
         ])
 
         // Enable liquid glass on iOS 19+
@@ -378,7 +381,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 		_createPipeline()
 		_createDocumentsDirectories()
 		StorageManager.purgeStaleTemporary()
-		InstallCleanup.flush()
+		InstallCleanup.flushOnLaunch()
 		_addDefaultCertificates()
 		_registerBackgroundTasks()
 

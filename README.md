@@ -24,12 +24,31 @@ Inherited from Feather:
 
 Added by RyukSign:
 
+- **Auto Cleanup** — one screen (Settings → Auto Cleanup) that deletes apps, downloaded IPAs, caches, temporary files, leftovers and exported IPAs by itself after every sign and install, so nothing has to be removed by hand. Includes a one-tap "import → sign → install → clean" pipeline.
+- **IPA Explorer** — open an IPA (or any app in your library) and browse every file inside it: edit `Info.plist` key by key or as raw XML, edit text files, preview and replace images, add/rename/replace/delete files, then rebuild the IPA or sign and install it directly.
 - **Tweak Manager** — import, organize, and inject `.dylib`, `.deb`, `.framework`, `.bundle`, and `.appex` tweaks. Multi-file tweaks, per-file configuration, a file-info/dependency inspector, and ElleKit/CydiaSubstrate detection.
 - **Live Activities & Dynamic Island** — watch download progress live from the Lock Screen and Dynamic Island, plus an in-app download overlay.
 - **Enhanced download manager** — fast background downloads that keep running while you use other apps.
 - **File Transfer server** — upload IPAs and tweaks over HTTP (drag-and-drop browser page) or WebDAV (mount in Finder / the Files app), with optional password protection.
 - **App update checker** — flags installed apps that have a newer version available in your sources, with per-app ignore/skip.
 - **Curated repositories** and a fully configurable tab bar.
+
+## Automation
+
+Everything RyukSign can do on its own lives in **Settings → Auto Cleanup**:
+
+| Toggle | What it does |
+| --- | --- |
+| Auto Cleanup | Master switch for every option below. |
+| One-Tap Install | Import or download an app and RyukSign signs it, installs it, drops it from the library and clears the caches. |
+| Delete Installed App | Removes the signed app from RyukSign's library once installing finishes. It stays on your device. |
+| Delete Downloaded IPA | Deletes the IPA RyukSign downloaded or imported as soon as it became a library app. |
+| Delete Unsigned App | Removes the file you imported once it has been signed. |
+| Delete Signed App | Removes the signed copy too, unless it is being installed or exported. |
+| Clear Caches / Temporary Files / Leftovers / Exported IPAs | Storage sweeps that run after each sign and install. |
+| Clean Now | Runs the storage sweeps immediately and shows how much was freed. |
+
+Deletions are staged on disk, so an install that finishes while the app is closed is still cleaned up on the next launch. A short toast reports what was removed and how much space was freed.
 
 ## How does it work?
 

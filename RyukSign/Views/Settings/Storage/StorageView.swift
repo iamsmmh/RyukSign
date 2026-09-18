@@ -121,8 +121,11 @@ private extension StorageView {
 	var _automatic: some View {
 		NBSection(.localized("Automatic Cleanup")) {
 			Toggle(.localized("Clear Cache After Installing"), isOn: $_clearCacheAfterInstall)
+			NavigationLink(destination: CleanupView()) {
+				Label(.localized("All Auto Cleanup Options"), systemImage: "sparkles")
+			}
 		} footer: {
-			Text(.localized("Frees cached icons and web data every time an install finishes. They rebuild as you browse."))
+			Text(.localized("Frees cached icons and web data every time an install finishes. They rebuild as you browse. Open Auto Cleanup to also delete signed and installed apps, temporary files and leftovers by themselves."))
 		}
 	}
 
