@@ -104,6 +104,9 @@ struct SettingsView: View {
                     NavigationLink(destination: WebManagerView()) {
                         Label(.localized("Web Manager"), systemImage: "externaldrive.badge.wifi")
                     }
+                    NavigationLink(destination: IPAExplorerHomeView()) {
+                        Label(.localized("IPA Explorer"), systemImage: "doc.text.magnifyingglass")
+                    }
                     NavigationLink(destination: LogsHistoryView()) {
                         Label(.localized("Activity Logs"), systemImage: "text.alignleft")
                     }
@@ -114,6 +117,9 @@ struct SettingsView: View {
                 _directories()
 
                 Section {
+                    NavigationLink(destination: CleanupView()) {
+                        Label(.localized("Auto Cleanup"), systemImage: "sparkles")
+                    }
                     NavigationLink(destination: StorageView()) {
                         Label(.localized("Storage"), systemImage: "internaldrive")
                     }
@@ -124,7 +130,7 @@ struct SettingsView: View {
                         Label(.localized("Reset"), systemImage: "trash")
                     }
                 } footer: {
-                    Text(.localized("Check what is using space, back up your setup, or reset the app."))
+                    Text(.localized("Clean up after signing and installing automatically, check what is using space, back up your setup, or reset the app."))
                 }
             }
         }

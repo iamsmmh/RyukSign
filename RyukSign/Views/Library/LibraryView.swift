@@ -18,6 +18,7 @@ struct LibraryView: View {
     @State private var _selectedSigningAppPresenting: AnyApp?
     @State private var _isDownloadingPresenting = false
     @State private var _alertDownloadString: String = "" // for _isDownloadingPresenting
+    @State private var _isExplorerPresenting = false
     
     // MARK: Selection State
     @State private var _selectedAppUUIDs: Set<String> = []
@@ -117,6 +118,9 @@ struct LibraryView: View {
                 .environment(\.editMode, $_editMode)
                 .sheet(item: $_selectedInfoAppPresenting) { app in
                     LibraryInfoView(app: app.base)
+                }
+                .sheet(isPresented: $_isExplorerPresenting) {
+                    IPAExplorerHomeView()
                 }
                 .fullScreenCover(item: $_batchRequest, onDismiss: InstallCleanup.flush) { request in
                     BatchSignView(apps: request.apps, mode: request.mode)
@@ -347,6 +351,9 @@ struct LibraryView: View {
         }
         Button(.localized("Import from URL"), systemImage: "globe") {
             Presentation.afterDismiss { _isDownloadingPresenting = true }
+        }
+        Button(.localized("Open in IPA Explorer"), systemImage: "doc.text.magnifyingglass") {
+            Presentation.afterDismiss { _isExplorerPresenting = true }
         }
     }
 

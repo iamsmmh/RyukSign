@@ -206,12 +206,20 @@ extension SigningView {
 				Toast.success(.localized("Signed successfully"), systemImage: "checkmark.seal.fill")
 
 				let finish = {
-					if
-						_temporaryOptions.post_deleteAppAfterSigned,
-						!app.isSigned
-					{
+					let deletesSource = _temporaryOptions.post_deleteAppAfterSigned && !app.isSigned
+
+					if deletesSource {
 						Storage.shared.deleteApp(for: app)
 					}
+
+					// Auto cleanup: honours Delete Unsigned / Signed App and the storage toggles.
+					// Runs after the deletion above so it never reads a removed object.
+					let remainingSource: AppInfoPresentable? = deletesSource ? nil : app
+					CleanupManager.shared.runAfterSign(
+						source: remainingSource,
+						signed: signed,
+						keepsSignedApp: _temporaryOptions.post_installAppAfterSigned
+					)
 
 					if _temporaryOptions.post_installAppAfterSigned {
 						InstallQueue.shared.enqueue(signed)

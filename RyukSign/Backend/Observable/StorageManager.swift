@@ -212,6 +212,53 @@ extension StorageManager {
 	}
 }
 
+// MARK: - Manager extension: automatic cleanup
+extension StorageManager {
+	/// Bytes the automatic cleanup would reclaim for `categories` right now, without deleting
+	/// anything. Only ever counts categories that are safe to clear (plus exported IPAs).
+	func reclaimableBytes(_ categories: [StorageCategory]) -> Int64 {
+		let library = _librarySnapshot()
+		return categories.reduce(0) { $0 + StorageScanner.reclaimableBytes($1, library) }
+	}
+
+	/// Per-category breakdown for the cleanup settings screen.
+	func reclaimableBreakdown() -> [(category: StorageCategory, bytes: Int64)] {
+		let library = _librarySnapshot()
+		return [StorageCategory.caches, .temporary, .leftovers, .archives, .logs]
+			.map { (category: $0, bytes: StorageScanner.reclaimableBytes($0, library)) }
+	}
+
+	/// Deletes one reclaimable category and returns how many bytes were freed.
+	///
+	/// Nothing here can touch app bundles, certificates or the database — only the caches,
+	/// temporary work files, leftovers and exported IPAs the user asked to be rid of.
+	@discardableResult
+	func purge(_ category: StorageCategory, preservingDownloads: Bool = true) -> Int64 {
+		let library = _librarySnapshot()
+		let before = StorageScanner.reclaimableBytes(category, library)
+		guard before > 0 else { return 0 }
+
+		switch category {
+		case .caches:
+			StorageManager.purgeCaches()
+		case .logs:
+			FileLogger.clear()
+		case .temporary:
+			StorageScanner.purgeTemporary(preservingDownloads: preservingDownloads)
+		case .leftovers:
+			for url in StorageScanner.leftovers(library) { try? FileManager.default.removeItem(at: url) }
+		case .archives:
+			StorageScanner.purge(contentsOf: FileManager.default.archives)
+		default:
+			return 0
+		}
+
+		entries.removeAll()
+		refresh()
+		return before
+	}
+}
+
 // MARK: - Library snapshot
 struct AppDescriptor {
 	let name: String
@@ -303,6 +350,42 @@ private enum StorageScanner {
 			purge(contentsOf: fm.archives)
 		default:
 			break
+		}
+	}
+
+	/// Bytes the cleanup toggle for `category` would free, using the same rules the purge uses.
+	static func reclaimableBytes(_ category: StorageCategory, _ library: LibrarySnapshot) -> Int64 {
+		switch category {
+		case .caches:
+			return fm.allocatedSize(at: cachesDirectory)
+		case .logs:
+			return fm.allocatedSize(at: fm.logs)
+		case .temporary:
+			return temporarySize(preservingDownloads: true)
+		case .leftovers:
+			return leftovers(library).reduce(0) { $0 + fm.allocatedSize(at: $1) }
+		case .archives:
+			return fm.allocatedSize(at: fm.archives)
+		default:
+			return 0
+		}
+	}
+
+	/// Clears the temporary directory. Ran while a background download is still staged would kill
+	/// it, so the download staging folder is kept unless the user cleared temp files by hand.
+	static func purgeTemporary(preservingDownloads: Bool) {
+		let staging = fm.downloadStaging.lastPathComponent
+		for url in contents(of: fm.temporaryDirectory) {
+			if preservingDownloads, url.lastPathComponent == staging { continue }
+			try? fm.removeItem(at: url)
+		}
+	}
+
+	private static func temporarySize(preservingDownloads: Bool) -> Int64 {
+		let staging = fm.downloadStaging.lastPathComponent
+		return contents(of: fm.temporaryDirectory).reduce(0) { total, url in
+			if preservingDownloads, url.lastPathComponent == staging { return total }
+			return total + fm.allocatedSize(at: url)
 		}
 	}
 

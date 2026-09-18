@@ -206,13 +206,17 @@ struct SigningOptionsView: View {
 					systemImage: "trash.fill",
 					isOn: $_deleteAfterInstall
 				)
+
+				NavigationLink(destination: CleanupView()) {
+					Label(.localized("Auto Cleanup Options"), systemImage: "sparkles")
+				}
 			}
 		} footer: {
 			VStack(alignment: .leading, spacing: 6) {
 				Text(.localized("This will delete your imported application after signing, to save on using unneeded space."))
 
 				if temporaryOptions == nil {
-					Text(.localized("Delete After Installing drops the signed app from your library once it finishes installing. It stays installed on your device."))
+					Text(.localized("Delete After Installing drops the signed app from your library once it finishes installing. It stays installed on your device. Auto Cleanup Options also clears caches, temporary files and leftovers automatically."))
 				}
 			}
 		}

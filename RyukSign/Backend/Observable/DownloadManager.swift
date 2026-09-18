@@ -810,8 +810,18 @@ class DownloadManager: NSObject, ObservableObject {
 	}
 
 	private func finishImport(of download: Download, succeeded: Bool) {
+		// Captured before `endImport()` clears it — the staged IPA is deleted below.
+		let stagedURL = download.pendingFileURL
+
 		download.isActive = false
 		endImport(for: download)
+
+		if succeeded {
+			// Auto cleanup → "Delete Downloaded IPA": the archive already became a library app.
+			Task { @MainActor in
+				CleanupManager.shared.purgeDownloadArtifacts(fileURL: stagedURL, stageURL: nil)
+			}
+		}
 
 		// Drop from activity tracking only once archiving completes (not on download finish).
 		if succeeded {

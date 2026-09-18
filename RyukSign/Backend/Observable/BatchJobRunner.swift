@@ -181,13 +181,18 @@ final class BatchJobRunner: ObservableObject {
 				items[index].signed = signed
 				items[index].state = .signed
 
-				if options.post_deleteAppAfterSigned, !app.isSigned {
+				// Per-app option first, then the global Auto Cleanup toggle.
+				if !app.isSigned, options.post_deleteAppAfterSigned || CleanupManager.shared.deletesSourceAfterSign {
 					Storage.shared.deleteApp(for: app)
 				}
 			case .failure(let error):
 				items[index].state = .failed(error.localizedDescription)
 			}
 		}
+
+		// One shared sweep for the whole batch: the apps were handled above, so this only
+		// clears whichever storage toggles are on.
+		CleanupManager.shared.runAfterSign(source: nil, signed: nil, keepsSignedApp: mode.installs)
 	}
 
 	private func _installAll() async {
