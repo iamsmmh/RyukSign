@@ -1,4 +1,4 @@
-name: Create New Release
+name: Build & Release IPA
 
 on:
   workflow_dispatch:
