@@ -38,14 +38,16 @@ struct IPAExplorerView: View {
 
 	// MARK: Init
 	init(workspace: IPAWorkspace, embedded: Bool = false) {
-		self._workspace = ObservedObject(wrappedValue: workspace)
+		// The property is itself named `_workspace` (house style), so assigning the
+		// wrapped value here initializes the `@ObservedObject` storage.
+		self._workspace = workspace
 		self._directory = workspace.appURL
 		self._isRoot = true
 		self._ownsStack = !embedded
 	}
 
 	init(workspace: IPAWorkspace, directory: URL) {
-		self._workspace = ObservedObject(wrappedValue: workspace)
+		self._workspace = workspace
 		self._directory = directory
 		self._isRoot = false
 		self._ownsStack = false

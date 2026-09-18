@@ -469,7 +469,10 @@ private enum StorageScanner {
 		)
 	}
 
-	private static func leftovers(_ library: LibrarySnapshot) -> [URL] {
+	// Not `private`: `StorageManager.purge(_:)` (an extension of a different type in
+	// this same file) calls this, and `private` would limit access to StorageScanner
+	// and its own extensions. The enclosing enum is file-scoped anyway.
+	static func leftovers(_ library: LibrarySnapshot) -> [URL] {
 		partition(fm.signed) { library.owns($0, signed: true) }.orphans
 		+ partition(fm.unsigned) { library.owns($0, signed: false) }.orphans
 		+ partition(fm.certificates) { library.certificates.contains($0) }.orphans

@@ -353,7 +353,9 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 	// MARK: Static helpers
 
 	/// `Documents/IPAWorkspaces`
-	static var root: URL {
+	// `nonisolated` so nonisolated contexts (e.g. `IPAWorkspaceRecord.url`) can use it;
+	// it only does pure Foundation path math, so it is safe off the main actor.
+	nonisolated static var root: URL {
 		URL.documentsDirectory.appendingPathComponent("IPAWorkspaces", isDirectory: true)
 	}
 
