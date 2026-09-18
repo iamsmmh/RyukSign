@@ -15,11 +15,12 @@ enum IdentityVault {
 		case deviceUUID
 		case premiumActive
 		case premiumURLs
+		case premiumAPIKey
 
 		var service: String {
 			switch self {
 			case .deviceUUID: return "com.ryuksign.deviceuuid"
-			case .premiumActive, .premiumURLs: return "com.ryuksign.premium"
+			case .premiumActive, .premiumURLs, .premiumAPIKey: return "com.ryuksign.premium"
 			}
 		}
 
@@ -28,6 +29,7 @@ enum IdentityVault {
 			case .deviceUUID: return "deviceUUID"
 			case .premiumActive: return "isPremium"
 			case .premiumURLs: return "premiumURLs"
+			case .premiumAPIKey: return "apiKey"
 			}
 		}
 

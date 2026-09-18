@@ -55,6 +55,43 @@ enum RyukSignAPI {
 		return uuid
 	}
 
+	// MARK: - Premium API Key
+
+	/// Developer override: hardcode your own key here and it is picked up on first
+	/// launch (e.g. `static let developerPremiumAPIKey = "RYK-XXXX-XXXX-XXXX"`).
+	/// Leave empty to rely on the in-app "Redeem Key" flow, which persists the key
+	/// so it survives relaunches.
+	static let developerPremiumAPIKey = ""
+
+	// MARK: - Self-managed / local premium mode
+	//
+	// If you don't own a key from https://ryuksign.com, you can run your own
+	// "premium" setup without that server. Set `localModePremiumKey` to any
+	// RYK-…-formatted key you invent, and `localModePremiumURLs` to the repository
+	// feeds that key should unlock. Then redeeming that exact key in the app skips
+	// the remote /validate call entirely and activates your local repo list.
+
+	/// The key accepted in local mode (empty disables local mode). Must keep the
+	/// client-side "RYK-" format check happy (prefix + at least 16 chars).
+	static let localModePremiumKey = "" // e.g. "RYK-LOCAL-DEV-KEY-0001"
+
+	/// Repository URLs that a matching local key unlocks — e.g. your own altstore
+	/// JSON feeds: ["https://your-host.com/premium.json", …].
+	static let localModePremiumURLs: [String] = []
+
+	/// The persisted premium API key. Backed by the keychain (via IdentityVault), so
+	/// a redeemed key keeps working across launches instead of living only in memory.
+	static var premiumAPIKey: String? {
+		get { IdentityVault.read(.premiumAPIKey) }
+		set {
+			if let newValue, !newValue.isEmpty {
+				IdentityVault.write(.premiumAPIKey, newValue)
+			} else {
+				IdentityVault.delete(.premiumAPIKey)
+			}
+		}
+	}
+
 	// MARK: - Premium State
 
 	static var isPremium: Bool {
@@ -96,6 +133,7 @@ enum RyukSignAPI {
 	static func clearPremiumIdentity() {
 		IdentityVault.delete(.premiumActive)
 		IdentityVault.delete(.premiumURLs)
+		IdentityVault.delete(.premiumAPIKey)
 	}
 
 	/// Activation survived in the vault but this install has no premium sources.
@@ -208,6 +246,13 @@ enum RyukSignAPI {
 			return
 		}
 		request.setValue(uuid, forHTTPHeaderField: "ryukSignUUID")
+		#if canImport(AltSourceKit)
+		// Add the premium repository API key to IPA/manifest downloads from
+		// premium hosts (single source of truth: EsignSourceKey.customApiKey).
+		if !EsignSourceKey.customApiKey.isEmpty, request.value(forHTTPHeaderField: "X-API-Key") == nil {
+			request.setValue(EsignSourceKey.customApiKey, forHTTPHeaderField: "X-API-Key")
+		}
+		#endif
 	}
 
 	// MARK: - Excluded Sources

@@ -13,6 +13,11 @@ public class NBFetchService {
 
 	private static let log = Logger(subsystem: "com.ryuksign.network", category: "NBFetchService")
 
+	/// Dependency-free hook the host app registers once at startup to supply the
+	/// premium repository API key (e.g. `{ EsignSourceKey.customApiKey }`).
+	/// When it returns a non-empty string, every request receives it as `X-API-Key`.
+	public static var apiKeyProvider: (() -> String)? = nil
+
 	public enum NBFetchServiceError: Error, LocalizedError {
 		case invalidURL
 		case networkError(Error)
@@ -64,6 +69,18 @@ extension NBFetchService {
 			// Apply custom headers
 			for (key, value) in headers {
 				request.setValue(value, forHTTPHeaderField: key)
+			}
+
+			// Premium repository API key. Sourced from `apiKeyProvider` so the
+			// NimbleJSON target never has to depend on AltSourceKit; the host app
+			// registers a provider that returns `EsignSourceKey.customApiKey`.
+			// Explicitly passed headers win over the ambient key.
+			if
+				request.value(forHTTPHeaderField: "X-API-Key") == nil,
+				let key = Self.apiKeyProvider?(),
+				!key.isEmpty
+			{
+				request.setValue(key, forHTTPHeaderField: "X-API-Key")
 			}
 
 			let task = URLSession.shared.dataTask(with: request) { data, response, error in

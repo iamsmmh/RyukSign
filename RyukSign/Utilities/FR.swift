@@ -172,6 +172,29 @@ enum FR {
 		}
 	}
 	
+	// MARK: - Premium repository API key wiring
+
+	/// Registers the app-wide repository fetch key provider and loads the effective key.
+	/// Precedence: hardcoded developer override → persisted (redeemed, keychain) key.
+	/// Call once at launch so every manifest fetch/decrypt attaches it as `X-API-Key`.
+	static func registerRepositoryKeyProvider() {
+		let effectiveKey: String = {
+			if !RyukSignAPI.developerPremiumAPIKey.isEmpty {
+				return RyukSignAPI.developerPremiumAPIKey
+			}
+			if let persisted = RyukSignAPI.premiumAPIKey {
+				return persisted
+			}
+			return ""
+		}()
+		#if canImport(AltSourceKit)
+		EsignSourceKey.customApiKey = effectiveKey
+		NBFetchService.apiKeyProvider = { EsignSourceKey.customApiKey }
+		#else
+		NBFetchService.apiKeyProvider = { effectiveKey }
+		#endif
+	}
+
 	static func handleSource(
 		_ urlString: String,
 		showAlerts: Bool = true,
@@ -188,7 +211,16 @@ enum FR {
 			return
 		}
 
-		NBFetchService().fetch<ASRepository>(from: url) { (result: Result<ASRepository, Error>) in
+		var headers: [String: String] = RyukSignAPI.authHeaders(for: url)
+		#if canImport(AltSourceKit)
+		// Belt-and-braces: also attach the premium key directly when a non-empty
+		// `customApiKey` is configured (single-source path through EsignSourceKey).
+		if !EsignSourceKey.customApiKey.isEmpty, headers["X-API-Key"] == nil {
+			headers["X-API-Key"] = EsignSourceKey.customApiKey
+		}
+		#endif
+
+		NBFetchService().fetch<ASRepository>(from: url, headers: headers) { (result: Result<ASRepository, Error>) in
 			switch result {
 			case .success(let data):
 				let id = data.id ?? url.absoluteString

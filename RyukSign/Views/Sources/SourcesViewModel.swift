@@ -112,10 +112,16 @@ final class SourcesViewModel: ObservableObject {
 				Logger.misc.error("Source has no URL: \(source.name ?? "Unknown", privacy: .public)")
 				return nil
 			}
+			var headers = RyukSignAPI.authHeaders(for: url)
+			#if canImport(AltSourceKit)
+			if !EsignSourceKey.customApiKey.isEmpty, headers["X-API-Key"] == nil {
+				headers["X-API-Key"] = EsignSourceKey.customApiKey
+			}
+			#endif
 			return FetchItem(
 				source: source,
 				url: RyukSignAPI.catalogURL(for: url),
-				headers: RyukSignAPI.authHeaders(for: url),
+				headers: headers,
 				isPremium: RyukSignAPI.isPremiumSource(url)
 			)
 		}

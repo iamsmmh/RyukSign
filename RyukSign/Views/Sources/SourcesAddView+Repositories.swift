@@ -17,7 +17,15 @@ extension SourcesAddView {
 		}
 
 		do {
-			let (data, response) = try await URLSession.shared.data(from: RyukSignAPI.reposListURL)
+			var request = URLRequest(url: RyukSignAPI.reposListURL)
+			#if canImport(AltSourceKit)
+			// The repos catalog may be a premium (authenticated) endpoint.
+			if !EsignSourceKey.customApiKey.isEmpty {
+				request.setValue(EsignSourceKey.customApiKey, forHTTPHeaderField: "X-API-Key")
+			}
+			#endif
+
+			let (data, response) = try await URLSession.shared.data(for: request)
 
 			guard let httpResponse = response as? HTTPURLResponse,
 				httpResponse.statusCode == 200 else {
@@ -146,6 +154,12 @@ extension SourcesAddView {
 		_runPremiumTask {
 			try await PremiumManager.shared.redeem(key: apiKey)
 		} onSuccess: { count in
+			// Persist the redeemed key so it survives relaunches and is attached to
+			// every subsequent repository fetch/decrypt request automatically.
+			RyukSignAPI.premiumAPIKey = apiKey
+			#if canImport(AltSourceKit)
+			EsignSourceKey.customApiKey = apiKey
+			#endif
 			Toast.success(.localized("Added %lld premium repositories", arguments: count))
 			_refreshFilteredRecommendedSourcesData()
 			dismiss()

@@ -47,6 +47,22 @@ final class PremiumManager: ObservableObject {
 	}
 
 	func redeem(key: String) async throws -> Int {
+		// Self-managed / local mode: validate against the developer's own key and
+		// repo list instead of calling https://ryuksign.com. Kept fully offline so
+		// a locally generated key works without the official backend.
+		if !RyukSignAPI.localModePremiumKey.isEmpty {
+			guard key == RyukSignAPI.localModePremiumKey else {
+				throw PremiumError.message("Invalid API key. The key does not exist or has already been used.")
+			}
+			let urls = RyukSignAPI.localModePremiumURLs.compactMap { URL(string: $0) }
+			guard !urls.isEmpty else {
+				throw PremiumError.message("Local premium mode is enabled but no premium repositories are configured.")
+			}
+			isWorking = true
+			defer { isWorking = false }
+			return try await _activate(with: urls)
+		}
+
 		guard let endpoint = URL(string: RyukSignAPI.apiValidateEndpoint) else {
 			throw PremiumError.message("Internal error: Invalid API URL configuration.")
 		}
@@ -109,6 +125,13 @@ final class PremiumManager: ObservableObject {
 	}
 
 	private func _recover() async throws -> Int {
+		// Self-managed / local mode: recover without any server round-trip.
+		if !RyukSignAPI.localModePremiumKey.isEmpty {
+			let urls = RyukSignAPI.localModePremiumURLs.compactMap { URL(string: $0) }
+			guard !urls.isEmpty else { throw PremiumError.unavailable }
+			return try await _activate(with: urls)
+		}
+
 		guard let uuid = RyukSignAPI.deviceUUID else { throw PremiumError.noDeviceID }
 		guard let endpoint = URL(string: RyukSignAPI.apiURLsEndpoint) else { throw PremiumError.unavailable }
 
