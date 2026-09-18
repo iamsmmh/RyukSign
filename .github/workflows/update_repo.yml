@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
         with:
           # A `release` event runs on refs/tags/<tag>, so a plain checkout lands
           # on a detached HEAD at the tag and the commit below cannot be pushed.

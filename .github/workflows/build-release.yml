@@ -24,7 +24,7 @@ jobs:
     runs-on: macos-15
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
         with:
           # Zsign and IDeviceKitten are git submodules and are required to build.
           submodules: recursive
