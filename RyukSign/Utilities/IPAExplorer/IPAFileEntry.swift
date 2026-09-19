@@ -176,7 +176,15 @@ enum IPAFileLoader {
 	private static let _databaseExtensions: Set<String> = ["sqlite", "sqlite3", "db", "db-wal", "db-shm"]
 
 	/// Sorted, folders first.
-	static func children(of directory: URL, includesHidden: Bool = false) -> [IPAFileEntry] {
+	///
+	/// `measuringDirectorySize` walks a whole subtree to size it. The IPA Explorer wants that
+	/// (an app bundle is one folder), a Documents browser does not — listing `/Documents`
+	/// would re-walk every signed app just to show a number nothing renders.
+	static func children(
+		of directory: URL,
+		includesHidden: Bool = false,
+		measuringDirectorySize: Bool = true
+	) -> [IPAFileEntry] {
 		let urls = (try? _fileManager.contentsOfDirectory(
 			at: directory,
 			includingPropertiesForKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey],
@@ -185,14 +193,14 @@ enum IPAFileLoader {
 
 		return urls
 			.filter { includesHidden || !$0.lastPathComponent.hasPrefix(".") }
-			.map { entry(at: $0) }
+			.map { entry(at: $0, measuringDirectorySize: measuringDirectorySize) }
 			.sorted {
 				if $0.isDirectory != $1.isDirectory { return $0.isDirectory }
 				return $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending
 			}
 	}
 
-	static func entry(at url: URL) -> IPAFileEntry {
+	static func entry(at url: URL, measuringDirectorySize: Bool = true) -> IPAFileEntry {
 		let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .totalFileAllocatedSizeKey, .contentModificationDateKey])
 		let isDirectory = values?.isDirectory == true
 
@@ -201,11 +209,13 @@ enum IPAFileLoader {
 			name: url.lastPathComponent,
 			isDirectory: isDirectory,
 			size: isDirectory
-				? _fileManager.allocatedSize(at: url)
+				? (measuringDirectorySize ? _fileManager.allocatedSize(at: url) : 0)
 				: Int64(values?.totalFileAllocatedSize ?? values?.fileSize ?? 0),
 			date: values?.contentModificationDate ?? .distantPast,
 			kind: kind(of: url, isDirectory: isDirectory),
-			childCount: isDirectory ? children(of: url, includesHidden: true).count : 0
+			childCount: isDirectory
+				? children(of: url, includesHidden: true, measuringDirectorySize: false).count
+				: 0
 		)
 	}
 

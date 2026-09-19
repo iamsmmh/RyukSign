@@ -1,6 +1,908 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Hide Filters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Filters"
+          }
+        }
+      }
+    },
+    "Show Filters" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Filters"
+          }
+        }
+      }
+    },
+    "Nothing matches this filter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing matches this filter"
+          }
+        }
+      }
+    },
+    "Sign, install or download something and it shows up here as it happens." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign, install or download something and it shows up here as it happens."
+          }
+        }
+      }
+    },
+    "Clear Logs?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Logs?"
+          }
+        }
+      }
+    },
+    "Logs cleared" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logs cleared"
+          }
+        }
+      }
+    },
+    "Warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning"
+          }
+        }
+      }
+    },
+    "Detail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detail"
+          }
+        }
+      }
+    },
+    "Downloads are paused" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads are paused"
+          }
+        }
+      }
+    },
+    "Nothing new is fetched, and paused downloads stay paused until the mode is off." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing new is fetched, and paused downloads stay paused until the mode is off."
+          }
+        }
+      }
+    },
+    "Automatic updates are skipped" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic updates are skipped"
+          }
+        }
+      }
+    },
+    "The scheduled check-and-sign pass does not run, so no data is spent in the background." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The scheduled check-and-sign pass does not run, so no data is spent in the background."
+          }
+        }
+      }
+    },
+    "Signing and installing keep working" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing and installing keep working"
+          }
+        }
+      }
+    },
+    "Anything already on disk can still be signed, tweaked and installed. This mode only stops the network." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anything already on disk can still be signed, tweaked and installed. This mode only stops the network."
+          }
+        }
+      }
+    },
+    "Game Mode on — downloads paused" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode on — downloads paused"
+          }
+        }
+      }
+    },
+    "Game Mode is on" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode is on"
+          }
+        }
+      }
+    },
+    "Game Mode is on — %lld download(s) paused" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode is on — %lld download(s) paused"
+          }
+        }
+      }
+    },
+    "Game Mode off" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode off"
+          }
+        }
+      }
+    },
+    "Game Mode is off" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode is off"
+          }
+        }
+      }
+    },
+    "Game Mode is On" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode is On"
+          }
+        }
+      }
+    },
+    "%@ is paused while Game Mode is on. Turn it off in Settings to continue." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is paused while Game Mode is on. Turn it off in Settings to continue."
+          }
+        }
+      }
+    },
+    "Turn Off Game Mode" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turn Off Game Mode"
+          }
+        }
+      }
+    },
+    "Keep It On" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep It On"
+          }
+        }
+      }
+    },
+    "%@ is paused while Game Mode is on." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is paused while Game Mode is on."
+          }
+        }
+      }
+    },
+    "Leave this on while you play: RyukSign stops downloading and stops its background update pass, so it uses no data and next to no battery." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leave this on while you play: RyukSign stops downloading and stops its background update pass, so it uses no data and next to no battery."
+          }
+        }
+      }
+    },
+    "What It Pauses" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What It Pauses"
+          }
+        }
+      }
+    },
+    "Paused downloads" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paused downloads"
+          }
+        }
+      }
+    },
+    "Downloads stay paused until Game Mode is off." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloads stay paused until Game Mode is off."
+          }
+        }
+      }
+    },
+    "These were paused when Game Mode was switched on. They resume when you tap the button above." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These were paused when Game Mode was switched on. They resume when you tap the button above."
+          }
+        }
+      }
+    },
+    "Game Mode for Signed Apps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Mode for Signed Apps"
+          }
+        }
+      }
+    },
+    "Separate from this switch: Signing Options → Game Mode writes GCSupportsGameMode into an app you sign, so iOS gives that app the system's own Game Mode." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Separate from this switch: Signing Options → Game Mode writes GCSupportsGameMode into an app you sign, so iOS gives that app the system's own Game Mode."
+          }
+        }
+      }
+    },
+    "Resuming downloads" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resuming downloads"
+          }
+        }
+      }
+    },
+    "Notify only" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notify only"
+          }
+        }
+      }
+    },
+    "Sign & queue" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign & queue"
+          }
+        }
+      }
+    },
+    "Checks for updates and tells you what is new. Nothing is signed or downloaded." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checks for updates and tells you what is new. Nothing is signed or downloaded."
+          }
+        }
+      }
+    },
+    "Checks for updates, signs every app that has one and queues the installs. You still confirm each install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Checks for updates, signs every app that has one and queues the installs. You still confirm each install."
+          }
+        }
+      }
+    },
+    "Automatic update checks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic update checks"
+          }
+        }
+      }
+    },
+    "RyukSign automation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RyukSign automation"
+          }
+        }
+      }
+    },
+    "%lld updates found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld updates found"
+          }
+        }
+      }
+    },
+    "No updates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No updates"
+          }
+        }
+      }
+    },
+    "%lld signed and queued" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld signed and queued"
+          }
+        }
+      }
+    },
+    "%lld skipped" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld skipped"
+          }
+        }
+      }
+    },
+    "Cleaned %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleaned %@"
+          }
+        }
+      }
+    },
+    "Updating apps" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updating apps"
+          }
+        }
+      }
+    },
+    "Updates continuing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updates continuing"
+          }
+        }
+      }
+    },
+    "The remaining updates will continue when you reopen the app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The remaining updates will continue when you reopen the app"
+          }
+        }
+      }
+    },
+    "The update did not download (HTTP %lld)." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The update did not download (HTTP %lld)."
+          }
+        }
+      }
+    },
+    "No certificate. Import one in Settings → Certificates, or set the default signing option." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No certificate. Import one in Settings → Certificates, or set the default signing option."
+          }
+        }
+      }
+    },
+    "New File" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New File"
+          }
+        }
+      }
+    },
+    "File name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File name"
+          }
+        }
+      }
+    },
+    "Swipe a row for share and delete, or long press for rename, duplicate and copy path." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Swipe a row for share and delete, or long press for rename, duplicate and copy path."
+          }
+        }
+      }
+    },
+    "Items" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Items"
+          }
+        }
+      }
+    },
+    "RyukSign storage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RyukSign storage"
+          }
+        }
+      }
+    },
+    "Documents" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documents"
+          }
+        }
+      }
+    },
+    "Everything RyukSign keeps on this device lives here. Deleting an app folder removes its Library entry as well." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everything RyukSign keeps on this device lives here. Deleting an app folder removes its Library entry as well."
+          }
+        }
+      }
+    },
+    "Duplicate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate"
+          }
+        }
+      }
+    },
+    "Nothing Here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing Here"
+          }
+        }
+      }
+    },
+    "This folder is empty. Create a file or import one from Files." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This folder is empty. Create a file or import one from Files."
+          }
+        }
+      }
+    },
+    "No file in this folder matches “%@”." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No file in this folder matches “%@”."
+          }
+        }
+      }
+    },
+    "Import from Files…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import from Files…"
+          }
+        }
+      }
+    },
+    "File Manager" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File Manager"
+          }
+        }
+      }
+    },
+    "This folder and everything in it are deleted." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This folder and everything in it are deleted."
+          }
+        }
+      }
+    },
+    "Saving writes straight to disk. An invalid property list is rejected rather than written." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saving writes straight to disk. An invalid property list is rejected rather than written."
+          }
+        }
+      }
+    },
+    "This folder belongs to an app in the Library. Editing it here changes the app bundle that was installed." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This folder belongs to an app in the Library. Editing it here changes the app bundle that was installed."
+          }
+        }
+      }
+    },
+    "First bytes of the file. Binary content cannot be edited here, but it can be shared, moved or replaced by importing another file with the same name." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "First bytes of the file. Binary content cannot be edited here, but it can be shared, moved or replaced by importing another file with the same name."
+          }
+        }
+      }
+    },
+    "This file is empty." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This file is empty."
+          }
+        }
+      }
+    },
+    "Export to Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export to Files"
+          }
+        }
+      }
+    },
+    "Unpacking…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unpacking…"
+          }
+        }
+      }
+    },
+    "%@ is managed by RyukSign — its Library entry is removed as well." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is managed by RyukSign — its Library entry is removed as well."
+          }
+        }
+      }
+    },
+    "This is inside %@, which is still in the Library. What is left of it may no longer open." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is inside %@, which is still in the Library. What is left of it may no longer open."
+          }
+        }
+      }
+    },
+    "Enter a file name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a file name"
+          }
+        }
+      }
+    },
+    "File created" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File created"
+          }
+        }
+      }
+    },
+    "Imported %lld item(s)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imported %lld item(s)"
+          }
+        }
+      }
+    },
+    "Duplicated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicated"
+          }
+        }
+      }
+    },
+    "Moved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moved"
+          }
+        }
+      }
+    },
+    "Deleted %lld items" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deleted %lld items"
+          }
+        }
+      }
+    },
+    "Move Here" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move Here"
+          }
+        }
+      }
+    },
+    "Subfolders" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subfolders"
+          }
+        }
+      }
+    },
+    "Greyed out folders are the app's own managed folders, or the item's current home." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Greyed out folders are the app's own managed folders, or the item's current home."
+          }
+        }
+      }
+    },
+    "Stops downloads and the background update pass while you play. Signing and installing what you already have keeps working." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stops downloads and the background update pass while you play. Signing and installing what you already have keeps working."
+          }
+        }
+      }
+    },
+    "File Manager browses everything RyukSign stores, with editing and import built in. The buttons below hand the same folders to the Files app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File Manager browses everything RyukSign stores, with editing and import built in. The buttons below hand the same folders to the Files app."
+          }
+        }
+      }
+    },
+    "File Manager browses and edits what RyukSign stores. Import Folders chooses which folder each kind of import opens in." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "File Manager browses and edits what RyukSign stores. Import Folders chooses which folder each kind of import opens in."
+          }
+        }
+      }
+    },
     "Text" : {
       "extractionState" : "manual",
       "localizations" : {

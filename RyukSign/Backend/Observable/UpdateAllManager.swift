@@ -97,6 +97,13 @@ final class UpdateAllManager: ObservableObject {
 	func run(tasks prepared: [UpdateTask]) async {
 		guard !isRunning, !prepared.isEmpty else { return }
 
+		// Game Mode: updating apps means downloading them. Say so rather than silently
+		// doing nothing, since this is a deliberate tap.
+		guard !GameMode.isEnabled else {
+			GameMode.reportBlockedInline(.localized("Updating apps"))
+			return
+		}
+
 		isRunning = true
 		_cancelled = false
 		succeeded = 0

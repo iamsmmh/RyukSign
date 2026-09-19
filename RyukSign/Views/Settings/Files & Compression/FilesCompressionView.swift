@@ -47,11 +47,14 @@ struct FilesCompressionView: View {
 			}
 
 			Section {
+				NavigationLink(destination: FileManagerView(directory: URL.documentsDirectory, isRoot: true)) {
+					Label(.localized("File Manager"), systemImage: "folder.badge.gearshape")
+				}
 				NavigationLink(destination: ImportFoldersView()) {
 					Label(.localized("Import Folders"), systemImage: "folder")
 				}
 			} footer: {
-				Text(.localized("Choose which folder each kind of import opens in."))
+				Text(.localized("File Manager browses and edits what RyukSign stores. Import Folders chooses which folder each kind of import opens in."))
 			}
 		}
     }

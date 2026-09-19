@@ -139,6 +139,9 @@ final class SelfUpdateManager: NSObject, ObservableObject {
 	@MainActor
 	func checkOnLaunch() async {
 		guard isAutoCheckEnabled else { return }
+		// The launch check is the one request RyukSign makes without being asked, so it is part
+		// of what Game Mode stops. The manual check in Settings still works.
+		guard !GameMode.isEnabled else { return }
 		await check()
 		if available != nil { presentUpdatePrompt = true }
 	}

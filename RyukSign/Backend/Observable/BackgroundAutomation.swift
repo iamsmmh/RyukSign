@@ -69,6 +69,16 @@ enum BackgroundAutomation {
 	static func run(fromBackground: Bool = false) async -> AutomationRunResult? {
 		guard BackgroundAutomationPreferences.isEnabled else { return nil }
 
+		// Game Mode: the pass refreshes every source and downloads updates, which is exactly
+		// the background traffic the mode exists to stop.
+		guard !GameMode.isEnabled else {
+			FileLogger.log("Automation skipped — Game Mode is on", category: "update")
+			if !fromBackground {
+				GameMode.reportBlockedInline(.localized("Automatic update checks"))
+			}
+			return nil
+		}
+
 		let policy = BackgroundAutomationPreferences.policy
 		let storage = Storage.shared
 		let sources = storage.getSources()

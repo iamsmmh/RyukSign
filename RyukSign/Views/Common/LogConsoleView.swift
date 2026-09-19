@@ -120,7 +120,7 @@ extension LogConsoleView {
 		private static let _detailIndent: CGFloat = 18
 
 		private struct _Palette {
-			let info, dim, meta, success, error: UIColor
+			let info, dim, meta, success, warn, error: UIColor
 		}
 
 		private static let _consolePalette = _Palette(
@@ -128,6 +128,7 @@ extension LogConsoleView {
 			dim: UIColor(red: 0.62, green: 0.65, blue: 0.72, alpha: 1),
 			meta: UIColor(red: 0.56, green: 0.60, blue: 0.72, alpha: 1),
 			success: UIColor(red: 0.34, green: 0.86, blue: 0.60, alpha: 1),
+			warn: UIColor(red: 1.00, green: 0.78, blue: 0.34, alpha: 1),
 			error: UIColor(red: 1.00, green: 0.45, blue: 0.47, alpha: 1)
 		)
 		private static let _transparentPalette = _Palette(
@@ -135,6 +136,7 @@ extension LogConsoleView {
 			dim: _consolePalette.dim,
 			meta: .secondaryLabel,
 			success: .systemGreen,
+			warn: .systemOrange,
 			error: .systemRed
 		)
 
@@ -146,6 +148,7 @@ extension LogConsoleView {
 			switch kind {
 			case .info: palette.info
 			case .success: palette.success
+			case .warn: palette.warn
 			case .error: palette.error
 			case .detail: palette.dim
 			}
