@@ -110,8 +110,12 @@ verification is split:
    tree-sitter and reports `ERROR`/`MISSING` nodes. Every file added or edited here parses
    cleanly; the twelve files it flags are pre-existing grammar noise (`try await` on its own
    line, `"\(a).\(b)"` interpolation) and are identical to the baseline before this branch.
-2. **Compile** — `.github/workflows/build.yml` runs a full `xcodebuild` on every pull request to
-   `main`; that is the real check for these changes.
+2. **Compile** — `.github/workflows/build.yml` runs a full `make` (an `xcodebuild` of the app,
+   the widget extension and the String Catalog, then a signed `.ipa`) on every pull request to
+   `main`; that is the real check for these changes. It built this branch green: run
+   [35436258383](https://github.com/iamsmmh/RyukSign/actions/runs/35436258383) — *Compile
+   RyukSign ✓ 11m01s*, and `Get Version` read the version out of the staged `Payload/*.app`,
+   so the bundle was complete rather than merely error-free.
 3. **Premium backend** — run for real in this environment: `keygen.py create` minted a key,
    `uvicorn` served the app, and `/api/health`, `/api/validate` (401 for an unknown key, 200 +
    gated feed URL for a real one), `/api/urls` (device restore) and `/repo/premium.json`
