@@ -22,6 +22,7 @@ struct AboutView: View {
 	// Hardcoded: upstream's creditsv2.json now 404s.
 	private let _credits: [CreditsModel] = [
 		.init(name: "Ryuk", desc: "RyukSign Developer", github: "faroukbmiled"),
+		.init(name: "NovaDev404", desc: "NexStore Developer", github: "NovaDev404"),
 		.init(name: "claration", desc: "Feather — original project", github: "claration"),
 		.init(name: "Asami", desc: "Developer", github: "Nyasami"),
 		.init(name: "Lakhan Lothiyi", desc: "AltStore Repositories", github: "llsc12"),

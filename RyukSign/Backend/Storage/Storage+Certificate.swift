@@ -11,6 +11,7 @@ import ZsignSwift
 
 // MARK: - Class extension: certificate
 extension Storage {
+	@MainActor
 	func addCertificate(
 		uuid: String,
 		password: String? = nil,
@@ -30,13 +31,17 @@ extension Storage {
 		new.expiration = expiration
 		new.nickname = nickname
 		new.isDefault = isDefault
-		Storage.shared.revokagedCertificate(for: new)
+		new.revoked = false
+		CertificateStatusManager.shared.refreshStatus(for: new)
 		saveContext()
 		generator.impactOccurred()
 		completion(nil)
 	}
 	
+	@MainActor
 	func deleteCertificate(for cert: CertificatePair) {
+		CertificateStatusManager.shared.removeAppleStatus(for: cert)
+
 		if let url = getUuidDirectory(for: cert) {
 			try? FileManager.default.removeItem(at: url)
 		}
@@ -58,19 +63,23 @@ extension Storage {
 		return results[index]
 	}
 	
-	func revokagedCertificate(for cert: CertificatePair) {
-		guard !cert.revoked else { return }
+	func revokagedCertificate(for cert: CertificatePair, completion: ((Bool) -> Void)? = nil) {
+		guard !cert.revoked else {
+			completion?(true)
+			return
+		}
 		
 		Zsign.checkRevokage(
 			provisionPath: Storage.shared.getFile(.provision, from: cert)?.path ?? "",
 			p12Path: Storage.shared.getFile(.certificate, from: cert)?.path ?? "",
 			p12Password: cert.password ?? ""
 		) { (status, _, _) in
-			if status == 1 {
-				DispatchQueue.main.async {
+			DispatchQueue.main.async {
+				if status == 1 {
 					cert.revoked = true
 					self.saveContext()
 				}
+				completion?(status == 1)
 			}
 		}
 	}

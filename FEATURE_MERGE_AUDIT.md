@@ -21,6 +21,13 @@ faroukbmiled/RyukSign, and the upstream projects each feature came from).
 | 2G | File manager | **Missing** | **Added** browser, editor, move picker, library-aware delete |
 | 2H | Game Mode | Signing-side only (`Options.gameMode` → `GCSupportsGameMode`) | **Added** app-side pause: downloads, resume, automation |
 | 2I | Self-hosted premium backend | **Already implemented** (`server/`, FastAPI + keygen + admin) | Verified end-to-end |
+| 2J | Official Certs Catalog (NexCerts) | **Missing** | **Added** (`NexCerts.swift`, `OfficialCertificatesView.swift`, auto-import) |
+| 2K | Apple Cert Status Checker | **Missing** | **Added** (`CertificateStatusManager.swift`, dynamic OCSP cache & status badges) |
+| 2L | NovaDNS Dynamic (PPQ Bypass) | **Missing** | **Added** (`NovaDNSDynamic.swift`, AntiRevoke settings + install polling bypass) |
+| 2M | Signing Live Activity | Download-only | **Added** (`SigningActivityAttributes`, `SigningLiveActivityManager`, extension widget) |
+| 2N | App Cloning / Duplication | **Missing** | **Added** (`AppCloner.swift`, context menu duplication with new bundle ID) |
+| 2O | iDevice Install Fallback | Server-only fallback | **Added** automatic fallback to `InstallationProxy` if server fails |
+| 2P | Bundle ID Prefix & Suffix | Base suggestion only | **Added** prefix/suffix input & application in signing properties |
 
 Two of the nine features were genuinely missing; the rest already existed. Rather than
 re-scaffolding what was there (the guide's snippets are deliberately minimal — a `BulkSignQueue`

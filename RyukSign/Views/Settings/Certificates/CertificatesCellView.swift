@@ -13,7 +13,8 @@ struct CertificatesCellView: View {
 	@State var data: Certificate?
 	
 	@ObservedObject var cert: CertificatePair
-	
+	@ObservedObject private var statusManager = CertificateStatusManager.shared
+
 	// MARK: Body
 	var body: some View {
 		VStack(spacing: 6) {
@@ -42,6 +43,9 @@ struct CertificatesCellView: View {
 				data = Storage.shared.getProvisionFileDecoded(for: cert)
 			}
 		}
+		.task(id: cert.uuid ?? cert.objectID.uriRepresentation().absoluteString) {
+			statusManager.refreshStatusIfNeeded(for: cert)
+		}
 	}
 }
 
@@ -66,15 +70,21 @@ extension CertificatesCellView {
 	
 	private func _buildPills(from cert: CertificatePair) -> [NBPillItem] {
 		var pills: [NBPillItem] = []
-		
+		let status = statusManager.effectiveStatus(for: cert)
+		let title = statusManager.effectiveStatusTitle(for: cert)
+
+		pills.append(
+			NBPillItem(
+				title: title,
+				icon: status.icon,
+				color: status.color
+			)
+		)
+
 		if cert.ppQCheck == true {
 			pills.append(NBPillItem(title: .localized("PPQCheck"), icon: "checkmark.shield", color: .red))
 		}
-		
-		if cert.revoked == true {
-			pills.append(NBPillItem(title: .localized("Revoked"), icon: "xmark.octagon", color: .red))
-		}
-		
+
 		if let info = cert.expiration?.expirationInfo() {
 			pills.append(NBPillItem(
 				title: info.formatted,

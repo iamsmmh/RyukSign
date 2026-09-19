@@ -52,6 +52,8 @@ enum FR {
 			log.reset()
 			log.info(.localized("Preparing to sign %@", arguments: app.name ?? .localized("app")))
 
+			await SigningLiveActivityManager.shared.start(appName: app.name ?? "App")
+
 			let keepAlive = BackgroundTaskManager(
 				taskName: "Signing",
 				expirationTitle: .localized("Signing continuing"),
@@ -66,7 +68,9 @@ enum FR {
 
 			do {
 				try await handler.copy()
+				await SigningLiveActivityManager.shared.update(progress: 0.3, status: .localized("Modifying…"))
 				try await handler.modify()
+				await SigningLiveActivityManager.shared.update(progress: 0.8, status: .localized("Finalizing…"))
 				try? await handler.clean()
 
 				guard let signed = handler.signedApp else {
@@ -74,12 +78,14 @@ enum FR {
 				}
 
 				log.success(.localized("Signed successfully"))
+				await SigningLiveActivityManager.shared.complete(appName: app.name)
 				await MainActor.run {
 					completion(.success(signed))
 				}
 			} catch {
 				try? await handler.clean()
 				log.error(error.localizedDescription)
+				await SigningLiveActivityManager.shared.cancel()
 				await MainActor.run {
 					completion(.failure(error))
 				}

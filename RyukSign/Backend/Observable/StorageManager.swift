@@ -253,6 +253,11 @@ extension StorageManager {
 			return 0
 		}
 
+		SigningLog.shared.info(
+			.localized("Purged %@: freed %@", arguments: category.title, ByteCountFormatter.string(fromByteCount: before, countStyle: .file)),
+			category: "storage"
+		)
+
 		entries.removeAll()
 		refresh()
 		return before

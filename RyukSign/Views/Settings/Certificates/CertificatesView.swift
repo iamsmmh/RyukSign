@@ -8,11 +8,18 @@
 import SwiftUI
 import NimbleViews
 
+private enum CertificateAddSheet: String, Identifiable {
+	case certificateFiles
+	case official
+
+	var id: String { rawValue }
+}
+
 // MARK: - View
 struct CertificatesView: View {
 	@AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
 	
-	@State private var _isAddingPresenting = false
+	@State private var _addSheet: CertificateAddSheet?
 	@State private var _isRenamingPresenting = false
 	@State private var _isSelectedInfoPresenting: CertificatePair?
 	@State private var _certToRename: CertificatePair?
@@ -49,8 +56,8 @@ struct CertificatesView: View {
 					systemImage: "questionmark.folder.fill",
 					description: .localized("Get started signing by importing your first certificate.")
 				) {
-					Button {
-						_isAddingPresenting = true
+					Menu {
+						_addOptions()
 					} label: {
 						NBButton(.localized("Import"), style: .text)
 					}
@@ -59,21 +66,20 @@ struct CertificatesView: View {
 		}
 		.toolbar {
 			if _bindingSelectedCert == nil {
-				NBToolbarButton(
+				NBToolbarMenu(
 					systemImage: "plus",
 					style: .icon,
 					placement: .topBarTrailing
 				) {
-					_isAddingPresenting = true
+					_addOptions()
 				}
 			}
 		}
 		.sheet(item: $_isSelectedInfoPresenting) { cert in
 			CertificatesInfoView(cert: cert)
 		}
-		.sheet(isPresented: $_isAddingPresenting) {
-			CertificatesAddView()
-				.presentationDetents([.medium])
+		.sheet(item: $_addSheet) { sheet in
+			_addSheetView(for: sheet)
 		}
 		.alert(.localized("Change Nickname"), isPresented: $_isRenamingPresenting, presenting: _certToRename) { cert in
 			TextField(.localized("Nickname"), text: $_newNickname)
@@ -88,6 +94,29 @@ struct CertificatesView: View {
 
 // MARK: - View extension
 extension CertificatesView {
+	@ViewBuilder
+	private func _addOptions() -> some View {
+		Button(.localized("Official (NexCerts)")) {
+			_addSheet = .official
+		}
+
+		Button(.localized("Certificate Files")) {
+			_addSheet = .certificateFiles
+		}
+	}
+
+	@ViewBuilder
+	private func _addSheetView(for sheet: CertificateAddSheet) -> some View {
+		switch sheet {
+		case .certificateFiles:
+			CertificatesAddView()
+				.presentationDetents([.medium])
+		case .official:
+			OfficialCertificatesView()
+				.presentationDetents([.large])
+		}
+	}
+
 	@ViewBuilder
 	private func _cellButton(for cert: CertificatePair, at index: Int) -> some View {
 		let cornerRadius = NBRadius.large
@@ -147,6 +176,9 @@ extension CertificatesView {
 			}
 		}
 		Divider()
+		Button(.localized("Refresh Apple Status"), systemImage: "arrow.clockwise") {
+			CertificateStatusManager.shared.refreshStatus(for: cert)
+		}
 		Button(.localized("Check Revokage"), systemImage: "person.text.rectangle") {
 			Storage.shared.revokagedCertificate(for: cert)
 		}

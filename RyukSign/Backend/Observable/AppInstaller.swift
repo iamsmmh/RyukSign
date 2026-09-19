@@ -30,6 +30,7 @@ final class AppInstaller: ObservableObject {
 	private let _installationMethod = UserDefaults.standard.integer(forKey: "Feather.installationMethod")
 	private let _serverMethod = UserDefaults.standard.integer(forKey: "Feather.serverMethod")
 	private let _useShareSheet = UserDefaults.standard.bool(forKey: "Feather.useShareSheetForArchiving")
+	private let _useNovaDNSDynamic = UserDefaults.standard.bool(forKey: "RyukSign.useNovaDNSDynamic")
 
 	private var _server: ServerInstaller?
 	private var _progressTask: Task<Void, Never>?
@@ -150,7 +151,23 @@ final class AppInstaller: ObservableObject {
 			failure = await server.selfCheck()
 		}
 
-		viewModel.status = failure.map { .broken($0) } ?? .ready
+		if let failure {
+			let pairingExists = FileManager.default.fileExists(atPath: HeartbeatManager.pairingFile())
+			if pairingExists {
+				FileLogger.log("Server setup failed (\(failure.localizedDescription)), falling back to idevice installation", category: "install")
+				SigningLog.shared.info(.localized("Server failed, falling back to idevice installation…"), category: "install")
+				do {
+					try await InstallationProxy(viewModel: viewModel)
+						.install(at: packageUrl, suspend: app.identifier == Bundle.main.bundleIdentifier!)
+					return
+				} catch {
+					FileLogger.error("idevice fallback failed: \(error.localizedDescription)", category: "install")
+				}
+			}
+			viewModel.status = .broken(failure)
+		} else {
+			viewModel.status = .ready
+		}
 	}
 
 	// MARK: Status
@@ -187,6 +204,12 @@ final class AppInstaller: ObservableObject {
 		}
 
 		FileLogger.log("opening \(link)", category: "install")
+
+		if _useNovaDNSDynamic {
+			Task {
+				await NovaDNSDynamic.sendRequest(endpoint: "enablePPQ")
+			}
+		}
 
 		UIApplication.shared.open(url) { [weak self] opened in
 			FileLogger.log("itms-services accepted by iOS: \(opened)", category: "install")
@@ -254,9 +277,11 @@ final class AppInstaller: ObservableObject {
 
 	private func _startProgressPolling() {
 		guard _progressTask == nil, let bundleID = app.identifier else { return }
+		let useNovaDNS = _useNovaDNSDynamic
 
 		_progressTask = Task.detached(priority: .background) { [viewModel] in
 			var hasStarted = false
+			var lastEnablePPQTime = Date()
 
 			while !Task.isCancelled {
 				let raw = await UIApplication.installProgress(for: bundleID) ?? 0.0
@@ -270,6 +295,14 @@ final class AppInstaller: ObservableObject {
 				await MainActor.run {
 					if viewModel.installProgress != value {
 						viewModel.installProgress = value
+					}
+				}
+
+				if useNovaDNS && hasStarted {
+					let now = Date()
+					if now.timeIntervalSince(lastEnablePPQTime) >= 10 {
+						await NovaDNSDynamic.sendRequest(endpoint: "enablePPQ")
+						lastEnablePPQTime = now
 					}
 				}
 
