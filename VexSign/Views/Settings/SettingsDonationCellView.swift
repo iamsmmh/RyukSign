@@ -2,7 +2,7 @@
 //  SettingsDonationCellView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 19.09.2026.
+//  Created by VexSign Team on 19.09.2026.
 //
 #if !NIGHTLY && !DEBUG
 import SwiftUI

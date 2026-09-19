@@ -3,7 +3,7 @@
 //  VexSign
 //
 //  Created by VexSign Team on 10.04.2025.
-//  Maintained by @iamsmmh — https://github.com/iamsmmh/VexSign
+//  Created by VexSign Team
 //
 
 import CoreData

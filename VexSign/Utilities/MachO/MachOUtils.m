@@ -2,7 +2,7 @@
 //  MachOUtils.m
 //  VexSign
 //
-//  Created by iamsmmh on 12.06.2025.
+//  Created by VexSign Team on 12.06.2025.
 //
 
 #import "MachOUtils.h"
