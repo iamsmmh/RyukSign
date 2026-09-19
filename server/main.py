@@ -47,6 +47,8 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 import db
+import admin
+from admin import router as admin_router
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -92,6 +94,9 @@ app = FastAPI(
     openapi_url=None,
     lifespan=lifespan,
 )
+
+# Distributor admin API (token-gated; disabled when ADMIN_TOKEN is unset).
+app.include_router(admin_router)
 
 
 class ValidateBody(BaseModel):
@@ -258,13 +263,21 @@ def icon() -> FileResponse:
 
 @app.get("/")
 def root(request: Request) -> dict:
+    endpoints = [
+        "POST /api/validate",
+        "GET /api/urls",
+        "GET /api/health",
+        "GET /repo/premium.json",
+    ]
+    if bool(admin.ADMIN_TOKEN):
+        endpoints += [
+            "GET /api/admin/health",
+            "POST /api/admin/keys        (mint)",
+            "GET /api/admin/keys         (list)",
+            "POST /api/admin/keys/disable|enable|reset|revoke",
+        ]
     return {
         "service": "RyukSign Premium API",
-        "endpoints": [
-            "POST /api/validate",
-            "GET /api/urls",
-            "GET /api/health",
-            "GET /repo/premium.json",
-        ],
+        "endpoints": endpoints,
         "appSetting": f'static let apiBaseURL = "{_base_url(request)}/api"  // RyukSign/Utilities/RyukSignAPI.swift',
     }

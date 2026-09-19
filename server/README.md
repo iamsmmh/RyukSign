@@ -12,6 +12,10 @@ create and issue keys yourself, and no key paid to someone else is required.
 | `GET /api/urls` | `ryukSignUUID: <device>` header | "Restore Repositories" — re-lists a device's premium URLs without consuming anything |
 | `GET /api/health` | – | Liveness check |
 | `GET /repo/premium.json` | `ryukSignUUID` / `X-API-Key` | Built-in **gated** demo premium source (works out of the box) |
+| `GET /api/admin/health` | – | Whether the admin API is enabled (no token needed) |
+| `POST /api/admin/keys` | `X-Admin-Token` | Mint fresh keys (distributor) |
+| `GET /api/admin/keys` | `X-Admin-Token` | List every key + its status |
+| `POST /api/admin/keys/{disable\|enable\|reset\|revoke}` | `X-Admin-Token` | Manage a single key |
 
 Keys are **single-use and device-bound**, exactly like the app expects:
 
@@ -75,6 +79,61 @@ python keygen.py revoke RYK-…        # delete it
 
 Keys live in `ryuksign.db` (SQLite, override with `RYUKSIGN_DB=/path/file.db`).
 
+### 3b. Distributor admin API (manage keys without SSH)
+
+Keys can also be managed over HTTP — handy when you're selling keys from a
+phone/laptop and can't (or don't want to) SSH into the box. It's the same
+operations as §3, gated by a single shared secret set as the `ADMIN_TOKEN`
+environment variable:
+
+- `ADMIN_TOKEN` **unset** → the whole admin surface is off (`403` for every
+  `/api/admin/*` route). This is the default, so nothing to ship unauthenticated.
+- `ADMIN_TOKEN` **set** → every management call must send
+  `X-Admin-Token: <your secret>`, or it gets `403`.
+
+First, set the secret once (Render dashboard → Environment, or your VPS shell):
+
+```bash
+# Render dashboard: add env var  ADMIN_TOKEN=<paste output>  then redeploy
+# VPS:
+export ADMIN_TOKEN="$(openssl rand -hex 24)"   # e.g. 32 random hex chars
+```
+
+Then manage keys over HTTPS:
+
+```bash
+S=https://your-server.onrender.com
+T="your-admin-token"
+
+# See if admin is live (no token required):
+curl -s "$S/api/admin/health"
+# -> {"enabled": true}
+
+# Mint a batch of fresh keys:
+curl -s -X POST "$S/api/admin/keys" \
+  -H "X-Admin-Token: $T" -H "Content-Type: application/json" \
+  -d '{"count": 5}'
+# -> {"count": 5, "keys": ["RYK-…", …]}
+
+# List every key and its status:
+curl -s "$S/api/admin/keys" -H "X-Admin-Token: $T"
+
+# Manage a single key (body: the key to act on):
+curl -s -X POST "$S/api/admin/keys/disable" -H "X-Admin-Token: $T" \
+  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+curl -s -X POST "$S/api/admin/keys/enable"  -H "X-Admin-Token: $T" \
+  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+curl -s -X POST "$S/api/admin/keys/reset"   -H "X-Admin-Token: $T" \
+  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+curl -s -X POST "$S/api/admin/keys/revoke"  -H "X-Admin-Token: $T" \
+  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+```
+
+> **Selling flow:** buyer contacts you → you run the `mint` curl (count 1) →
+> paste the fresh `RYK-…` key back → they redeem it in-app. Because the free
+> tier has no persistent disk, **also append each issued key to `SEED_KEYS`**
+> in the dashboard so a redeploy doesn't strand your buyers.
+
 ## 4. Serve your own premium content
 
 Out of the box, redeeming a key returns this server's gated `/repo/premium.json` demo
@@ -118,6 +177,8 @@ testing. Easiest paths:
    - `SEED_KEYS=RYK-AAAA-BBBB-CCCC,RYK-…` — keys are (re)created idempotently
      on every boot. This is how keys survive free-tier redeploys (no
      persistent disk): the key text is in your dashboard, not on the box.
+   - `ADMIN_TOKEN=<openssl rand -hex 24>` — optional: enables the §3b
+     distributor admin API. Leave unset to keep remote key management off.
    - `PREMIUM_REPO_URLS` — only if you use Option B content.
 4. Render gives you `https://your-app.onrender.com` → set `apiBaseURL` to `…/api`.
 

@@ -18,11 +18,9 @@ import time
 
 import db
 
-_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"  # no easily-confused O/0, I/1
-
 
 def generate_key() -> str:
-    parts = ("".join(secrets.choice(_ALPHABET) for _ in range(4)) for _ in range(3))
+    parts = ("".join(secrets.choice(db.KEY_ALPHABET) for _ in range(4)) for _ in range(3))
     return "RYK-" + "-".join(parts)
 
 
