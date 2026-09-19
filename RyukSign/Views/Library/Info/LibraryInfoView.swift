@@ -52,17 +52,21 @@ struct LibraryInfoView: View {
 extension LibraryInfoView {
 	@ViewBuilder
 	private func _resignSection() -> some View {
-		guard app.isSigned else { return }
-
-		let hasProfile = SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil
-		Section(.localized("Re-sign")) {
-			Button {
-				_resignWithLastSettings()
-			} label: {
-				Label(.localized(hasProfile ? "Re-sign with last settings" : "Sign again"), systemImage: "signature")
+		if app.isSigned {
+			NBSection(.localized("Re-sign")) {
+				Button {
+					_resignWithLastSettings()
+				} label: {
+					Label(
+						.localized(SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil
+							? "Re-sign with last settings"
+							: "Sign again"),
+						systemImage: "signature"
+					)
+				}
+			} footer: {
+				Text(.localized("Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it."))
 			}
-		} footer: {
-			Text(.localized("Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it."))
 		}
 	}
 
