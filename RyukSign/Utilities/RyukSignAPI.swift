@@ -21,7 +21,7 @@ enum RyukSignAPI {
 
 	// MARK: - API
 
-	static let apiBaseURL = "https://ryuksign.com/api"
+	static let apiBaseURL = "https://ryuksign-premium.onrender.com/api"
 	/// Key validation (POST, consumes key).
 	static let apiValidateEndpoint = "\(apiBaseURL)/validate"
 	/// URL preview (GET, doesn't consume key).
