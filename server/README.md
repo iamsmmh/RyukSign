@@ -51,6 +51,17 @@ Rebuild the app, open **Sources → Premium** (the crown), redeem one of your ke
 This build has `NSAllowsArbitraryLoads`, so `http://` works for LAN testing — still use
 HTTPS in production.
 
+If your proxy doesn't forward `X-Forwarded-Host`/`X-Forwarded-Proto` (e.g. e2b sandbox
+previews), the URLs the server hands back may be the proxy's internal address instead of
+the public one. Pin the public base with the `PUBLIC_BASE_URL` env var:
+
+```bash
+PUBLIC_BASE_URL=https://your-public-host uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+(Hosts ending in `.e2b.app` additionally get `https` by default, since iOS rejects
+cleartext URLs.)
+
 ## 3. Manage keys
 
 ```bash
@@ -67,28 +78,54 @@ Keys live in `ryuksign.db` (SQLite, override with `RYUKSIGN_DB=/path/file.db`).
 ## 4. Serve your own premium content
 
 Out of the box, redeeming a key returns this server's gated `/repo/premium.json` demo
-source. To give your users real repos, either:
+source. To give your users real repos, pick one:
 
-- **Option A — use existing feeds:** set `PREMIUM_REPO_URLS` to comma-separated
+- **Option A — host your own feed file here (recommended):** copy
+  `premium.example.json` to `server/premium.json` (gitignored), fill in your app
+  entries, done. The server serves it at `/repo/premium.json` behind the same
+  key gating and re-reads the file on every request, so content edits apply
+  without a restart. Point `PREMIUM_FEED_FILE` at another path if you prefer.
+  (On Render this file must be committed to the deploy branch or hosted
+  elsewhere — see Option B.)
+- **Option B — use existing feeds:** set `PREMIUM_REPO_URLS` to comma-separated
   AltStore-style JSON URLs, e.g.
   `PREMIUM_REPO_URLS="https://you.com/premium1.json,https://you.com/premium2.json"`
-- **Option B — host them here:** edit the dict returned by `premium_repo()` in
-  `main.py` (add your apps' `downloadURL`s — must be real IPA URLs, HTTPS).
+- **Option C — in code:** edit the dict returned by `premium_repo()` in `main.py`.
+
+Field reference (what the app's `ASRepository` decoder needs):
+
+| Level | Field | Notes |
+| --- | --- | --- |
+| repo | `name`, `identifier` | shown in the source list |
+| repo | `apps` | **required, non-empty** — the source won't load otherwise |
+| app | `iconURL` | **required** (decode hard-fails without it) |
+| app | `name`, `bundleIdentifier`, `developerName`, `subtitle` | display |
+| app | `downloadURL` | direct HTTPS `.ipa` URL — required to actually install |
+| app | `version`, `versionDate`, `size`, `category` | optional |
 
 ## 5. Deploy (free options)
 
 The server must be reachable from your iPhone 24/7, so local-only won't cut it past
 testing. Easiest paths:
 
-**Render (free tier)**
+**Render free tier (one-click blueprint)**
 
-1. Push this repo to GitHub (already done — it's your repo).
-2. Render → New → Web Service → pick the repo.
-3. Root directory: `server`. Build: `pip install -r requirements.txt`.
-   Start: `uvicorn main:app --host 0.0.0.0 --port $PORT`.
-4. Add env var `PREMIUM_REPO_URLS` if you use Option A, and a persistent disk mounted
-   at `/data` so keys survive restarts (set `RYUKSIGN_DB=/data/ryuksign.db`).
-5. Render gives you `https://your-app.onrender.com` → set `apiBaseURL` to `…/api`.
+1. Push the branch you want to deploy to GitHub.
+2. Render → **New → Blueprint** → pick the repo. The `render.yaml` at the repo
+   root configures everything (rootDir `server`, build/start, health check).
+3. After the first deploy, add private env vars to the service:
+   - `SEED_KEYS=RYK-AAAA-BBBB-CCCC,RYK-…` — keys are (re)created idempotently
+     on every boot. This is how keys survive free-tier redeploys (no
+     persistent disk): the key text is in your dashboard, not on the box.
+   - `PREMIUM_REPO_URLS` — only if you use Option B content.
+4. Render gives you `https://your-app.onrender.com` → set `apiBaseURL` to `…/api`.
+
+Free-tier gotchas: the instance sleeps after 15 min idle — a cold start can
+take ~30–60 s, so the app's 30 s request timeout may need one retry after
+silence. No persistent disk on free instances, and after a redeploy a device
+must re-redeem its (still valid) key once to re-bind. A paid instance can
+attach a disk at `/data` instead, keeping bindings forever
+(`RYUKSIGN_DB=/data/ryuksign.db` is already the default in `render.yaml`).
 
 **Docker (any VPS / Railway / Fly.io)**
 

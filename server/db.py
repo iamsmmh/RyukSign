@@ -29,6 +29,9 @@ CREATE TABLE IF NOT EXISTS keys (
 
 def connect() -> sqlite3.Connection:
     """Open the database (creating the schema on first use)."""
+    parent = os.path.dirname(DB_PATH)
+    if parent:
+        os.makedirs(parent, exist_ok=True)  # e.g. /data before a volume exists
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.executescript(_SCHEMA)
