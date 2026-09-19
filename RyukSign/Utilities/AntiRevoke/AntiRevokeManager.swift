@@ -62,7 +62,7 @@ final class AntiRevokeManager {
 		let directory = URL.documentsDirectory.appendingPathComponent("AntiRevoke", isDirectory: true)
 		try fileManager.createDirectoryIfNeeded(at: directory)
 
-		let baseIdentifier = "com.ryuksign.antirevoke.dns.\\(Bundle.main.bundleIdentifier ?? "ryuksign")"
+		let baseIdentifier = "com.ryuksign.antirevoke.dns.\(Bundle.main.bundleIdentifier ?? "ryuksign")"
 		let payloadIdentifier = baseIdentifier + ".managed"
 
 		let payload: [String: Any] = [
