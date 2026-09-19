@@ -79,7 +79,9 @@ jobs:
             echo "::warning::agvtool could not stamp the build number (${BUILD_NUMBER}); continuing with the committed CURRENT_PROJECT_VERSION."
           fi
 
-          make
+          # Tee the build log so a later step can surface the compiler errors as
+          # annotations (and we keep a copy if the log CDN is unreachable).
+          make 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log"
 
           if ! ls packages/*.ipa >/dev/null 2>&1; then
             echo "::error::make finished but produced no .ipa in packages/."
@@ -88,6 +90,19 @@ jobs:
 
           mkdir -p upload
           mv packages/*.ipa upload/
+
+      - name: Surface build errors
+        if: failure()
+        run: |
+          set +e
+          LOG="$RUNNER_TEMP/xcodebuild.log"
+          if [ -f "$LOG" ]; then
+            # File-scoped compiler errors → annotations with location.
+            grep -nE "error:" "$LOG" | sed -E 's/^([0-9]+):[[:space:]]*([^:]+):([0-9]+):([0-9]+):[^:]*:[[:space:]]*(.*)$/::error file=\2,line=\3,col=\4::\5/' | head -150
+            # Anything the first pass missed (linker, subsystem) → plain error.
+            grep -E "error:" "$LOG" | grep -vE ":[0-9]+:[0-9]+:[[:space:]]*error:" | sed -E 's/^[[:space:]]*(.*)$/::error::\1/' | head -30
+          fi
+          exit 0
 
       - name: Get Version
         id: get_version
