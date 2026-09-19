@@ -1,4 +1,4 @@
-"""Admin API for the RyukSign Premium server — remote key management for a
+"""Admin API for the VexSign Premium server — remote key management for a
 single distributor. This is the same set of operations `keygen.py` does on a
 shell, exposed over HTTP and gated by one shared ADMIN_TOKEN secret, so a key
 seller can mint/disable/enable/reset/revoke keys from a phone without SSH.

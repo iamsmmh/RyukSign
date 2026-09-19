@@ -32,7 +32,7 @@ origin_repo() {
 }
 
 RELEASE_REPO="${RELEASE_REPO:-$(origin_repo)}"
-[ -n "$RELEASE_REPO" ] || RELEASE_REPO="faroukbmiled/RyukSign"
+[ -n "$RELEASE_REPO" ] || RELEASE_REPO="faroukbmiled/VexSign"
 
 API_URL="https://api.github.com/repos/${RELEASE_REPO}/releases/latest"
 

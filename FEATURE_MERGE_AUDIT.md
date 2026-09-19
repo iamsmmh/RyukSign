@@ -1,12 +1,12 @@
 # Feature Merge Audit
 
-This is the record of merging the "merge features into your RyukSign fork" guide into this
+This is the record of merging the "merge features into your VexSign fork" guide into this
 repository: what the guide asks for, what was already here, what this branch changed, and how
 each piece was checked. Modelled on `MYSIGN_MERGE_AUDIT.md` (MySignReincarnated), which does the
 same job for a different signer.
 
 Everything below is GPL-3.0 and keeps the upstream attribution (claration/Feather,
-faroukbmiled/RyukSign, and the upstream projects each feature came from).
+faroukbmiled/VexSign, and the upstream projects each feature came from).
 
 ## 1. Summary
 
@@ -14,7 +14,7 @@ faroukbmiled/RyukSign, and the upstream projects each feature came from).
 | --- | --- | --- | --- |
 | 2A | Bulk / batch signing | **Already implemented** (`BatchJobRunner`, Library multi-select, per-app overrides) | Reviewed, unchanged |
 | 2B | Dedicated Logs tab | Log store + console existed; no tab, no warning level, console was session-only | **Added** Logs tab, `warn` level, live + on-disk history |
-| 2C | Backup / restore | **Already implemented**, richer (encrypted `.ryukbackup` archive) | Reviewed, unchanged |
+| 2C | Backup / restore | **Already implemented**, richer (encrypted `.vexbackup` archive) | Reviewed, unchanged |
 | 2D | App name / icon / bundle ID editing | **Already implemented** (`SigningCustomizationView`, per-app overrides) | Reviewed, unchanged |
 | 2E | DNS anti-revoke | **Already implemented** (`AntiRevokeManager`, DoH profile) | Reviewed, unchanged |
 | 2F | Background downloads & signing | **Already implemented** (background `URLSession`, keep-alive, Live Activity phases) | Reviewed, unchanged |
@@ -41,18 +41,18 @@ implemented the gaps and left the working implementations alone.
 The app already had the pieces: `SigningLog` (batched, capped, mirrored to `FileLogger`) and
 `LogConsoleView` (a `UITextView` renderer). What was missing was reachability and a level.
 
-- `RyukSign/Views/Logs/LogsView.swift` — the tab: live console, level filter chips with counts,
+- `VexSign/Views/Logs/LogsView.swift` — the tab: live console, level filter chips with counts,
   share/copy/reload/clear, pull-to-refresh, empty states.
-- `RyukSign/Backend/Observable/SigningLog.swift` — now owns history. `entries` (newest first) is
+- `VexSign/Backend/Observable/SigningLog.swift` — now owns history. `entries` (newest first) is
   the session's entries followed by the tail of the on-disk log, loaded once via
   `loadHistory()`. Entries written this launch are filtered out of the history by timestamp, so
   nothing appears twice. `warn(_:)`, `clear()` and `exportText(_:)` added;
   `lines` still works for the existing signing-console sheet.
-- `RyukSign/Utilities/LogPresentation.swift` — `LogKind.warn`, `WARNING:` classification that
+- `VexSign/Utilities/LogPresentation.swift` — `LogKind.warn`, `WARNING:` classification that
   survives a round-trip through the log file, plus titles/system images for the filter UI.
-- `RyukSign/Views/Common/LogConsoleView.swift` — amber warning colour in both palettes.
-- `RyukSign/Utilities/FileLogger.swift` — `warn(_:category:)`.
-- `RyukSign/Views/TabView/TabEnum.swift` — `.logs` tab (default order: Sources, Library, Logs,
+- `VexSign/Views/Common/LogConsoleView.swift` — amber warning colour in both palettes.
+- `VexSign/Utilities/FileLogger.swift` — `warn(_:category:)`.
+- `VexSign/Views/TabView/TabEnum.swift` — `.logs` tab (default order: Sources, Library, Logs,
   Tweaks, Settings); `TabBarPreferences.hideableTabs` includes it, so it can be hidden or
   reordered like any other tab.
 
@@ -62,13 +62,13 @@ auto-scroll needed, and the user can scroll back through history without being y
 
 ### 2G — File Manager
 
-- `RyukSign/Views/FileManager/FileManagerView.swift` — recursive browser of `Documents`:
+- `VexSign/Views/FileManager/FileManagerView.swift` — recursive browser of `Documents`:
   sort (name/date/size), hidden files, search, per-row swipe actions and context menu, "＋" menu
   (new folder, new file, import from Files), a summary header at the root, and an empty state.
-- `RyukSign/Views/FileManager/FileManagerItemView.swift` — one file: preview (text, plist,
+- `VexSign/Views/FileManager/FileManagerItemView.swift` — one file: preview (text, plist,
   image, hex), editors, share, duplicate, move, export, delete, and file attributes.
-- `RyukSign/Views/FileManager/FileManagerActions.swift` — every write, in one place.
-- `RyukSign/Views/FileManager/FileManagerMoveView.swift` — destination picker for "Move".
+- `VexSign/Views/FileManager/FileManagerActions.swift` — every write, in one place.
+- `VexSign/Views/FileManager/FileManagerMoveView.swift` — destination picker for "Move".
 - Entry points: Settings → Misc → File Manager, and Files & Compression → File Manager.
 
 Reuse instead of a second file engine: entries, type sniffing, text/plist reading and the
@@ -89,10 +89,10 @@ Tweak Manager import shortcut is offered for `.dylib`/`.deb`/`.framework`/`.bund
 ### 2H — Game Mode (app side)
 
 `Options.gameMode` already existed on the signing side (it writes `GCSupportsGameMode` into a
-signed app's `Info.plist`). The guide's other half — RyukSign itself not spending data while you
+signed app's `Info.plist`). The guide's other half — VexSign itself not spending data while you
 play — was missing.
 
-- `RyukSign/Backend/Observable/GameMode.swift` — the switch, what it pauses (read by Settings),
+- `VexSign/Backend/Observable/GameMode.swift` — the switch, what it pauses (read by Settings),
   `enable()` (pauses in-flight downloads), `disable()`, and two ways of reporting a blocked
   action: an alert that offers to turn the mode off, and a toast for flows that must not be
   interrupted.
@@ -120,8 +120,8 @@ verification is split:
 2. **Compile** — `.github/workflows/build.yml` runs a full `make` (an `xcodebuild` of the app,
    the widget extension and the String Catalog, then a signed `.ipa`) on every pull request to
    `main`; that is the real check for these changes. It built this branch green: run
-   [35436258383](https://github.com/iamsmmh/RyukSign/actions/runs/35436258383) — *Compile
-   RyukSign ✓ 11m01s*, and `Get Version` read the version out of the staged `Payload/*.app`,
+   [35436258383](https://github.com/iamsmmh/VexSign/actions/runs/35436258383) — *Compile
+   VexSign ✓ 11m01s*, and `Get Version` read the version out of the staged `Payload/*.app`,
    so the bundle was complete rather than merely error-free.
 3. **Premium backend** — run for real in this environment: `keygen.py create` minted a key,
    `uvicorn` served the app, and `/api/health`, `/api/validate` (401 for an unknown key, 200 +
@@ -148,7 +148,7 @@ server items needs a device (Zsign requires real hardware).
       profile in Settings, confirm the device's DNS shows the pinned DoH server.
 - [ ] **Background** — start a download, lock the phone, confirm it completes and the Live
       Activity goes through Downloading → Importing → Signing.
-- [ ] **File Manager** — Settings → Misc → File Manager; browse `Logs`; open `ryuksign.log`; create
+- [ ] **File Manager** — Settings → Misc → File Manager; browse `Logs`; open `vexsign.log`; create
       a file; rename it; edit a `.plist` (invalid XML must be refused); move it into a subfolder;
       delete a file from `Temporary`? (nothing there is protected) and confirm the app is
       unaffected.
@@ -158,7 +158,7 @@ server items needs a device (Zsign requires real hardware).
 - [ ] **Game Mode** — Settings → Game Mode on: start a download (blocked with an alert that
       offers to turn it off), leave one running while you flip it on (it pauses), run
       Settings → Automation → Run Now (skipped), then turn it off and resume downloads.
-- [ ] **Premium backend** — deploy `server/` (see `server/README.md`), point `RyukSignAPI.apiBaseURL`
+- [ ] **Premium backend** — deploy `server/` (see `server/README.md`), point `VexSignAPI.apiBaseURL`
       at it, redeem a key minted with `keygen.py create`.
 
 ## 5. Notes for future merges
@@ -168,7 +168,7 @@ server items needs a device (Zsign requires real hardware).
   `ContentUnavailableView`, and `#available` guards for anything newer — the codebase has
   `View+compat*` helpers in NimbleKit for the common cases.
 - New Swift files are picked up automatically: the app target uses
-  `PBXFileSystemSynchronizedRootGroup`, so dropping a file into `RyukSign/` is enough.
+  `PBXFileSystemSynchronizedRootGroup`, so dropping a file into `VexSign/` is enough.
 - Keep user-facing strings going through `.localized()` and add them to the catalog with the
   `tools/add_*_strings.py` scripts, which are explicit about which files they read.
 - Don't break the Tweak Manager: tweak injection paths (`TweakHandler`, `SigningHandler`) were not
@@ -180,7 +180,7 @@ server items needs a device (Zsign requires real hardware).
 The guide lists five problems it ran into while merging. None of them are live here — recorded so
 a later merge does not "fix" something that is not broken:
 
-- **Concurrency-safe `apiKeyProvider`** — this fork reads the premium key through `RyukSignAPI`,
+- **Concurrency-safe `apiKeyProvider`** — this fork reads the premium key through `VexSignAPI`,
   which is backed by the keychain (`IdentityVault`), rather than a mutable global on a fetch
   service. There is no shared mutable state to make safe.
 - **`StorageScanner.leftovers` visibility** — `StorageCategory.leftovers` exists in
@@ -190,6 +190,6 @@ a later merge does not "fix" something that is not broken:
   lifecycle + alert paths `@MainActor`; `AntiRevokeManager.buildProfile` is `nonisolated` with
   callers hopping. The new code follows the same rule.
 - **`AltSourceKit` import guard** — already `#if canImport(AltSourceKit)` in `FR.swift`,
-  `RyukSignAPI.swift` and `SourcesAddView+Repositories.swift`. The package is a submodule, so the
+  `VexSignAPI.swift` and `SourcesAddView+Repositories.swift`. The package is a submodule, so the
   guard matters whenever it is not checked out.
 - **`ObservedObject(wrappedValue:)`** — not used anywhere in this tree.

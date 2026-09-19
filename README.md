@@ -1,136 +1,96 @@
-# RyukSign
+# VexSign
 
-[![GitHub Release](https://img.shields.io/github/v/release/faroukbmiled/RyukSign?include_prereleases)](https://github.com/faroukbmiled/RyukSign/releases)
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/faroukbmiled/RyukSign/total)](https://github.com/faroukbmiled/RyukSign/releases)
-[![GitHub License](https://img.shields.io/github/license/faroukbmiled/RyukSign?color=%23C96FAD)](https://github.com/faroukbmiled/RyukSign/blob/main/LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2015%2B-black)]()
+[![Swift](https://img.shields.io/badge/Swift-5.9-orange)]()
 
-RyukSign is an on-device app signer and installer for iOS, derived from [Feather](https://github.com/claration/Feather). It installs and manages applications using certificate pairs and various installation techniques, entirely on-device using built-in features. RyukSign extends Feather with a Tweak Manager, a built-in File Transfer server, an enhanced download manager, and curated repository support.
+**VexSign** is a powerful, modern on-device iOS app signer and installer. No computer needed. Import your certificate, sign any IPA, and install directly on your iPhone or iPad.
 
-> **RyukSign is a fork of [Feather](https://github.com/claration/Feather) by [claration](https://github.com/claration).** All upstream work and attribution is preserved; see [Acknowledgements](#acknowledgements) and [Credits](#credits).
+<p align="center"><img alt="VexSign" src="Images/Image-light.png" width="800"></p>
 
-<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="Images/Image-dark.png"><source media="(prefers-color-scheme: light)" srcset="Images/Image-light.png"><img alt="RyukSign" src="Images/Image-light.png"></picture></p>
+### Why VexSign?
 
-## Features
+VexSign was built from scratch for power users who want full control over sideloading:
 
-Inherited from Feather:
+- Clean, native SwiftUI design with Liquid Glass support
+- Fast on-device signing via Zsign
+- No tracking, no analytics, 100% open source
 
-- User-friendly, clean UI.
-- Sign and install applications using a `.p12` / `.mobileprovision` pair (via Zsign).
-- Supports [AltStore](https://faq.altstore.io/distribute-your-apps/make-a-source#apps) repositories.
-- View detailed information about apps and certificates.
-- Configurable signing options (appearance, Files-app support, compatibility patching, Liquid Glass).
-- No tracking or analytics.
-- Open source and free.
+### Features
 
-Added by RyukSign:
+- **Sign & Install** — Use `.p12` / `.mobileprovision` to sign and install any IPA on-device
+- **Tweak Injection** — Import `.dylib`, `.deb`, `.framework`, `.bundle`, `.appex` with full dependency inspector and ElleKit support
+- **IPA Explorer** — Browse, edit Info.plist, replace images, add/delete files, rebuild IPA
+- **File Transfer Server** — Upload IPAs over HTTP drag-and-drop or WebDAV (Finder / Files app)
+- **Smart Download Manager** — Background downloads, Live Activities & Dynamic Island progress
+- **App Update Checker** — Detect updates from sources + one-tap Update All
+- **Batch Signing** — Sign and queue multiple apps at once
+- **Auto Cleanup** — One-tap pipeline: import → sign → install → clean. Auto-delete caches, temp files, leftover IPAs
+- **Backup & Restore** — Encrypted `.vexbackup` archives for certs, sources, tweaks, settings
+- **Logs & File Manager** — Live console + full Documents browser with plist/text editor
+- **Anti-Revoke DNS Profile**, **Game Mode**, **Automation**, **Named Signing Profiles**, **Certificate Health**, **Storage Rules**, **Setup Wizard**
 
-- **Auto Cleanup** — one screen (Settings → Auto Cleanup) that deletes apps, downloaded IPAs, caches, temporary files, leftovers and exported IPAs by itself after every sign and install, so nothing has to be removed by hand. Includes a one-tap "import → sign → install → clean" pipeline.
-- **IPA Explorer** — open an IPA (or any app in your library) and browse every file inside it: edit `Info.plist` key by key or as raw XML, edit text files, preview and replace images, add/rename/replace/delete files, then rebuild the IPA or sign and install it directly.
-- **Tweak Manager** — import, organize, and inject `.dylib`, `.deb`, `.framework`, `.bundle`, and `.appex` tweaks. Multi-file tweaks, per-file configuration, a file-info/dependency inspector, and ElleKit/CydiaSubstrate detection.
-- **Live Activities & Dynamic Island** — watch download progress live from the Lock Screen and Dynamic Island, plus an in-app download overlay.
-- **Enhanced download manager** — fast background downloads that keep running while you use other apps.
-- **File Transfer server** — upload IPAs and tweaks over HTTP (drag-and-drop browser page) or WebDAV (mount in Finder / the Files app), with optional password protection.
-- **App update checker** — flags installed apps that have a newer version available in your sources, with per-app ignore/skip, plus **Update All** to re-sign and queue every update in one tap.
-- **Batch signing** — select any number of apps in the Library and sign (and install) them in one queue, with per-app properties, icons and certificates.
-- **Logs tab** — a live console of everything the app does (signing, tweak injection, installs, downloads, automation) with level filters, on-disk history, and share/copy/clear.
-- **File Manager** — browse all of RyukSign's documents, edit text and `.plist` files, create, import, move, share and delete, with Library and Certificates kept in sync when a managed folder is removed.
-- **Backup & Restore** — export certificates, sources, tweaks and settings to an encrypted `.ryukbackup` archive and restore them on another install.
-- **Anti-Revoke** — generate a DNS-over-HTTPS configuration profile that pins the resolver used for Apple's certificate-verification hosts, for you to install yourself.
-- **Game Mode** — stops downloads and the background update pass while you play, so RyukSign uses no data and next to no battery. (Separately, Signing Options → Game Mode stamps `GCSupportsGameMode` into an app you sign.)
-- **Automation** — an opt-in scheduled pass that checks sources for updates, optionally signs and queues them, runs the cleanup sweep and posts one summary notification.
-- **Named signing profiles** — save, apply, export and import option snapshots (Settings → Signing Profiles, and the signing screen menu).
-- **Certificate health** — valid / expiring / revoked counts and a one-tap Apple status refresh on the Certificates screen.
-- **Install queue summary** — retry / skip / stop on failure, then a succeeded/failed tally when the run finishes.
-- **Source QoL** — pin sources, last-refresh / last-error, hide duplicate apps, copy IPA URL, open in browser.
-- **Download reliability** — Wi-Fi only, parallel cap, speed/ETA, resume when Game Mode turns off.
-- **Library sort** — name / date / size, On Device badge, swipe to re-sign with last settings.
-- **Storage rules** — keep only the newest signed copy, warn when Documents exceed N GB.
-- **Setup guide** — first-launch wizard for certificate import and install method.
-- **Curated repositories** and a fully configurable tab bar.
+### Installation Methods
 
-## Automation
+**Server Install (Recommended)**
+- Fully local HTTPS server with backloop.dev SSL
+- Uses `itms-services://` for installation
+- Works without computer, supports iOS 18 entitlements
 
-Everything RyukSign can do on its own lives in **Settings → Auto Cleanup**:
+**Pairing Install**
+- Direct AFC install via VPN + pairing file
+- Similar to ideviceinstaller but 100% on-device
 
-| Toggle | What it does |
-| --- | --- |
-| Auto Cleanup | Master switch for every option below. |
-| One-Tap Install | Import or download an app and RyukSign signs it, installs it, drops it from the library and clears the caches. |
-| Delete Installed App | Removes the signed app from RyukSign's library once installing finishes. It stays on your device. |
-| Delete Downloaded IPA | Deletes the IPA RyukSign downloaded or imported as soon as it became a library app. |
-| Delete Unsigned App | Removes the file you imported once it has been signed. |
-| Delete Signed App | Removes the signed copy too, unless it is being installed or exported. |
-| Clear Caches / Temporary Files / Leftovers / Exported IPAs | Storage sweeps that run after each sign and install. |
-| Clean Now | Runs the storage sweeps immediately and shows how much was freed. |
+### Download
 
-Deletions are staged on disk, so an install that finishes while the app is closed is still cleaned up on the next launch. A short toast reports what was removed and how much space was freed.
+Get the latest IPA from [Releases](https://github.com/iamsmmh/VexSign/releases)
 
-## How does it work?
+### Building from Source
 
-How Feather works is a bit complicated, with multiple ways to install, app management, tweaks, etc. The important pieces:
-
-To start, we need a validly signed IPA, achieved with Zsign using a provided IPA plus a `.p12` and `.mobileprovision` pair.
-
-#### Install (Server)
-
-- Use a locally hosted server for the IPA files used for installation (and assets such as icons).
-  - On iOS 18, a few entitlements are needed: `Associated Domains`, `Custom Network Protocol`, `MDM Managed Associated Domains`, `Network Extensions`.
-- Include valid HTTPS SSL certificates (we use [*.backloop.dev](https://backloop.dev/)).
-- Then `itms-services://?action=download-manifest&url=<PLIST_URL>` initiates the install via `UIApplication.open`.
-
-Due to iOS 18 entitlement changes, an alternative is needed: either install fully locally via the local server (above), or use an external HTTPS server as a middle-man for `PLIST_URL` while keeping the files local — for the latter, a plain insecure local server plus [plistserver](https://github.com/nekohaxx/plistserver) for the `PLIST_URL`, and a Safari webview redirect to the `itms-services://` URL.
-
-#### Install (Pairing)
-
-- Establish a heartbeat with a TCP provider, requiring a [pairing file](https://github.com/jkcoxson/idevice_pair) and a VPN.
-- Connect to the socket routed to `10.7.0.1`, establish an `AFC` connection, create `/PublicStaging/`, upload the IPA, and install it directly — similar to `ideviceinstaller`, but fully on-device.
-
-This path needs both a VPN and a lockdownd pairing file (so a computer for initial setup); otherwise use the server install method.
-
-## Download
-
-Visit [RyukSign releases](https://github.com/faroukbmiled/RyukSign/releases) and get the latest `.ipa`.
-
-## Building from source
-
-RyukSign uses Xcode 16 (synchronized groups, `objectVersion 77`) and Swift Package Manager plus git submodules. See [CONTRIBUTING.md](./CONTRIBUTING.md). In short:
+Requirements: Xcode 16+, iOS 15+ SDK
 
 ```bash
-git clone --recursive https://github.com/faroukbmiled/RyukSign.git
-cd RyukSign
-make deps          # fetches the backloop.dev SSL pack used by the local install server
-open RyukSign.xcworkspace
+git clone --recursive https://github.com/iamsmmh/VexSign.git
+cd VexSign
+make deps
+open VexSign.xcworkspace
 ```
 
-Signing identity is not committed in a usable form — set your own team / enable automatic signing in Xcode, or build the unsigned CLI path via `make`.
+Set your own team in Signing & Capabilities, or build unsigned via `make`.
 
-## Contributing
+### Project Structure
 
-Read the [contribution requirements](./CONTRIBUTING.md) for more information.
+```
+VexSign/
+├── Backend/       # Signing, downloads, storage, server
+├── Extensions/    # Swift extensions
+├── Resources/     # Assets, Info.plist, entitlements
+├── Utilities/     # Helpers, crypto, file handling
+├── Views/         # SwiftUI views
+├── VexSign.xcodeproj
+└── VexSign.xcworkspace
+```
 
-## Acknowledgements
+### Tech Stack
 
-- [claration](https://github.com/claration) — author of [Feather](https://github.com/claration/Feather), the project RyukSign is derived from.
-- [idevice](https://github.com/jkcoxson/idevice) — backend used for communication with `installd`.
-- [*.backloop.dev](https://backloop.dev/) — localhost with a public-CA-signed SSL certificate.
-- [Vapor](https://github.com/vapor/vapor) — server-side Swift HTTP web framework.
-- [Zsign](https://github.com/zhlynn/zsign) — on-device signing, reimplemented for iOS.
-- [ElleKit](https://github.com/tealbathingsuit/ellekit) — tweak injection.
-- [LiveContainer](https://github.com/LiveContainer/LiveContainer) — fixes / help.
-- [Nuke](https://github.com/kean/Nuke) — image caching.
-- [Asspp](https://github.com/Lakr233/Asspp) — HTTP server setup reference.
-- [plistserver](https://github.com/nekohaxx/plistserver) — hosted on https://api.palera.in.
+- **Zsign** — On-device IPA signing
+- **Vapor** — Local HTTP server
+- **idevice** — AFC installation backend
+- **ElleKit** — Tweak injection
+- **Nuke** — Image caching
+- **ZIPFoundation / SWCompression** — Archive handling
 
-## License
+### License
 
-This project is licensed under the **GPL-3.0** license — see [LICENSE](./LICENSE) for the full text. As a derivative of Feather (also GPL-3.0), RyukSign preserves that license. The complete corresponding source for every distributed binary is this repository: <https://github.com/faroukbmiled/RyukSign>.
+GPL-3.0 — See [LICENSE](./LICENSE)
 
-By contributing, you agree to license your code under GPL-3.0 (including agreeing to license exceptions), ensuring your work remains freely accessible and open.
+This project includes code from open source projects. See Acknowledgements in Settings.bundle.
 
-## Disclaimer
+### Acknowledgements
 
-RyukSign is maintained here, on GitHub, and releases are distributed here, on GitHub. Avoid any other sites hosting this software — they are often malicious and exist to mislead users.
+- Feather project for pioneering on-device signing concepts
+- idevice, Vapor, Zsign, ElleKit, LiveContainer communities
 
-## Credits
+### Disclaimer
 
-- [Feather](https://github.com/claration/Feather) — the upstream project RyukSign is based on.
+Use at your own risk. Sideloading may violate Apple Developer Program terms. VexSign is not affiliated with Apple Inc.

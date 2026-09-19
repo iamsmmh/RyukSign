@@ -1,4 +1,4 @@
-# Render Blueprint — one-click deploy of the RyukSign premium server.
+# Render Blueprint — one-click deploy of the VexSign premium server.
 #
 # Render dashboard -> New -> Blueprint -> pick this repo (any branch), done.
 # After the first deploy, set these private env vars in the dashboard:
@@ -18,7 +18,7 @@
 # automatically, and a device just re-redeems its (still valid) key once.
 services:
   - type: web
-    name: ryuksign-premium
+    name: vexsign-premium
     runtime: python
     plan: free
     rootDir: server
@@ -29,8 +29,8 @@ services:
     envVars:
       # /data is where Render mounts a persistent disk (paid add-on). Without
       # one it's still a valid (ephemeral) path — see db.py.
-      - key: RYUKSIGN_DB
-        value: /data/ryuksign.db
+      - key: VEXSIGN_DB
+        value: /data/vexsign.db
       - key: SEED_KEYS
         sync: false
       - key: ADMIN_TOKEN

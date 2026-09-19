@@ -1,7 +1,7 @@
-# RyukSign Premium Server
+# VexSign Premium Server
 
-A self-hosted backend for the RyukSign app's **Premium RyukSign** feature. It replaces
-`https://ryuksign.com/api`, so **your** app validates keys against **your** server — you
+A self-hosted backend for the VexSign app's **Premium VexSign** feature. It replaces
+`https://vexsign.com/api`, so **your** app validates keys against **your** server — you
 create and issue keys yourself, and no key paid to someone else is required.
 
 ## What it implements
@@ -9,9 +9,9 @@ create and issue keys yourself, and no key paid to someone else is required.
 | Endpoint | Auth | Purpose |
 | --- | --- | --- |
 | `POST /api/validate` | `X-API-Key: RYK-…` header + `{"device_uuid": "…"}` body | Redeems a key: consumes it, binds it to the device, returns its premium repo URLs |
-| `GET /api/urls` | `ryukSignUUID: <device>` header | "Restore Repositories" — re-lists a device's premium URLs without consuming anything |
+| `GET /api/urls` | `vexSignUUID: <device>` header | "Restore Repositories" — re-lists a device's premium URLs without consuming anything |
 | `GET /api/health` | – | Liveness check |
-| `GET /repo/premium.json` | `ryukSignUUID` / `X-API-Key` | Built-in **gated** demo premium source (works out of the box) |
+| `GET /repo/premium.json` | `vexSignUUID` / `X-API-Key` | Built-in **gated** demo premium source (works out of the box) |
 | `GET /api/admin/health` | – | Whether the admin API is enabled (no token needed) |
 | `POST /api/admin/keys` | `X-Admin-Token` | Mint fresh keys (distributor) |
 | `GET /api/admin/keys` | `X-Admin-Token` | List every key + its status |
@@ -45,7 +45,7 @@ curl -X POST http://localhost:8000/api/validate \
 
 ## 2. Point the app at your server
 
-One line in `RyukSign/Utilities/RyukSignAPI.swift`:
+One line in `VexSign/Utilities/VexSignAPI.swift`:
 
 ```swift
 static let apiBaseURL = "https://YOUR-SERVER-DOMAIN/api"
@@ -77,7 +77,7 @@ python keygen.py reset RYK-…         # unbind device, make it redeemable again
 python keygen.py revoke RYK-…        # delete it
 ```
 
-Keys live in `ryuksign.db` (SQLite, override with `RYUKSIGN_DB=/path/file.db`).
+Keys live in `vexsign.db` (SQLite, override with `RYUKSIGN_DB=/path/file.db`).
 
 ### 3b. Distributor admin API (manage keys without SSH)
 
@@ -187,13 +187,13 @@ take ~30–60 s, so the app's 30 s request timeout may need one retry after
 silence. No persistent disk on free instances, and after a redeploy a device
 must re-redeem its (still valid) key once to re-bind. A paid instance can
 attach a disk at `/data` instead, keeping bindings forever
-(`RYUKSIGN_DB=/data/ryuksign.db` is already the default in `render.yaml`).
+(`RYUKSIGN_DB=/data/vexsign.db` is already the default in `render.yaml`).
 
 **Docker (any VPS / Railway / Fly.io)**
 
 ```bash
-cd server && docker build -t ryuksign-premium .
-docker run -p 8000:8000 -e PREMIUM_REPO_URLS="https://you.com/premium.json" ryuksign-premium
+cd server && docker build -t vexsign-premium .
+docker run -p 8000:8000 -e PREMIUM_REPO_URLS="https://you.com/premium.json" vexsign-premium
 ```
 
 **Any VPS with Python:**

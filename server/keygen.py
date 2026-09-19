@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Manage RyukSign premium keys from the command line.
+"""Manage VexSign premium keys from the command line.
 
 Usage:
     python keygen.py create [-n 5]          Generate n fresh keys (default 1)
@@ -64,7 +64,7 @@ def _set_flag(key: str, sql: str, verb: str) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="RyukSign premium key manager")
+    parser = argparse.ArgumentParser(description="VexSign premium key manager")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_create = sub.add_parser("create", help="Generate fresh keys")

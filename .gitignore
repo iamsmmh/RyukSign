@@ -77,7 +77,7 @@ release_notes.txt
 pending_notes.txt
 DEV.md
 
-RyukSign/Resources/SelfUpdateConfig.plist
+VexSign/Resources/SelfUpdateConfig.plist
 
 # Signing material / secrets (belt-and-suspenders)
 *.pem
@@ -90,7 +90,7 @@ RyukSign/Resources/SelfUpdateConfig.plist
 .env.*
 cert.txt
 
-_RyukSign/
+_VexSign/
 
 manifest-worker
 

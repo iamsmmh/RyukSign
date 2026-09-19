@@ -1,12 +1,12 @@
 # Feature Suggestions
 
-You asked for automation that makes RyukSign feel like the App Store on your own device: install something and forget about it, keep everything up to date, and never manage files by hand. This is what already exists, what is worth building next, and what is deliberately not on the list.
+You asked for automation that makes VexSign feel like the App Store on your own device: install something and forget about it, keep everything up to date, and never manage files by hand. This is what already exists, what is worth building next, and what is deliberately not on the list.
 
 ---
 
-## Where RyukSign already is
+## Where VexSign already is
 
-| App Store behaviour | RyukSign today |
+| App Store behaviour | VexSign today |
 | --- | --- |
 | Install an app | Sign with Zsign → install via `itms-services` → queue in `InstallQueue` with Live Activities |
 | Download progress | Background downloads with Live Activities / Dynamic Island |
@@ -35,9 +35,9 @@ The two gaps that matter for "feels automated" are **updating** (the checker kno
 
 **What:** An opt-in background task that periodically: checks sources for updates → optionally auto-signs and queues flagged apps → runs the Auto Cleanup sweep → posts one notification summarising what happened.
 
-**Why it matters:** The App Store does its updates while you sleep. RyukSign already has the pieces (a `BGTask` registered in `RyukSignApp`, `AutoSignManager`, `CleanupManager`, `AppUpdateChecker`) but every step has to be started by hand.
+**Why it matters:** The App Store does its updates while you sleep. VexSign already has the pieces (a `BGTask` registered in `VexSignApp`, `AutoSignManager`, `CleanupManager`, `AppUpdateChecker`) but every step has to be started by hand.
 
-**Hooks:** `RyukSignApp._registerBackgroundTasks()`, `AppUpdateChecker.refreshUpdateCount`, `AutoSignManager`, `CleanupManager`. Two policies: "notify only" and "sign + queue" — installing still needs the user in the loop, which is honest and safer.
+**Hooks:** `VexSignApp._registerBackgroundTasks()`, `AppUpdateChecker.refreshUpdateCount`, `AutoSignManager`, `CleanupManager`. Two policies: "notify only" and "sign + queue" — installing still needs the user in the loop, which is honest and safer.
 
 **Effort:** Medium — the plumbing exists; the policy handling and notification text are the real work.
 
@@ -67,7 +67,7 @@ The two gaps that matter for "feels automated" are **updating** (the checker kno
 
 **What:** Remember the full `Options` snapshot (tweaks, entitlements, `infoPlistOverrides`, display-name overrides, keychain isolation, chosen certificate) per app, and offer "Re-sign with last settings".
 
-**Why:** Store apps get updated with the same identity every time. RyukSign currently rebuilds the options each sign, so re-signing an app after an update means re-picking everything. This also makes #1 possible for real.
+**Why:** Store apps get updated with the same identity every time. VexSign currently rebuilds the options each sign, so re-signing an app after an update means re-picking everything. This also makes #1 possible for real.
 
 **Hooks:** `OptionsManager` (the `Options` struct already serialises to `signing_options`, including `tweakInjections` and `infoPlistOverrides`), `LibraryInfoView`, `SigningOptionsView`.
 
@@ -95,7 +95,7 @@ The two gaps that matter for "feels automated" are **updating** (the checker kno
 
 ### 8. Storage insights: history and rules
 
-**What:** Keep a small history of what Auto Cleanup removed, show a trend on the Storage screen, and add rules like "keep only the newest signed copy of each app" and "warn when RyukSign's own storage passes N GB".
+**What:** Keep a small history of what Auto Cleanup removed, show a trend on the Storage screen, and add rules like "keep only the newest signed copy of each app" and "warn when VexSign's own storage passes N GB".
 
 **Why:** Cleanup is invisible by design, but invisible tools get switched off the moment they delete something unexpected. A one-line history ("yesterday: 2 apps, 1.4 GB") plus an undo-friendly last-run summary makes it trustworthy.
 
@@ -118,7 +118,7 @@ The two gaps that matter for "feels automated" are **updating** (the checker kno
 ## Deliberately not suggested
 
 - **Silent background installs without a prompt.** iOS gives a signature-based install flow no way to prove the user wanted it; auto-queuing installs and notifying is the honest ceiling.
-- **Accounts, telemetry or a hosted service.** RyukSign is local-first and advertises no tracking; nothing above needs a server.
+- **Accounts, telemetry or a hosted service.** VexSign is local-first and advertises no tracking; nothing above needs a server.
 - **A full UI redesign.** The tab bar is already configurable and the Library/Sources/Updates screens map cleanly onto the store metaphor; the missing part is automation, not chrome.
 - **More archive formats in the explorer.** IPA/TIPA plus the existing tweak formats cover what the app installs.
 

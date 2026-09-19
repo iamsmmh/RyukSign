@@ -1,8 +1,8 @@
 //
 //  FilePickerFix.m
-//  RyukSign
+//  VexSign
 //
-//  Created by Ryuk
+//  Created by Vex
 //
 //  force the picker into copy mode and relocate anything that still lands outside
 //  the sandbox before the app sees it

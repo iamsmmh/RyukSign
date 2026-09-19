@@ -24,28 +24,28 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CATALOG = ROOT / "RyukSign/Resources/Localizable.xcstrings"
+CATALOG = ROOT / "VexSign/Resources/Localizable.xcstrings"
 
 # Files that were added or edited for Auto Cleanup and the IPA Explorer. Keeping the list
 # explicit means re-running this on a later change does not silently sweep in other strings.
 SOURCES = [
-    "RyukSign/Backend/Observable/CleanupManager.swift",
-    "RyukSign/Utilities/IPAExplorer/IPAFileEntry.swift",
-    "RyukSign/Utilities/IPAExplorer/IPAWorkspace.swift",
-    "RyukSign/Backend/Observable/InstallCleanup.swift",
-    "RyukSign/Backend/Observable/StorageManager.swift",
-    "RyukSign/Views/Settings/Cleanup/CleanupView.swift",
-    "RyukSign/Views/IPAExplorer/IPAExplorerView.swift",
-    "RyukSign/Views/IPAExplorer/IPAFileViewerView.swift",
-    "RyukSign/Views/IPAExplorer/IPAExplorerHomeView.swift",
-    "RyukSign/Views/IPAExplorer/IPAExplorerActions.swift",
+    "VexSign/Backend/Observable/CleanupManager.swift",
+    "VexSign/Utilities/IPAExplorer/IPAFileEntry.swift",
+    "VexSign/Utilities/IPAExplorer/IPAWorkspace.swift",
+    "VexSign/Backend/Observable/InstallCleanup.swift",
+    "VexSign/Backend/Observable/StorageManager.swift",
+    "VexSign/Views/Settings/Cleanup/CleanupView.swift",
+    "VexSign/Views/IPAExplorer/IPAExplorerView.swift",
+    "VexSign/Views/IPAExplorer/IPAFileViewerView.swift",
+    "VexSign/Views/IPAExplorer/IPAExplorerHomeView.swift",
+    "VexSign/Views/IPAExplorer/IPAExplorerActions.swift",
     # Existing screens that gained a cleanup or explorer entry point.
-    "RyukSign/Views/Settings/SettingsView.swift",
-    "RyukSign/Views/Settings/Storage/StorageView.swift",
-    "RyukSign/Views/Signing/Shared/SigningOptionsView.swift",
-    "RyukSign/Views/Library/LibraryView.swift",
-    "RyukSign/Views/Library/LibraryCellView.swift",
-    "RyukSign/Views/Library/Info/LibraryInfoView.swift",
+    "VexSign/Views/Settings/SettingsView.swift",
+    "VexSign/Views/Settings/Storage/StorageView.swift",
+    "VexSign/Views/Signing/Shared/SigningOptionsView.swift",
+    "VexSign/Views/Library/LibraryView.swift",
+    "VexSign/Views/Library/LibraryCellView.swift",
+    "VexSign/Views/Library/Info/LibraryInfoView.swift",
 ]
 
 # Matches `.localized("Key")` and `.localized("Key", arguments: …)` — the arguments form carries

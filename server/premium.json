@@ -1,19 +1,19 @@
 {
-  "name": "RyukSign Premium",
-  "identifier": "com.iamsmmh.ryuksign.premium",
+  "name": "VexSign Premium",
+  "identifier": "com.iamsmmh.vexsign.premium",
   "subtitle": "Your private premium source",
-  "iconURL": "https://raw.githubusercontent.com/iamsmmh/RyukSign/main/icon.png",
+  "iconURL": "https://raw.githubusercontent.com/iamsmmh/VexSign/main/icon.png",
   "apps": [
     {
-      "name": "RyukSign",
-      "bundleIdentifier": "ryuk2.anoxclan.com",
+      "name": "VexSign",
+      "bundleIdentifier": "com.vexsign.app",
       "developerName": "iamsmmh",
       "subtitle": "On-device iOS app signer and installer.",
-      "description": "RyukSign v3.0.1, delivered from your private premium source.",
+      "description": "VexSign v3.0.1, delivered from your private premium source.",
       "version": "3.0.1",
       "versionDate": "2026-09-19T04:34:34Z",
-      "downloadURL": "https://github.com/iamsmmh/RyukSign/releases/download/v3.0.1/RyukSign.ipa",
-      "iconURL": "https://raw.githubusercontent.com/iamsmmh/RyukSign/main/icon.png",
+      "downloadURL": "https://github.com/iamsmmh/VexSign/releases/download/v3.0.1/VexSign.ipa",
+      "iconURL": "https://raw.githubusercontent.com/iamsmmh/VexSign/main/icon.png",
       "size": 18406740,
       "category": "Utilities"
     }

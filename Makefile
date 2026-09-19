@@ -1,12 +1,12 @@
-NAME := RyukSign
+NAME := VexSign
 PLATFORM := iphoneos
-SCHEMES := RyukSign
+SCHEMES := VexSign
 # TMPDIR is unset in some environments (plain Linux CI, bare shells); without a
 # fallback the paths below would resolve to "/$(NAME)" and fail on permissions.
 TMP := $(if $(TMPDIR),$(TMPDIR),/tmp)/$(NAME)
 STAGE := $(TMP)/stage
 APP := $(TMP)/Build/Products/Release-$(PLATFORM)
-CERT_JSON_URL := https://ryuksign-install.ryuksign.workers.dev/pack.json
+CERT_JSON_URL := https://vexsign-install.vexsign.workers.dev/pack.json
 
 .PHONY: all deps clean $(SCHEMES)
 
@@ -31,7 +31,7 @@ deps:
 
 $(SCHEMES): deps
 	xcodebuild \
-	    -project RyukSign.xcodeproj \
+	    -project VexSign.xcodeproj \
 	    -scheme "$@" \
 	    -configuration Release \
 	    -arch arm64 \

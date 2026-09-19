@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Tiny SQLite-backed storage for RyukSign premium API keys.
+"""Tiny SQLite-backed storage for VexSign premium API keys.
 
 A key row looks like:
 
     api_key      TEXT PRIMARY KEY  -- e.g. RYK-ABCD-EFGH-IJKL
     used         INTEGER           -- 0 = fresh, 1 = consumed by a device
-    device_uuid  TEXT              -- the RyukSign device that consumed it
+    device_uuid  TEXT              -- the VexSign device that consumed it
     disabled     INTEGER           -- 1 = administratively disabled (403)
     created_at   REAL              -- unix timestamp
 """
@@ -14,7 +14,7 @@ import os
 import sqlite3
 import time
 
-DB_PATH = os.environ.get("RYUKSIGN_DB", os.path.join(os.path.dirname(__file__), "ryuksign.db"))
+DB_PATH = os.environ.get("RYUKSIGN_DB", os.path.join(os.path.dirname(__file__), "vexsign.db"))
 
 # Shared with keygen.py and the admin API: keep O/0 and I/1 out of keys so a
 # key read off a phone screen and typed back is never ambiguous.

@@ -24,30 +24,30 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-CATALOG = ROOT / "RyukSign/Resources/Localizable.xcstrings"
+CATALOG = ROOT / "VexSign/Resources/Localizable.xcstrings"
 
 # Files added or edited for the Logs tab, Game Mode, the File Manager and the entry points
 # they hang off.
 SOURCES = [
     # Logs tab
-    "RyukSign/Views/Logs/LogsView.swift",
-    "RyukSign/Utilities/LogPresentation.swift",
-    "RyukSign/Views/TabView/TabEnum.swift",
-    "RyukSign/Backend/Observable/SigningLog.swift",
+    "VexSign/Views/Logs/LogsView.swift",
+    "VexSign/Utilities/LogPresentation.swift",
+    "VexSign/Views/TabView/TabEnum.swift",
+    "VexSign/Backend/Observable/SigningLog.swift",
     # Game Mode
-    "RyukSign/Backend/Observable/GameMode.swift",
-    "RyukSign/Views/Settings/GameModeView.swift",
-    "RyukSign/Backend/Observable/DownloadManager.swift",
-    "RyukSign/Backend/Observable/BackgroundAutomation.swift",
-    "RyukSign/Backend/Observable/UpdateAllManager.swift",
+    "VexSign/Backend/Observable/GameMode.swift",
+    "VexSign/Views/Settings/GameModeView.swift",
+    "VexSign/Backend/Observable/DownloadManager.swift",
+    "VexSign/Backend/Observable/BackgroundAutomation.swift",
+    "VexSign/Backend/Observable/UpdateAllManager.swift",
     # File Manager
-    "RyukSign/Views/FileManager/FileManagerView.swift",
-    "RyukSign/Views/FileManager/FileManagerItemView.swift",
-    "RyukSign/Views/FileManager/FileManagerActions.swift",
-    "RyukSign/Views/FileManager/FileManagerMoveView.swift",
+    "VexSign/Views/FileManager/FileManagerView.swift",
+    "VexSign/Views/FileManager/FileManagerItemView.swift",
+    "VexSign/Views/FileManager/FileManagerActions.swift",
+    "VexSign/Views/FileManager/FileManagerMoveView.swift",
     # Existing screens that gained an entry point.
-    "RyukSign/Views/Settings/SettingsView.swift",
-    "RyukSign/Views/Settings/Files & Compression/FilesCompressionView.swift",
+    "VexSign/Views/Settings/SettingsView.swift",
+    "VexSign/Views/Settings/Files & Compression/FilesCompressionView.swift",
 ]
 
 # Matches `.localized("Key")` and `.localized("Key", arguments: …)` — the arguments form carries

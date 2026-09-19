@@ -11,7 +11,7 @@ import OSLog
 // MARK: - Class
 public class NBFetchService {
 
-	private static let log = Logger(subsystem: "com.ryuksign.network", category: "NBFetchService")
+	private static let log = Logger(subsystem: "com.vexsign.network", category: "NBFetchService")
 
 	/// Dependency-free hook the host app registers once at startup to supply the
 	/// premium repository API key (e.g. `{ EsignSourceKey.customApiKey }`).

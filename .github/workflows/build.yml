@@ -70,7 +70,7 @@ jobs:
           xcodebuild -version
           echo "iOS SDK: $(xcrun --sdk iphoneos --show-sdk-version)"
 
-      - name: Compile RyukSign
+      - name: Compile VexSign
         run: |
           set -euo pipefail
 
@@ -134,7 +134,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v3
         with:
-          name: RyukSign v${{ env.VERSION }}
+          name: VexSign v${{ env.VERSION }}
           tag_name: v${{ env.VERSION }}
           files: |
             upload/*.ipa
