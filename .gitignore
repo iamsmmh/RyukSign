@@ -93,3 +93,8 @@ cert.txt
 _RyukSign/
 
 manifest-worker
+
+# Premium API server
+server/__pycache__/
+server/*.db
+server/.venv/
