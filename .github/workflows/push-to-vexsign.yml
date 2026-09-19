@@ -1,0 +1,25 @@
+name: Push to VexSign
+
+on:
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout fresh VexSign
+        uses: actions/checkout@v4
+        with:
+          ref: vexsign-fresh-main
+          fetch-depth: 0
+
+      - name: Push to VexSign repo
+        env:
+          PAT: ${{ secrets.VEXSIGN_PAT }}
+        run: |
+          git config user.name "iamsmmh"
+          git config user.email "iamsmmh@github.com"
+          git remote add vexsign https://x-access-token:${PAT}@github.com/iamsmmh/VexSign.git
+          git branch -M main
+          git push vexsign main -f
+          echo "✅ Pushed to https://github.com/iamsmmh/VexSign"
