@@ -38,7 +38,7 @@ struct SigningPropertiesView: View {
 			}
 
 			if isIdentifier {
-				Section(.localized("Prefix & Suffix")) {
+				Section {
 					HStack {
 						TextField(.localized("Prefix"), text: $prefix)
 							.textInputAutocapitalization(.none)
@@ -55,6 +55,8 @@ struct SigningPropertiesView: View {
 							suffix = ""
 						}
 					}
+				} header: {
+					Text(verbatim: .localized("Prefix & Suffix"))
 				} footer: {
 					Text(.localized("Add a custom prefix or suffix to ensure unique bundle IDs when cloning or testing apps."))
 				}

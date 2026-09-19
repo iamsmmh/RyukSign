@@ -11,7 +11,6 @@ import ZsignSwift
 
 // MARK: - Class extension: certificate
 extension Storage {
-	@MainActor
 	func addCertificate(
 		uuid: String,
 		password: String? = nil,
@@ -32,15 +31,18 @@ extension Storage {
 		new.nickname = nickname
 		new.isDefault = isDefault
 		new.revoked = false
-		CertificateStatusManager.shared.refreshStatus(for: new)
+		Task { @MainActor in
+			CertificateStatusManager.shared.refreshStatus(for: new)
+		}
 		saveContext()
 		generator.impactOccurred()
 		completion(nil)
 	}
 	
-	@MainActor
 	func deleteCertificate(for cert: CertificatePair) {
-		CertificateStatusManager.shared.removeAppleStatus(for: cert)
+		Task { @MainActor in
+			CertificateStatusManager.shared.removeAppleStatus(for: cert)
+		}
 
 		if let url = getUuidDirectory(for: cert) {
 			try? FileManager.default.removeItem(at: url)
