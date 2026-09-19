@@ -5,10 +5,13 @@
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-iOS%2015%2B-black)]()
 [![Author](https://img.shields.io/badge/Author-@iamsmmh-purple)]()
+[![Base](https://img.shields.io/badge/Base-Feather%20by%20%40claration-blue)](https://github.com/claration/Feather)
 
 **The most powerful on-device iOS signer. No PC. No revoke fear. Just sign and install.**
 
 Built and maintained by **[@iamsmmh](https://github.com/iamsmmh)** — Crafted for power users who want full control.
+
+> **🙏 Based on [Feather](https://github.com/claration/Feather) by [@claration](https://github.com/claration) (Samara)** — The original open source on-device signer. VexSign is built on top of Feather's solid GPL-3.0 foundation with exclusive features added by @iamsmmh. Without Feather, VexSign wouldn't exist — special thanks to @claration for open sourcing!
 
 <p align="center">
   <img src="repo-icon.png" width="160" alt="VexSign Icon" />
@@ -20,14 +23,17 @@ Built and maintained by **[@iamsmmh](https://github.com/iamsmmh)** — Crafted f
 
 ---
 
-### 👨‍💻 Author
+### 👨‍💻 Author & Base
 
 **VexSign** is designed, developed and maintained by **[@iamsmmh](https://github.com/iamsmmh)**
 
 - GitHub: [@iamsmmh](https://github.com/iamsmmh)
 - Repository: [iamsmmh/VexSign](https://github.com/iamsmmh/VexSign)
 
-If you like VexSign, please ⭐ star the repo!
+**Base Project:**
+- **[Feather](https://github.com/claration/Feather) by [@claration](https://github.com/claration) (Samara)** — Original on-device signer, GPL-3.0. All base signing engine, CoreData model and UI architecture from Feather.
+
+If you like VexSign, please ⭐ star the repo! And please also ⭐ [Feather](https://github.com/claration/Feather) to support the base.
 
 ---
 
@@ -35,27 +41,27 @@ If you like VexSign, please ⭐ star the repo!
 
 Most signers do one thing: sign an IPA. **VexSign does everything after that too.**
 
-| Feature | Feather | ESign / KSign | Scarlet | **VexSign by @iamsmmh** |
+| Feature | Feather (Base) | ESign / KSign | Scarlet | **VexSign by @iamsmmh** |
 | :--- | :---: | :---: | :---: | :---: |
-| On-device signing | ✅ | ✅ | ✅ | ✅ |
-| Tweak injection | ✅ | ❌ | ✅ | ✅ **Advanced** |
-| IPA Explorer (edit inside IPA) | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| File Transfer (HTTP/WebDAV) | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Live Activities & Dynamic Island | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Auto Cleanup Pipeline | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Batch Signing | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Update All (one-tap) | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Backup & Restore (.vexbackup) | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| Logs & File Manager | ❌ | ❌ | ❌ | ✅ **Exclusive** |
-| No Ads, No Tracking | ✅ | ❌ | ❌ | ✅ |
+| On-device signing | ✅ | ✅ | ✅ | ✅ (from Feather) |
+| Tweak injection | ✅ | ❌ | ✅ | ✅ **Advanced by @iamsmmh** |
+| IPA Explorer (edit inside IPA) | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| File Transfer (HTTP/WebDAV) | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Live Activities & Dynamic Island | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Auto Cleanup Pipeline | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Batch Signing | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Update All (one-tap) | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Backup & Restore (.vexbackup) | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| Logs & File Manager | ❌ | ❌ | ❌ | ✅ **Exclusive by @iamsmmh** |
+| No Ads, No Tracking | ✅ | ❌ | ❌ | ✅ (from Feather) |
 
-**VexSign is the only signer that feels like the real App Store.**
+**VexSign = Feather's solid base + 14 exclusive features by @iamsmmh = The only signer that feels like real App Store.**
 
 ---
 
 ### ✨ Features
 
-#### 🔹 Base Features — Powered by Feather
+#### 🔹 Base Features — Powered by Feather by @claration
 
 VexSign is built on top of **Feather** by **@claration** — the original open source on-device signer that pioneered the concept. All base features come from Feather's solid foundation:
 
@@ -68,9 +74,9 @@ VexSign is built on top of **Feather** by **@claration** — the original open s
 - View detailed app & certificate info
 - Configurable tab bar
 
-> **Credit:** Base signing engine, UI architecture and CoreData model originally from **[Feather](https://github.com/claration/Feather) by [claration](https://github.com/claration)** — Thank you for open sourcing this!
+> **Credit:** Base signing engine, UI architecture and CoreData model originally from **[Feather](https://github.com/claration/Feather) by [claration](https://github.com/claration)** — Thank you for open sourcing this! Feather is GPL-3.0 licensed, and VexSign preserves that license.
 
-#### 🔥 Exclusive Features — Added by [@iamsmmh](https://github.com/iamsmmh)
+#### 🔥 Exclusive Features — Added by [@iamsmmh](https://github.com/iamsmmh) (Why VexSign > Feather)
 
 These features **do not exist** in Feather or any other signer. Built from scratch for VexSign by @iamsmmh:
 
@@ -161,7 +167,7 @@ Set your own team in Signing & Capabilities, or build unsigned via `make`.
 
 **Base by Feather — Special Thanks:**
 
-- **[Feather](https://github.com/claration/Feather) by @claration (Samara)** — The original on-device signer, base for VexSign. Without Feather, VexSign wouldn't exist. GPL-3.0.
+- **[Feather](https://github.com/claration/Feather) by @claration (Samara)** — The original on-device signer, base for VexSign. Without Feather, VexSign wouldn't exist. GPL-3.0. **Please star Feather too!**
 
 **Other Open Source Projects:**
 
@@ -172,8 +178,8 @@ Set your own team in Signing & Capabilities, or build unsigned via `make`.
 - **[LiveContainer](https://github.com/LiveContainer/LiveContainer)** — Fixes and compatibility help
 - **[Nuke](https://github.com/kean/Nuke)** by kean — Image caching
 - **[ZIPFoundation](https://github.com/weichsel/ZIPFoundation) / [SWCompression](https://github.com/tsolomko/SWCompression)** — Archive handling
-- **[AltSourceKit](https://github.com/claration/AltSourceKit)** — AltStore source parsing
-- **[NimbleKit](https://github.com/claration/NimbleKit)** — UI components and extensions
+- **[AltSourceKit](https://github.com/claration/AltSourceKit)** — AltStore source parsing (by Feather team)
+- **[NimbleKit](https://github.com/claration/NimbleKit)** — UI components and extensions (by Feather team)
 - **[*.backloop.dev](https://backloop.dev/)** — localhost with public-CA-signed SSL certificate
 - **[Asspp](https://github.com/Lakr233/Asspp)** — HTTP server setup reference
 - **[plistserver](https://github.com/nekohaxx/plistserver)** — Hosted on api.palera.in
@@ -188,7 +194,7 @@ All dependencies retain their original licenses (MIT, BSD-3-Clause, GPL-3.0). Se
 
 VexSign is licensed under GPL-3.0, same as Feather. As a derivative of Feather (GPL-3.0), we preserve that license and give full credit to upstream.
 
-Copyright (c) 2026 [@iamsmmh](https://github.com/iamsmmh) & VexSign Team. Base (c) 2024 Samara / @claration.
+Copyright (c) 2026 [@iamsmmh](https://github.com/iamsmmh) & VexSign Team. Base (c) 2024 Samara / @claration (Feather).
 
 By contributing, you agree to license your code under GPL-3.0, ensuring it remains free and open.
 
@@ -196,13 +202,24 @@ By contributing, you agree to license your code under GPL-3.0, ensuring it remai
 
 ### 🙏 Acknowledgements
 
-**Special Thanks to Feather:**
+**Special Thanks to Feather — The Base:**
 
-> **VexSign is built on top of [Feather](https://github.com/claration/Feather) by [@claration](https://github.com/claration).** Feather pioneered on-device signing on stock iOS without jailbreak. We are deeply grateful for the open source foundation. All upstream work and attribution is preserved — see Credits in app and below.
+> **VexSign is built on top of [Feather](https://github.com/claration/Feather) by [@claration](https://github.com/claration) (Samara).** Feather pioneered on-device signing on stock iOS without jailbreak and open sourced it under GPL-3.0. We are deeply grateful for the open source foundation. All upstream work and attribution is preserved — see Credits in app and below. **If you use VexSign, please consider starring [Feather](https://github.com/claration/Feather) as well!**
+
+**What VexSign uses from Feather:**
+- Base signing engine and Zsign integration
+- CoreData model and Storage layer
+- SwiftUI UI architecture and Navigation
+- AltSourceKit and NimbleKit libraries
+- Certificate and Library management
+
+**What @iamsmmh added exclusively (not in Feather):**
+- IPA Explorer, File Transfer Server, Live Activities, Auto Cleanup, Batch Signing, Update All, Backup & Restore, Logs, File Manager, Anti-Revoke, Game Mode, Automation, and more.
 
 **Additional Thanks:**
 
 - **@iamsmmh** — Lead Developer, all exclusive features (IPA Explorer, File Transfer, Live Activities, Auto Cleanup, Batch Signing, etc.)
+- **@claration / Samara** — Feather base, AltSourceKit, NimbleKit
 - **@jkcoxson** — idevice backend
 - **@zhlynn** — Zsign
 - **@tealbathingsuit** — ElleKit
@@ -217,12 +234,12 @@ By contributing, you agree to license your code under GPL-3.0, ensuring it remai
 
 VexSign is maintained by [@iamsmmh](https://github.com/iamsmmh) on GitHub. Releases only on GitHub. Avoid other sites — they may be malicious.
 
-Use at your own risk. Sideloading may violate Apple Developer Program terms. Not affiliated with Apple Inc.
+Use at your own risk. Sideloading may violate Apple Developer Program terms. Not affiliated with Apple Inc. Feather is by @claration, VexSign is by @iamsmmh.
 
 ---
 
 <p align="center">
   <b>Made with ❤️ by <a href="https://github.com/iamsmmh">@iamsmmh</a> — VexSign</b><br>
-  Built on <a href="https://github.com/claration/Feather">Feather by @claration</a><br>
+  Based on <a href="https://github.com/claration/Feather">Feather by @claration</a> — Please star both!<br>
   If VexSign saves your time, please ⭐ star the repo!
 </p>
