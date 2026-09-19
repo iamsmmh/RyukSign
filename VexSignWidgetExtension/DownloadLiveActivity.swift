@@ -248,7 +248,7 @@ struct DownloadLiveActivity: Widget {
             .foregroundColor(context.state.resolvedPhase.tint)
         }
       }
-      .widgetURL(URL(string: "feather://downloads"))
+      .widgetURL(URL(string: "vexsign://downloads"))
       .keylineTint(context.state.resolvedPhase.tint)
     }
   }

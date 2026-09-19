@@ -72,7 +72,7 @@ extension FileManager {
 
 	/// Where finished downloads are staged before they get imported
 	var downloadStaging: URL {
-		temporaryDirectory.appendingPathComponent("FeatherDownloads", isDirectory: true)
+		temporaryDirectory.appendingPathComponent("VexSignDownloads", isDirectory: true)
 	}
 
 	/// A unique temp directory URL (`tmp/<label>_<uuid>`). The caller creates it.

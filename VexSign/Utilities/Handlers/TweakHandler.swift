@@ -1,6 +1,6 @@
 //
 //  DylibHandler.swift
-//  feather
+//  vexsign
 //
 //  Created by samara on 8/17/24.
 //  Copyright (c) 2024 Samara M (khcrysalis)
@@ -119,7 +119,7 @@ class TweakHandler {
 
 		try await _checkEllekit()
 
-		let baseTmpDir = _fileManager.uniqueTemporaryDirectory("FeatherTweak")
+		let baseTmpDir = _fileManager.uniqueTemporaryDirectory("VexSignTweak")
 		try _fileManager.createDirectoryIfNeeded(at: baseTmpDir)
 
 		if let filePickerFix {

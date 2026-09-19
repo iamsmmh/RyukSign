@@ -14,7 +14,7 @@ final class Storage: ObservableObject {
 	static let shared = Storage()
 	let container: NSPersistentContainer
 
-	private let _name: String = "Feather"
+	private let _name: String = "VexSign"
 
 	init(inMemory: Bool = false) {
 		container = NSPersistentContainer(name: _name)
@@ -82,7 +82,7 @@ final class Storage: ObservableObject {
 
 	// Backfills sortIndex from the old date-desc order so manual reordering starts stable
 	private func _migrateSortIndexIfNeeded() {
-		let key = "feather.sortIndexMigrated"
+		let key = "vexsign.sortIndexMigrated"
 		guard !UserDefaults.standard.bool(forKey: key) else { return }
 
 		let signedRequest: NSFetchRequest<Signed> = Signed.fetchRequest()
@@ -120,6 +120,6 @@ final class Storage: ObservableObject {
 		try? FileManager.default.removeFileIfNeeded(at: FileManager.default.signed)
 		try? FileManager.default.removeFileIfNeeded(at: FileManager.default.unsigned)
 		try? FileManager.default.removeFileIfNeeded(at: FileManager.default.certificates)
-		UserDefaults.standard.set(0, forKey: "feather.selectedCert")
+		UserDefaults.standard.set(0, forKey: "vexsign.selectedCert")
 	}
 }

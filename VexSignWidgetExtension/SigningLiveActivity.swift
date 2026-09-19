@@ -86,7 +86,7 @@ struct SigningLiveActivity: Widget {
 					.font(.system(size: 10))
 					.foregroundColor(context.state.isCompleted ? .green : .purple)
 			}
-			.widgetURL(URL(string: "feather://library"))
+			.widgetURL(URL(string: "vexsign://library"))
 			.keylineTint(.purple)
 		}
 	}

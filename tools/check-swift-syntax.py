@@ -31,7 +31,7 @@ from tree_sitter import Language, Node, Parser
 ROOT = Path(__file__).resolve().parents[1]
 
 # Nothing here is ours to fix, and the submodules ship their own build.
-SKIP = {".git", "Zsign", "IDeviceKitten", "_upstream_feather", ".build", "build"}
+SKIP = {".git", "Zsign", "IDeviceKitten", "_upstream_vexsign", ".build", "build"}
 
 
 def swift_files(paths: list[str]) -> list[Path]:

@@ -754,7 +754,7 @@ class DownloadManager: NSObject, ObservableObject {
 	}
 	
 	func isManualDownload(_ string: String) -> Bool {
-		return string.contains("FeatherManualDownload")
+		return string.contains("VexSignManualDownload")
 	}
 	
 	func getDownload(by id: String) -> Download? {

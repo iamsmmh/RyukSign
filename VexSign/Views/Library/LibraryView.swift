@@ -400,7 +400,7 @@ struct LibraryView: View {
         Button(.localized("Import from Files"), systemImage: "folder") {
             DocumentPicker.open([.ipa, .tipa], multiple: true, folder: .apps) { urls in
                 for url in urls {
-                    downloadManager.startArchive(from: url, id: "FeatherManualDownload_\(UUID().uuidString)")
+                    downloadManager.startArchive(from: url, id: "VexSignManualDownload_\(UUID().uuidString)")
                 }
             }
         }
@@ -427,7 +427,7 @@ struct LibraryView: View {
             if let url = URL(string: _alertDownloadString) {
                 _ = downloadManager.startDownload(
                     from: url,
-                    id: "FeatherManualDownload_\(UUID().uuidString)"
+                    id: "VexSignManualDownload_\(UUID().uuidString)"
                 )
             }
         }

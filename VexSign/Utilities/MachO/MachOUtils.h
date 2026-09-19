@@ -1,6 +1,6 @@
 //
 //  MachOUtils.h
-//  Feather
+//  VexSign
 //
 //  Created by samara on 12.06.2025.
 //

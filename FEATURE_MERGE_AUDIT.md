@@ -5,8 +5,8 @@ repository: what the guide asks for, what was already here, what this branch cha
 each piece was checked. Modelled on `MYSIGN_MERGE_AUDIT.md` (MySignReincarnated), which does the
 same job for a different signer.
 
-Everything below is GPL-3.0 and keeps the upstream attribution (claration/Feather,
-faroukbmiled/VexSign, and the upstream projects each feature came from).
+Everything below is GPL-3.0 and keeps the upstream attribution (claration/VexSign,
+iamsmmh/VexSign, and the upstream projects each feature came from).
 
 ## 1. Summary
 

@@ -237,7 +237,7 @@ struct Options: Codable, Equatable {
 
 	enum PPQProtection: String, Codable, CaseIterable, LocalizedDescribable {
 		case disabled
-		/// Feather method: append ppqString to the untouched identifier
+		/// VexSign method: append ppqString to the untouched identifier
 		case `default`
 		/// Vex method: prefix with "vex", replace known keywords, append ppqString
 		case vex = "Vex"
@@ -245,7 +245,7 @@ struct Options: Codable, Equatable {
 		var localizedDescription: String {
 			switch self {
 			case .disabled: .localized("Disabled")
-			case .default: "Feather"
+			case .default: "VexSign"
 			case .vex: "Vex"
 			}
 		}

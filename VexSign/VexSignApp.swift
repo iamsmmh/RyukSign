@@ -158,8 +158,8 @@ struct VexSignApp: App {
 	
 	private func _handleURL(_ url: URL) {
 		let scheme = url.scheme?.lowercased()
-		if scheme == "feather" || scheme == "vexsign" {
-			/// feather://import-certificate?p12=<base64>&mobileprovision=<base64>&password=<base64>
+		if scheme == "vexsign" || scheme == "vexsign" {
+			/// vexsign://import-certificate?p12=<base64>&mobileprovision=<base64>&password=<base64>
 			if url.host == "import-certificate" {
 				guard
 					let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -212,7 +212,7 @@ struct VexSignApp: App {
 				
 				return
 			}
-			/// feather://export-certificate?callback_template=<template>
+			/// vexsign://export-certificate?callback_template=<template>
 			/// ?callback_template=: This is how we callback to the application requesting the certificate, this will be a url scheme
 			/// 	example: livecontainer%3A%2F%2Fcertificate%3Fcert%3D%24%28BASE64_CERT%29%26password%3D%24%28PASSWORD%29
 			/// 	decoded: livecontainer://certificate?cert=$(BASE64_CERT)&password=$(PASSWORD)
@@ -229,11 +229,11 @@ struct VexSignApp: App {
 				
 				FR.exportCertificateAndOpenUrl(using: callbackTemplate)
 			}
-			/// feather://source/<url>
+			/// vexsign://source/<url>
 			if let fullPath = url.validatedScheme(after: "/source/") {
 				FR.handleSource(fullPath) { _ in }
 			}
-			/// feather://direct-install?url=<url>&sign=<true|false> or feather://direct-install/<url>
+			/// vexsign://direct-install?url=<url>&sign=<true|false> or vexsign://direct-install/<url>
 			if url.host == "direct-install" || url.path.hasPrefix("/direct-install") {
 				var targetURLString: String? = nil
 
@@ -253,7 +253,7 @@ struct VexSignApp: App {
 				}
 				return
 			}
-			/// feather://install/<url.ipa>
+			/// vexsign://install/<url.ipa>
 			if
 				let fullPath = url.validatedScheme(after: "/install/"),
 				let downloadURL = URL(string: fullPath)
@@ -264,7 +264,7 @@ struct VexSignApp: App {
 			let ext = url.pathExtension.lowercased()
 			if ext == "ipa" || ext == "tipa" {
 				// Handle file import using NSFileCoordinator for proper access control
-				let tempDir = FileManager.default.uniqueTemporaryDirectory("FeatherShared")
+				let tempDir = FileManager.default.uniqueTemporaryDirectory("VexSignShared")
 				let destinationURL = tempDir.appendingPathComponent(url.lastPathComponent)
 
 				let didStartAccessing = url.startAccessingSecurityScopedResource()
@@ -312,7 +312,7 @@ struct VexSignApp: App {
 				}
 
 				// Manual download to show progress in the header; completion reports the real outcome.
-				let id = "FeatherManualDownload_\(UUID().uuidString)"
+				let id = "VexSignManualDownload_\(UUID().uuidString)"
 				_ = DownloadManager.shared.startArchive(from: destinationURL, id: id) { error in
 					if let error = error {
 						UIAlertController.showErrorWithCopy(
@@ -341,7 +341,7 @@ struct VexSignApp: App {
 	private func _importSharedTweak(_ url: URL) {
 		let ext = url.pathExtension.lowercased()
 		let tempDir = FileManager.default.temporaryDirectory
-			.appendingPathComponent("FeatherSharedTweak_\(UUID().uuidString)", isDirectory: true)
+			.appendingPathComponent("VexSignSharedTweak_\(UUID().uuidString)", isDirectory: true)
 		let destinationURL = tempDir.appendingPathComponent(url.lastPathComponent)
 
 		let didStartAccessing = url.startAccessingSecurityScopedResource()

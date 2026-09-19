@@ -150,9 +150,9 @@ final class BackupManager {
 	}
 
 	/// Backs up any key in the app's namespaces; only device/install-specific keys are excluded.
-	private static let _settingPrefixes = ["VexSign.", "feather.", "VexSign.", "signing_options"]
+	private static let _settingPrefixes = ["VexSign.", "vexsign.", "VexSign.", "signing_options"]
 	private static let _settingDenylist: Set<String> = [
-		"feather.selectedCert",              // restored by uuid remap, not by raw index
+		"vexsign.selectedCert",              // restored by uuid remap, not by raw index
 		"VexSign.premiumSourceHosts",       // premium activation is install-bound
 		"VexSign.defaultImportFolderName",
 		"VexSign.defaultImportFolderBookmark", // security-scoped, dead on another install
@@ -213,7 +213,7 @@ final class BackupManager {
 				))
 			}
 
-			let selectedIndex = UserDefaults.standard.integer(forKey: "feather.selectedCert")
+			let selectedIndex = UserDefaults.standard.integer(forKey: "vexsign.selectedCert")
 			selectedUUID = (selectedIndex >= 0 && selectedIndex < certs.count) ? certs[selectedIndex].uuid : nil
 			if !certEntries.isEmpty { written.insert(.certificates) }
 		}
@@ -341,7 +341,7 @@ final class BackupManager {
 				let uuid = manifest.selectedCertUUID,
 				let index = Storage.shared.getAllCertificates().firstIndex(where: { $0.uuid == uuid })
 			{
-				UserDefaults.standard.set(index, forKey: "feather.selectedCert")
+				UserDefaults.standard.set(index, forKey: "vexsign.selectedCert")
 			}
 		}
 

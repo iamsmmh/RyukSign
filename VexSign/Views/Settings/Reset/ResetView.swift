@@ -170,7 +170,7 @@ extension ResetView {
 	}
 	
 	static func resetCertificates(resetAll: Bool = false) {
-		if !resetAll { UserDefaults.standard.set(0, forKey: "feather.selectedCert") }
+		if !resetAll { UserDefaults.standard.set(0, forKey: "vexsign.selectedCert") }
 		Storage.shared.clearContext(request: CertificatePair.fetchRequest())
 		try? FileManager.default.removeFileIfNeeded(at: FileManager.default.certificates)
 	}

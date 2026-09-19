@@ -35,7 +35,7 @@ final class AppFileHandler: NSObject, @unchecked Sendable {
 		self._download = download
 		self._appDescription = download?.appDescription
 		self._uniqueWorkDir = _fileManager.temporaryDirectory
-			.appendingPathComponent("FeatherImport_\(_uuid)", isDirectory: true)
+			.appendingPathComponent("VexSignImport_\(_uuid)", isDirectory: true)
 
 		super.init()
 		Logger.misc.debug("Import initiated for: \(self._ipa.lastPathComponent) with ID: \(self._uuid)")
@@ -249,7 +249,7 @@ final class AppFileHandler: NSObject, @unchecked Sendable {
 	}
 
 	private func _directory() async throws -> URL {
-		// Documents/Feather/Unsigned/\(UUID)
+		// Documents/VexSign/Unsigned/\(UUID)
 		_fileManager.unsigned(_uuid)
 	}
 

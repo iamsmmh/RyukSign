@@ -107,7 +107,7 @@ struct UpdatesSettingsView: View {
 			if _method == 1 {
 				Section {
 					Button {
-						UIApplication.open("localdevvpn://enable?scheme=feather")
+						UIApplication.open("localdevvpn://enable?scheme=vexsign")
 					} label: {
 						Label(.localized("Connect to LocalDevVPN"), systemImage: "link")
 					}

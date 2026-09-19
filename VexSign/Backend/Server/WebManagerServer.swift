@@ -164,7 +164,7 @@ final class WebManagerServer {
 	// MARK: - Debounced routing (WebDAV)
 	// Windows writes in stages (0-byte PUT, then full PUT, sometimes temp+MOVE). Debounce per
 	// path so each write reschedules one import ~1.5s later and only the final file is imported.
-	private let _debounceQueue = DispatchQueue(label: "feather.filetransfer.debounce")
+	private let _debounceQueue = DispatchQueue(label: "vexsign.filetransfer.debounce")
 	private var _pendingRoutes: [String: DispatchWorkItem] = [:]
 
 	func scheduleDebouncedRoute(forPath path: String, url: URL) {

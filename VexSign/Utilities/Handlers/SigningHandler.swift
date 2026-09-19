@@ -39,7 +39,7 @@ final class SigningHandler: NSObject {
 		self._options = options
 		self._appDescription = app.appDescription
 		self._uniqueWorkDir = _fileManager.temporaryDirectory
-			.appendingPathComponent("FeatherSigning_\(_uuid)", isDirectory: true)
+			.appendingPathComponent("VexSigning_\(_uuid)", isDirectory: true)
 		super.init()
 	}
 	
@@ -207,7 +207,7 @@ final class SigningHandler: NSObject {
 	}
 	
 	private func _directory() async throws -> URL {
-		// Documents/Feather/Signed/\(UUID)
+		// Documents/VexSign/Signed/\(UUID)
 		_fileManager.signed(_uuid)
 	}
 	

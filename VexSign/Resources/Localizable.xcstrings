@@ -9615,19 +9615,19 @@
         }
       }
     },
-    "A modified version of Feather, by Vex." : {
+    "A modified version of VexSign, by Vex." : {
       "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "نسخة معدّلة من Feather، من إعداد Vex."
+            "value" : "نسخة معدّلة من VexSign، من إعداد Vex."
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Upravená verze Featheru od Vexa."
+            "value" : "Upravená verze VexSignu od Vexa."
           }
         },
         "de" : {
@@ -9639,61 +9639,61 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A modified version of Feather, by Vex."
+            "value" : "A modified version of VexSign, by Vex."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una versión modificada de Feather, por Vex."
+            "value" : "Una versión modificada de VexSign, por Vex."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Une version modifiée de Feather, par Vex."
+            "value" : "Une version modifiée de VexSign, par Vex."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Versi modifikasi dari Feather, oleh Vex."
+            "value" : "Versi modifikasi dari VexSign, oleh Vex."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Una versione modificata di Feather, di Vex."
+            "value" : "Una versione modificata di VexSign, di Vex."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zmodyfikowana wersja Feathera autorstwa Vexa."
+            "value" : "Zmodyfikowana wersja VexSigna autorstwa Vexa."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Изменённая версия Feather от Vex."
+            "value" : "Изменённая версия VexSign от Vex."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather'ın Vex tarafından değiştirilmiş bir sürümü."
+            "value" : "VexSign'ın Vex tarafından değiştirilmiş bir sürümü."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Phiên bản chỉnh sửa của Feather, bởi Vex."
+            "value" : "Phiên bản chỉnh sửa của VexSign, bởi Vex."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "由 Vex 修改的 Feather 版本。"
+            "value" : "由 Vex 修改的 VexSign 版本。"
           }
         }
       }
@@ -9935,7 +9935,7 @@
       }
     },
     "About %@" : {
-      "comment" : "About Feather",
+      "comment" : "About VexSign",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -11847,7 +11847,7 @@
         "cs" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Všechny soubory Featheru jsou v složce Dokumenty, zde jsou na ně rychlé odkazy."
+            "value" : "Všechny soubory VexSignu jsou v složce Dokumenty, zde jsou na ně rychlé odkazy."
           }
         },
         "de" : {
@@ -11877,7 +11877,7 @@
         "id" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Semua berkas Feather berada di direktori dokumen, berikut beberapa tautan cepat ke berkas-berkas tersebut."
+            "value" : "Semua berkas VexSign berada di direktori dokumen, berikut beberapa tautan cepat ke berkas-berkas tersebut."
           }
         },
         "it" : {
@@ -11889,7 +11889,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wszystkie pliki Feather znajdują się w katalogu dokumentów, oto szybkie odnośniki do nich."
+            "value" : "Wszystkie pliki VexSign znajdują się w katalogu dokumentów, oto szybkie odnośniki do nich."
           }
         },
         "ru" : {
@@ -11907,7 +11907,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tất cả các file của Feather có thể được tìm thấy trong ứng dụng Tệp, đây là một số liên kết nhanh đến chúng."
+            "value" : "Tất cả các file của VexSign có thể được tìm thấy trong ứng dụng Tệp, đây là một số liên kết nhanh đến chúng."
           }
         },
         "zh-Hans" : {
@@ -14906,79 +14906,79 @@
         }
       }
     },
-    "Based on Feather" : {
+    "Based on VexSign" : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "مبني على Feather"
+            "value" : "مبني على VexSign"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Založeno na Feather"
+            "value" : "Založeno na VexSign"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basierend auf Feather"
+            "value" : "Basierend auf VexSign"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basado en Feather"
+            "value" : "Basado en VexSign"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basé sur Feather"
+            "value" : "Basé sur VexSign"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Berbasis Feather"
+            "value" : "Berbasis VexSign"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basato su Feather"
+            "value" : "Basato su VexSign"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oparte na Feather"
+            "value" : "Oparte na VexSign"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "На основе Feather"
+            "value" : "На основе VexSign"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather temellidir"
+            "value" : "VexSign temellidir"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dựa trên Feather"
+            "value" : "Dựa trên VexSign"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基于 Feather"
+            "value" : "基于 VexSign"
           }
         }
       }
@@ -26608,7 +26608,7 @@
       }
     },
     "Enjoying %@?" : {
-      "comment" : "Enjoying Feather?",
+      "comment" : "Enjoying VexSign?",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
@@ -29197,85 +29197,85 @@
         }
       }
     },
-    "Feather appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service." : {
+    "VexSign appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service." : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يضيف وضع Feather سلسلة عشوائية إلى معرّف حزمة التطبيق. أما Vex فيعيد كتابة المعرّف أيضًا (بادئة vex واستبدال الكلمات المفتاحية) قبل إضافة السلسلة. كلاهما يساعد على منع الإبلاغ عن Apple ID الخاص بك من قِبل Apple، لذا لا تعطّل هذا إلا عند استخدام خدمة توقيع."
+            "value" : "يضيف وضع VexSign سلسلة عشوائية إلى معرّف حزمة التطبيق. أما Vex فيعيد كتابة المعرّف أيضًا (بادئة vex واستبدال الكلمات المفتاحية) قبل إضافة السلسلة. كلاهما يساعد على منع الإبلاغ عن Apple ID الخاص بك من قِبل Apple، لذا لا تعطّل هذا إلا عند استخدام خدمة توقيع."
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather přidá k identifikátoru balíčku aplikace náhodný řetězec. Vex identifikátor navíc přepíše (předpona vex, nahrazení klíčových slov) a teprve pak řetězec přidá. Obojí pomáhá zabránit označení vašeho Apple ID ze strany Apple, takže tuto možnost vypněte jen při použití podepisovací služby."
+            "value" : "VexSign přidá k identifikátoru balíčku aplikace náhodný řetězec. Vex identifikátor navíc přepíše (předpona vex, nahrazení klíčových slov) a teprve pak řetězec přidá. Obojí pomáhá zabránit označení vašeho Apple ID ze strany Apple, takže tuto možnost vypněte jen při použití podepisovací služby."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather hängt eine zufällige Zeichenfolge an die Bundle-ID der App an. Vex schreibt die Bundle-ID zusätzlich um (vex-Präfix, Ersetzen bekannter Schlüsselwörter), bevor die Zeichenfolge angehängt wird. Beides hilft zu verhindern, dass deine Apple-ID von Apple markiert wird, deaktiviere es daher nur, wenn du einen Signierdienst verwendest."
+            "value" : "VexSign hängt eine zufällige Zeichenfolge an die Bundle-ID der App an. Vex schreibt die Bundle-ID zusätzlich um (vex-Präfix, Ersetzen bekannter Schlüsselwörter), bevor die Zeichenfolge angehängt wird. Beides hilft zu verhindern, dass deine Apple-ID von Apple markiert wird, deaktiviere es daher nur, wenn du einen Signierdienst verwendest."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service."
+            "value" : "VexSign appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather añade una cadena aleatoria al identificador del paquete de la app. Vex además reescribe el identificador (prefijo vex, sustitución de palabras clave) antes de añadirla. Ambos ayudan a evitar que Apple marque tu Apple ID, así que desactívalo solo si usas un servicio de firma."
+            "value" : "VexSign añade una cadena aleatoria al identificador del paquete de la app. Vex además reescribe el identificador (prefijo vex, sustitución de palabras clave) antes de añadirla. Ambos ayudan a evitar que Apple marque tu Apple ID, así que desactívalo solo si usas un servicio de firma."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather ajoute une chaîne aléatoire à l'identifiant de bundle de l'app. Vex réécrit en plus l'identifiant (préfixe vex, remplacement de mots-clés) avant de l'ajouter. Les deux aident à éviter que votre identifiant Apple soit signalé par Apple, ne le désactivez donc que si vous utilisez un service de signature."
+            "value" : "VexSign ajoute une chaîne aléatoire à l'identifiant de bundle de l'app. Vex réécrit en plus l'identifiant (préfixe vex, remplacement de mots-clés) avant de l'ajouter. Les deux aident à éviter que votre identifiant Apple soit signalé par Apple, ne le désactivez donc que si vous utilisez un service de signature."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather menambahkan string acak ke bundle identifier aplikasi. Vex juga menulis ulang identifier tersebut (awalan vex, penggantian kata kunci) sebelum menambahkannya. Keduanya membantu mencegah Apple ID Anda ditandai oleh Apple, jadi nonaktifkan hanya saat memakai layanan penandatanganan."
+            "value" : "VexSign menambahkan string acak ke bundle identifier aplikasi. Vex juga menulis ulang identifier tersebut (awalan vex, penggantian kata kunci) sebelum menambahkannya. Keduanya membantu mencegah Apple ID Anda ditandai oleh Apple, jadi nonaktifkan hanya saat memakai layanan penandatanganan."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather aggiunge una stringa casuale al bundle identifier dell'app. Vex riscrive anche l'identifier (prefisso vex, sostituzione di parole chiave) prima di aggiungerla. Entrambi aiutano a evitare che il tuo ID Apple venga segnalato da Apple, quindi disattivalo solo se usi un servizio di firma."
+            "value" : "VexSign aggiunge una stringa casuale al bundle identifier dell'app. Vex riscrive anche l'identifier (prefisso vex, sostituzione di parole chiave) prima di aggiungerla. Entrambi aiutano a evitare che il tuo ID Apple venga segnalato da Apple, quindi disattivalo solo se usi un servizio di firma."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather dopisuje losowy ciąg znaków do identyfikatora pakietu aplikacji. Vex dodatkowo przepisuje identyfikator (przedrostek vex, zamiana słów kluczowych), zanim go dopisze. Oba warianty pomagają uniknąć oznaczenia Twojego Apple ID przez Apple, więc wyłącz tę opcję tylko przy korzystaniu z usługi podpisywania."
+            "value" : "VexSign dopisuje losowy ciąg znaków do identyfikatora pakietu aplikacji. Vex dodatkowo przepisuje identyfikator (przedrostek vex, zamiana słów kluczowych), zanim go dopisze. Oba warianty pomagają uniknąć oznaczenia Twojego Apple ID przez Apple, więc wyłącz tę opcję tylko przy korzystaniu z usługi podpisywania."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather добавляет случайную строку к идентификатору пакета приложения. Vex дополнительно переписывает идентификатор (префикс vex, замена ключевых слов) перед добавлением строки. Оба варианта помогают избежать пометки вашего Apple ID со стороны Apple, поэтому отключайте это только при использовании сервиса подписи."
+            "value" : "VexSign добавляет случайную строку к идентификатору пакета приложения. Vex дополнительно переписывает идентификатор (префикс vex, замена ключевых слов) перед добавлением строки. Оба варианта помогают избежать пометки вашего Apple ID со стороны Apple, поэтому отключайте это только при использовании сервиса подписи."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather, uygulamanın paket tanımlayıcısına rastgele bir dize ekler. Vex ise dizeyi eklemeden önce tanımlayıcıyı da yeniden yazar (vex ön eki, anahtar sözcük değiştirme). Her ikisi de Apple Kimliğinizin Apple tarafından işaretlenmesini önlemeye yardımcı olur, bu yüzden yalnızca bir imzalama hizmeti kullanırken devre dışı bırakın."
+            "value" : "VexSign, uygulamanın paket tanımlayıcısına rastgele bir dize ekler. Vex ise dizeyi eklemeden önce tanımlayıcıyı da yeniden yazar (vex ön eki, anahtar sözcük değiştirme). Her ikisi de Apple Kimliğinizin Apple tarafından işaretlenmesini önlemeye yardımcı olur, bu yüzden yalnızca bir imzalama hizmeti kullanırken devre dışı bırakın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather thêm một chuỗi ngẫu nhiên vào bundle identifier của ứng dụng. Vex còn viết lại identifier (tiền tố vex, thay thế từ khóa) trước khi thêm chuỗi. Cả hai đều giúp tránh việc Apple ID của bạn bị Apple gắn cờ, vì vậy chỉ tắt khi bạn dùng dịch vụ ký."
+            "value" : "VexSign thêm một chuỗi ngẫu nhiên vào bundle identifier của ứng dụng. Vex còn viết lại identifier (tiền tố vex, thay thế từ khóa) trước khi thêm chuỗi. Cả hai đều giúp tránh việc Apple ID của bạn bị Apple gắn cờ, vì vậy chỉ tắt khi bạn dùng dịch vụ ký."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Feather 会在应用的 Bundle ID 后追加一段随机字符串。Vex 则会先重写 Bundle ID（vex 前缀、关键词替换）再追加。两者都有助于避免你的 Apple ID 被 Apple 标记，因此仅在使用签名服务时才关闭。"
+            "value" : "VexSign 会在应用的 Bundle ID 后追加一段随机字符串。Vex 则会先重写 Bundle ID（vex 前缀、关键词替换）再追加。两者都有助于避免你的 Apple ID 被 Apple 标记，因此仅在使用签名服务时才关闭。"
           }
         }
       }
@@ -47775,85 +47775,85 @@
         }
       }
     },
-    "Open an [issue](https://github.com/claration/Feather/issues) on GitHub if you want your source to be featured." : {
+    "Open an [issue](https://github.com/claration/VexSign/issues) on GitHub if you want your source to be featured." : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "افتح [issues](https://github.com/claration/Feather/issues) على GitHub إذا كنت تريد أن يتم تمييز مصدرك."
+            "value" : "افتح [issues](https://github.com/claration/VexSign/issues) على GitHub إذا كنت تريد أن يتم تمييز مصدرك."
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otevřete [issue](https://github.com/claration/Feather/issues) na GitHubu, pokud chcete, aby byl váš zdroj doporučen."
+            "value" : "Otevřete [issue](https://github.com/claration/VexSign/issues) na GitHubu, pokud chcete, aby byl váš zdroj doporučen."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne ein [Issue](https://github.com/claration/Feather/issues) auf GitHub wenn du deine Quelle aufgelistet haben möchtest."
+            "value" : "Öffne ein [Issue](https://github.com/claration/VexSign/issues) auf GitHub wenn du deine Quelle aufgelistet haben möchtest."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open an [issue](https://github.com/claration/Feather/issues) on GitHub if you want your source to be featured."
+            "value" : "Open an [issue](https://github.com/claration/VexSign/issues) on GitHub if you want your source to be featured."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abre una [incidencia](https://github.com/claration/Feather/issues) en GitHub si quieres que tu fuente aparezca destacada."
+            "value" : "Abre una [incidencia](https://github.com/claration/VexSign/issues) en GitHub si quieres que tu fuente aparezca destacada."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrez un [issue](https://github.com/claration/Feather/issues) sur GitHub si vous souhaitez que votre source soit mise en avant."
+            "value" : "Ouvrez un [issue](https://github.com/claration/VexSign/issues) sur GitHub si vous souhaitez que votre source soit mise en avant."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Buka [issue](https://github.com/claration/Feather/issues) di GitHub jika Anda ingin sumber Anda ditampilkan."
+            "value" : "Buka [issue](https://github.com/claration/VexSign/issues) di GitHub jika Anda ingin sumber Anda ditampilkan."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri un [problema](https://github.com/claration/Feather/issues) su GitHub se vuoi che la tua fonte sia consigliata."
+            "value" : "Apri un [problema](https://github.com/claration/VexSign/issues) su GitHub se vuoi che la tua fonte sia consigliata."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otwórz [issue](https://github.com/claration/Feather/issues) na GitHubie, jeśli chcesz, aby Twoje źródło zostało wyróżnione."
+            "value" : "Otwórz [issue](https://github.com/claration/VexSign/issues) na GitHubie, jeśli chcesz, aby Twoje źródło zostało wyróżnione."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Откройте [issue](https://github.com/claration/Feather/issues) на GitHub, если хотите, чтобы ваш источник был в рекомендуемых."
+            "value" : "Откройте [issue](https://github.com/claration/VexSign/issues) на GitHub, если хотите, чтобы ваш источник был в рекомендуемых."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kaynağınızın öne çıkarılmasını istiyorsanız GitHub’da bir [sorun kaydı](https://github.com/claration/Feather/issues) açın."
+            "value" : "Kaynağınızın öne çıkarılmasını istiyorsanız GitHub’da bir [sorun kaydı](https://github.com/claration/VexSign/issues) açın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở [issue](https://github.com/claration/Feather/issues) trên GitHub nếu bạn muốn nguồn của mình được giới thiệu."
+            "value" : "Mở [issue](https://github.com/claration/VexSign/issues) trên GitHub nếu bạn muốn nguồn của mình được giới thiệu."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "开启一个[issue](https://github.com/claration/Feather/issues)"
+            "value" : "开启一个[issue](https://github.com/claration/VexSign/issues)"
           }
         }
       }
@@ -58094,79 +58094,79 @@
         }
       }
     },
-    "VexSign is free software under the GPL-3.0 license, derived from Feather by claration. The complete corresponding source is available at the Source Code link above." : {
+    "VexSign is free software under the GPL-3.0 license, derived from VexSign by claration. The complete corresponding source is available at the Source Code link above." : {
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign برنامج حر بموجب ترخيص GPL-3.0، مشتق من Feather بواسطة claration. الكود المصدري الكامل المقابل متاح عبر رابط الكود المصدري أعلاه."
+            "value" : "VexSign برنامج حر بموجب ترخيص GPL-3.0، مشتق من VexSign بواسطة claration. الكود المصدري الكامل المقابل متاح عبر رابط الكود المصدري أعلاه."
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign je svobodný software pod licencí GPL-3.0, odvozený z Feather od claration. Kompletní odpovídající zdrojový kód je dostupný přes odkaz Zdrojový kód výše."
+            "value" : "VexSign je svobodný software pod licencí GPL-3.0, odvozený z VexSign od claration. Kompletní odpovídající zdrojový kód je dostupný přes odkaz Zdrojový kód výše."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign ist freie Software unter der GPL-3.0-Lizenz, abgeleitet von Feather von claration. Der vollständige zugehörige Quellcode ist über den Link „Quellcode“ oben verfügbar."
+            "value" : "VexSign ist freie Software unter der GPL-3.0-Lizenz, abgeleitet von VexSign von claration. Der vollständige zugehörige Quellcode ist über den Link „Quellcode“ oben verfügbar."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign es software libre bajo la licencia GPL-3.0, derivado de Feather de claration. El código fuente correspondiente completo está disponible en el enlace Código fuente de arriba."
+            "value" : "VexSign es software libre bajo la licencia GPL-3.0, derivado de VexSign de claration. El código fuente correspondiente completo está disponible en el enlace Código fuente de arriba."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign est un logiciel libre sous licence GPL-3.0, dérivé de Feather par claration. Le code source complet correspondant est disponible via le lien Code source ci-dessus."
+            "value" : "VexSign est un logiciel libre sous licence GPL-3.0, dérivé de VexSign par claration. Le code source complet correspondant est disponible via le lien Code source ci-dessus."
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign adalah perangkat lunak bebas di bawah lisensi GPL-3.0, diturunkan dari Feather oleh claration. Sumber lengkap yang sesuai tersedia di tautan Source Code di atas."
+            "value" : "VexSign adalah perangkat lunak bebas di bawah lisensi GPL-3.0, diturunkan dari VexSign oleh claration. Sumber lengkap yang sesuai tersedia di tautan Source Code di atas."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign è software libero sotto licenza GPL-3.0, derivato da Feather di claration. Il codice sorgente completo corrispondente è disponibile al link Codice sorgente qui sopra."
+            "value" : "VexSign è software libero sotto licenza GPL-3.0, derivato da VexSign di claration. Il codice sorgente completo corrispondente è disponibile al link Codice sorgente qui sopra."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign to wolne oprogramowanie na licencji GPL-3.0, oparte na Feather autorstwa Samary (claration). Kompletny odpowiadający kod źródłowy jest dostępny pod linkiem Kod źródłowy powyżej."
+            "value" : "VexSign to wolne oprogramowanie na licencji GPL-3.0, oparte na VexSign autorstwa Samary (claration). Kompletny odpowiadający kod źródłowy jest dostępny pod linkiem Kod źródłowy powyżej."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign — свободное ПО под лицензией GPL-3.0, основанное на Feather от claration. Полный исходный код доступен по ссылке «Исходный код» выше."
+            "value" : "VexSign — свободное ПО под лицензией GPL-3.0, основанное на VexSign от claration. Полный исходный код доступен по ссылке «Исходный код» выше."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign, claration tarafından geliştirilen Feather'dan türetilen, GPL-3.0 lisansı altındaki özgür bir yazılımdır. İlgili kaynak kodun tamamı yukarıdaki Source Code bağlantısında mevcuttur."
+            "value" : "VexSign, claration tarafından geliştirilen VexSign'dan türetilen, GPL-3.0 lisansı altındaki özgür bir yazılımdır. İlgili kaynak kodun tamamı yukarıdaki Source Code bağlantısında mevcuttur."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign là phần mềm tự do theo giấy phép GPL-3.0, dựa trên Feather của claration. Toàn bộ mã nguồn tương ứng có sẵn tại liên kết Source Code phía trên."
+            "value" : "VexSign là phần mềm tự do theo giấy phép GPL-3.0, dựa trên VexSign của claration. Toàn bộ mã nguồn tương ứng có sẵn tại liên kết Source Code phía trên."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "VexSign 是基于 GPL-3.0 许可证的自由软件，衍生自 claration 的 Feather。完整的对应源代码可通过上方的源代码链接获取。"
+            "value" : "VexSign 是基于 GPL-3.0 许可证的自由软件，衍生自 claration 的 VexSign。完整的对应源代码可通过上方的源代码链接获取。"
           }
         }
       }
@@ -62666,7 +62666,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bağış yaparak desteğinizi gösterin! Eğer bağış yapamıyorsanız Feather’ı dilden dile yaymak da işe yarar!"
+            "value" : "Bağış yaparak desteğinizi gösterin! Eğer bağış yapamıyorsanız VexSign’ı dilden dile yaymak da işe yarar!"
           }
         },
         "vi" : {

@@ -212,7 +212,7 @@ enum FR {
 		}
 
 		guard let url = URL(string: cleaned), url.host != nil else {
-			let error = NSError(domain: "Feather", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
+			let error = NSError(domain: "VexSign", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
 			if showAlerts {
 				DispatchQueue.main.async {
 					Toast.error(.localized("Invalid URL"), duration: .sticky)
@@ -242,7 +242,7 @@ enum FR {
 						competion(.success(sourceName))
 					}
 				} else {
-					let error = NSError(domain: "Feather", code: 1, userInfo: [NSLocalizedDescriptionKey: "Repository already added."])
+					let error = NSError(domain: "VexSign", code: 1, userInfo: [NSLocalizedDescriptionKey: "Repository already added."])
 					if showAlerts {
 						DispatchQueue.main.async {
 							Toast.error(.localized("Repository already added."), duration: .sticky)

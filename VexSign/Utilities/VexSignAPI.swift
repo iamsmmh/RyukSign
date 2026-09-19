@@ -44,7 +44,7 @@ enum VexSignAPI {
 
 	// MARK: - Repos
 
-	static let reposListURL = URL(string: "https://raw.githubusercontent.com/faroukbmiled/VexSign/refs/heads/main/repos.json")!
+	static let reposListURL = URL(string: "https://raw.githubusercontent.com/iamsmmh/VexSign/refs/heads/main/repos.json")!
 
 	// MARK: - Device Identity
 

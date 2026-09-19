@@ -77,7 +77,7 @@ python keygen.py reset RYK-…         # unbind device, make it redeemable again
 python keygen.py revoke RYK-…        # delete it
 ```
 
-Keys live in `vexsign.db` (SQLite, override with `RYUKSIGN_DB=/path/file.db`).
+Keys live in `vexsign.db` (SQLite, override with `VEXSIGN_DB=/path/file.db`).
 
 ### 3b. Distributor admin API (manage keys without SSH)
 
@@ -187,7 +187,7 @@ take ~30–60 s, so the app's 30 s request timeout may need one retry after
 silence. No persistent disk on free instances, and after a redeploy a device
 must re-redeem its (still valid) key once to re-bind. A paid instance can
 attach a disk at `/data` instead, keeping bindings forever
-(`RYUKSIGN_DB=/data/vexsign.db` is already the default in `render.yaml`).
+(`VEXSIGN_DB=/data/vexsign.db` is already the default in `render.yaml`).
 
 **Docker (any VPS / Railway / Fly.io)**
 

@@ -23,7 +23,7 @@ struct SettingsDonationCellView: View {
 				VStack(spacing: 4) {
 					Text("VexSign")
 						.font(.title3.bold())
-					Text(.localized("A modified version of Feather, by Vex."))
+					Text(.localized("A modified version of VexSign, by Vex."))
 						.font(.subheadline)
 						.foregroundStyle(.secondary)
 						.multilineTextAlignment(.center)

@@ -49,7 +49,7 @@ final class P12Cracker: ObservableObject {
 		"app",
 		"signer",
 		"vex",
-		"feather",
+		"vexsign",
 		"esign",
 		"ESign",
 		"scarlet",

@@ -1,6 +1,6 @@
 //
 //  TabbarController.swift / ExtendedTabbarView.swift
-//  feather
+//  vexsign
 //
 //  Created by samara on 5/17/24.
 //  Copyright (c) 2024 Samara M (khcrysalis)

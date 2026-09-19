@@ -51,7 +51,7 @@ final class SelfUpdateManager: NSObject, ObservableObject {
 	@Published var installProgress: Double = 0
 	@Published var presentUpdatePrompt = false
 
-	private let _repo = "faroukbmiled/VexSign"
+	private let _repo = "iamsmmh/VexSign"
 	private let _perPage = 30
 
 	private enum Keys {
@@ -88,7 +88,7 @@ final class SelfUpdateManager: NSObject, ObservableObject {
 	}
 
 	func resolvedCertificate() -> CertificatePair? {
-		let idx = certIndex >= 0 ? certIndex : UserDefaults.standard.integer(forKey: "feather.selectedCert")
+		let idx = certIndex >= 0 ? certIndex : UserDefaults.standard.integer(forKey: "vexsign.selectedCert")
 		return Storage.shared.getCertificate(for: idx)
 	}
 

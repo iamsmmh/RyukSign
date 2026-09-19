@@ -88,7 +88,7 @@ This project includes code from open source projects. See Acknowledgements in Se
 
 ### Acknowledgements
 
-- Feather project for pioneering on-device signing concepts
+- VexSign project for pioneering on-device signing concepts
 - idevice, Vapor, Zsign, ElleKit, LiveContainer communities
 
 ### Disclaimer

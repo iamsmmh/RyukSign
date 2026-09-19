@@ -354,7 +354,7 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 			temporary = true
 		}
 
-		let certificate = Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+		let certificate = Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 		let options = OptionsManager.shared.options.resolved(for: target)
 
 		guard options.signingOption != .default || certificate != nil else {

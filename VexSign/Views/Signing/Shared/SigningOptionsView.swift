@@ -27,7 +27,7 @@ struct SigningOptionsView: View {
 					values: Options.PPQProtection.allCases
 				)
 			} footer: {
-				Text(.localized("Feather appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service."))
+				Text(.localized("VexSign appends a random string to the app's bundle identifier. Vex also rewrites the identifier (vex prefix, keyword replacement) before appending it. Both help prevent your Apple ID from being flagged by Apple, so only disable this when using a signing service."))
 			}
 		}
 

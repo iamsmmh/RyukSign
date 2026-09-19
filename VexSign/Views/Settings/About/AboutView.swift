@@ -21,16 +21,16 @@ extension AboutView {
 struct AboutView: View {
 	// Hardcoded: upstream's creditsv2.json now 404s.
 	private let _credits: [CreditsModel] = [
-		.init(name: "Vex", desc: "VexSign Developer", github: "faroukbmiled"),
+		.init(name: "Vex", desc: "VexSign Developer", github: "iamsmmh"),
 		.init(name: "NovaDev404", desc: "NexStore Developer", github: "NovaDev404"),
-		.init(name: "claration", desc: "Feather — original project", github: "claration"),
+		.init(name: "claration", desc: "VexSign — original project", github: "claration"),
 		.init(name: "Asami", desc: "Developer", github: "Nyasami"),
 		.init(name: "Lakhan Lothiyi", desc: "AltStore Repositories", github: "llsc12"),
 	]
 
-	private let _sourceURL = "https://github.com/faroukbmiled/VexSign"
-	private let _upstreamURL = "https://github.com/claration/Feather"
-	private let _licenseURL = "https://github.com/faroukbmiled/VexSign/blob/main/LICENSE"
+	private let _sourceURL = "https://github.com/iamsmmh/VexSign"
+	private let _upstreamURL = "https://github.com/claration/VexSign"
+	private let _licenseURL = "https://github.com/iamsmmh/VexSign/blob/main/LICENSE"
 
 	// MARK: Body
 	var body: some View {
@@ -68,11 +68,11 @@ struct AboutView: View {
 				Button(.localized("License (GPL-3.0)"), systemImage: "doc.text") {
 					UIApplication.open(_licenseURL)
 				}
-				Button(.localized("Based on Feather"), systemImage: "arrow.triangle.branch") {
+				Button(.localized("Based on VexSign"), systemImage: "arrow.triangle.branch") {
 					UIApplication.open(_upstreamURL)
 				}
 			} footer: {
-				Text(.localized("VexSign is free software under the GPL-3.0 license, derived from Feather by claration. The complete corresponding source is available at the Source Code link above."))
+				Text(.localized("VexSign is free software under the GPL-3.0 license, derived from VexSign by claration. The complete corresponding source is available at the Source Code link above."))
 			}
 		}
 	}

@@ -118,9 +118,9 @@ final class SigningProfileStore {
 	/// Resolves the certificate a stored profile points at, falling back to the app-wide selection.
 	func certificate(for profile: SigningProfile?) -> CertificatePair? {
 		guard let uuid = profile?.certificateUUID else {
-			return Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+			return Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 		}
 		return Storage.shared.getAllCertificates().first { $0.uuid == uuid }
-			?? Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+			?? Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 	}
 }

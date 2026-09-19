@@ -14,7 +14,7 @@ import os
 import sqlite3
 import time
 
-DB_PATH = os.environ.get("RYUKSIGN_DB", os.path.join(os.path.dirname(__file__), "vexsign.db"))
+DB_PATH = os.environ.get("VEXSIGN_DB", os.path.join(os.path.dirname(__file__), "vexsign.db"))
 
 # Shared with keygen.py and the admin API: keep O/0 and I/1 out of keys so a
 # key read off a phone screen and typed back is never ambiguous.

@@ -49,7 +49,7 @@ class Download: Identifiable, @unchecked Sendable {
 	let appDescription: String?
 
 	var isManual: Bool {
-		id.contains("FeatherManualDownload")
+		id.contains("VexSignManualDownload")
 	}
 
 	init(

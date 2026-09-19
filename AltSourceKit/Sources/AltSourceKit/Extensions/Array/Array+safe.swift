@@ -1,6 +1,6 @@
 //
 //  Array+safe.swift
-//  Feather
+//  VexSign
 //
 //  Created by Lakhan Lothiyi on 19/04/2025.
 //

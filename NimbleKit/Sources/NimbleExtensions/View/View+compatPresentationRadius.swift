@@ -1,6 +1,6 @@
 //
 //  View+compatPresentationRadius.swift
-//  Feather
+//  VexSign
 //
 //  Created by samara on 16.04.2025.
 //

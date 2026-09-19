@@ -30,7 +30,7 @@ Environment variables:
                         Lets hosts without shell access (Render free tier)
                         restore keys after a redeploy wiped the DB.
     PUBLIC_BASE_URL     Public base URL override for generated feed URLs.
-    RYUKSIGN_DB         SQLite path (default: vexsign.db next to main.py).
+    VEXSIGN_DB         SQLite path (default: vexsign.db next to main.py).
 
 Run:
     pip install -r requirements.txt

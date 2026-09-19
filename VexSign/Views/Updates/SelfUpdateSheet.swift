@@ -231,7 +231,7 @@ struct SelfUpdateSheet: View {
 				.frame(maxWidth: .infinity, alignment: .leading)
 			if _manager.method == .idevice {
 				Button {
-					UIApplication.open("localdevvpn://enable?scheme=feather")
+					UIApplication.open("localdevvpn://enable?scheme=vexsign")
 				} label: {
 					Label(.localized("Connect to LocalDevVPN"), systemImage: "link")
 						.frame(maxWidth: .infinity)

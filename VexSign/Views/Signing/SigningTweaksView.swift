@@ -38,7 +38,7 @@ struct SigningTweaksView: View {
 			) {
 				DocumentPicker.open([.dylib, .deb], multiple: true, folder: .tweaks) { urls in
 					for url in urls {
-						FileManager.default.moveAndStore(url, with: "FeatherTweak") { url in
+						FileManager.default.moveAndStore(url, with: "VexSignTweak") { url in
 							options.injectionFiles.append(url)
 						}
 					}

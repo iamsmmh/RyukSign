@@ -76,7 +76,7 @@ final class AutoSignManager {
 	}
 
 	nonisolated private static func _certificate() -> CertificatePair? {
-		Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+		Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 	}
 }
 

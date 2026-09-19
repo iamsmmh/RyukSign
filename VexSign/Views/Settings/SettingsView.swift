@@ -13,7 +13,7 @@ import IDeviceSwift
 
 // MARK: - View
 struct SettingsView: View {
-    @AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
+    @AppStorage("vexsign.selectedCert") private var _storedSelectedCert: Int = 0
     /// Mirrors the same key `GameMode` reads; the switch itself is the fastest way to flip it.
     @AppStorage(GameMode.enabledKey) private var _gameMode: Bool = false
     @State private var _currentIcon: String? = UIApplication.shared.alternateIconName
@@ -37,7 +37,7 @@ struct SettingsView: View {
     }
 
     private let _donationsUrl = "https://buymeacoffee.com/axvex"
-    private let _githubUrl = "https://github.com/faroukbmiled/VexSign"
+    private let _githubUrl = "https://github.com/iamsmmh/VexSign"
     
     // MARK: Body
     var body: some View {

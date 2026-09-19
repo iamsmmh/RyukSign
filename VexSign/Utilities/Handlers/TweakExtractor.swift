@@ -66,7 +66,7 @@ enum TweakExtractor {
 	/// Unzips `archive` into a fresh temp dir and scans it. Caller MUST delete the returned dir.
 	static func extract(fromZip archive: URL) async throws -> (workDir: URL, candidates: [TweakCandidate]) {
 		let workDir = _fm.temporaryDirectory
-			.appendingPathComponent("FeatherZipExtract_\(UUID().uuidString)", isDirectory: true)
+			.appendingPathComponent("VexSignZipExtract_\(UUID().uuidString)", isDirectory: true)
 		do {
 			try _fm.createDirectoryIfNeeded(at: workDir)
 			try await _unzip(archive, to: workDir)
@@ -81,7 +81,7 @@ enum TweakExtractor {
 	/// - Returns: the work dir (caller MUST delete it once done importing) and the found candidates.
 	static func extract(fromIPA ipaURL: URL, progress: ((Double) -> Void)? = nil) async throws -> (workDir: URL, candidates: [TweakCandidate]) {
 		let workDir = _fm.temporaryDirectory
-			.appendingPathComponent("FeatherTweakExtract_\(UUID().uuidString)", isDirectory: true)
+			.appendingPathComponent("VexSignTweakExtract_\(UUID().uuidString)", isDirectory: true)
 
 		let needsScope = ipaURL.startAccessingSecurityScopedResource()
 		defer { if needsScope { ipaURL.stopAccessingSecurityScopedResource() } }

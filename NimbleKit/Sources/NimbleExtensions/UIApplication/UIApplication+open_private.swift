@@ -1,6 +1,6 @@
 //
 //  UIApplication+open.swift
-//  Feather
+//  VexSign
 //
 //  Created by samara on 21.04.2025.
 //

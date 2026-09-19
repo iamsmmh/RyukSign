@@ -70,7 +70,7 @@ build.log
 bk
 *.p12
 *.mobileprovision
-_upstream_feather/
+_upstream_vexsign/
 release.sh
 cert.json
 release_notes.txt

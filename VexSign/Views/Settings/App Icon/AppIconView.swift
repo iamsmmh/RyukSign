@@ -39,14 +39,14 @@ struct AppIconView: View {
 	var sections: [String: [AltIcon]] = [
 		"Main": [
 			AltIcon(displayName: "VexIcon", author: "Vex", key: nil),
-			AltIcon(displayName: "Feather (macOS)", author: "claration", key: "V2Mac"),
-			AltIcon(displayName: "Feather v1", author: "claration", key: "V1"),
-			AltIcon(displayName: "Feather v1 (macOS)", author: "claration", key: "V1Mac"),
-			AltIcon(displayName: "Feather v0", author: "claration", key: "V0"),
-			AltIcon(displayName: "Feather Donor", author: "claration", key: "Donor")
+			AltIcon(displayName: "VexSign (macOS)", author: "claration", key: "V2Mac"),
+			AltIcon(displayName: "VexSign v1", author: "claration", key: "V1"),
+			AltIcon(displayName: "VexSign v1 (macOS)", author: "claration", key: "V1Mac"),
+			AltIcon(displayName: "VexSign v0", author: "claration", key: "V0"),
+			AltIcon(displayName: "VexSign Donor", author: "claration", key: "Donor")
 		],
 		"Wingio": [
-			AltIcon(displayName: "Feather", author: "Wingio", key: "Wing"),
+			AltIcon(displayName: "VexSign", author: "Wingio", key: "Wing"),
 		]
 	]
 

@@ -33,7 +33,7 @@ struct BatchSignView: View {
 	init(apps: [AppInfoPresentable], mode: BatchJobRunner.Mode) {
 		self.apps = apps
 		self.mode = mode
-		__selectedCertificate = State(initialValue: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+		__selectedCertificate = State(initialValue: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 
 		if mode == .install {
 			__runner = State(initialValue: BatchJobRunner(

@@ -26,7 +26,7 @@ final class ArchiveHandler: NSObject {
 		self.viewModel = viewModel
 		self._app = app
 		self._uniqueWorkDir = _fileManager.temporaryDirectory
-			.appendingPathComponent("FeatherInstall_\(_uuid)", isDirectory: true)
+			.appendingPathComponent("VexSignInstall_\(_uuid)", isDirectory: true)
 		
 		super.init()
 	}

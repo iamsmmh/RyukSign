@@ -19,7 +19,7 @@ final class AppUpdateChecker: ObservableObject {
     @Published private(set) var updateCount: Int = 0
     
     private var updateCache: [String: Bool] = [:]
-    private let cacheQueue = DispatchQueue(label: "com.feather.updatechecker", attributes: .concurrent)
+    private let cacheQueue = DispatchQueue(label: "com.vexsign.updatechecker", attributes: .concurrent)
     
     private init() {}
     

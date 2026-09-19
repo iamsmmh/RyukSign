@@ -32,7 +32,7 @@ enum AppArchiver {
 		progress: ((Double) -> Void)? = nil
 	) throws {
 		let fm = FileManager.default
-		let work = fm.uniqueTemporaryDirectory("FeatherArchive")
+		let work = fm.uniqueTemporaryDirectory("VexSignArchive")
 		let payload = work.appendingPathComponent("Payload")
 		defer { try? fm.removeItem(at: work) }
 

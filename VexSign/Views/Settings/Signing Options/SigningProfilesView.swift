@@ -78,7 +78,7 @@ struct SigningProfilesView: View {
 			Button(.localized("Save")) {
 				let name = _newName.trimmingCharacters(in: .whitespacesAndNewlines)
 				guard !name.isEmpty else { return }
-				let cert = Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "feather.selectedCert"))
+				let cert = Storage.shared.getCertificate(for: UserDefaults.standard.integer(forKey: "vexsign.selectedCert"))
 				store.save(NamedSigningProfile(
 					name: name,
 					options: OptionsManager.shared.options,

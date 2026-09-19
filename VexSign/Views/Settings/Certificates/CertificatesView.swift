@@ -17,7 +17,7 @@ private enum CertificateAddSheet: String, Identifiable {
 
 // MARK: - View
 struct CertificatesView: View {
-	@AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
+	@AppStorage("vexsign.selectedCert") private var _storedSelectedCert: Int = 0
 	
 	@State private var _addSheet: CertificateAddSheet?
 	@State private var _isRenamingPresenting = false
