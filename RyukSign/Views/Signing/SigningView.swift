@@ -187,6 +187,50 @@ extension SigningView {
 		}
 
 		NBHaptic.tap()
+
+		// Preflight: catch bundle id, plist, dylib and certificate problems before the long sign.
+		let preflight = PreflightChecks.run(
+			app: app,
+			options: _temporaryOptions,
+			certificate: _selectedCert()
+		)
+		if preflight.hasBlocking {
+			let lines = preflight.issues
+				.filter { $0.severity == .blocking }
+				.map { "• \($0.title): \($0.detail)" }
+				.joined(separator: "\n")
+			UIAlertController.showAlertWithOptions(
+				title: .localized("Check Before Signing"),
+				message: lines,
+				actions: [
+					(.localized("Sign Anyway"), .destructive, {
+						_beginSign()
+					}),
+					(.localized("Cancel"), .cancel, nil)
+				]
+			)
+			return
+		} else if !preflight.issues.isEmpty {
+			let lines = preflight.issues
+				.map { "• \($0.title): \($0.detail)" }
+				.joined(separator: "\n")
+			UIAlertController.showAlertWithOptions(
+				title: .localized("Warnings"),
+				message: lines,
+				actions: [
+					(.localized("Sign"), .default, {
+						_beginSign()
+					}),
+					(.localized("Cancel"), .cancel, nil)
+				]
+			)
+			return
+		}
+
+		_beginSign()
+	}
+
+	private func _beginSign() {
 		_isSigning = true
 		if _autoShowLogs { _isLogPresenting = true }
 
@@ -204,6 +248,14 @@ extension SigningView {
 			case .success(let signed):
 				_isSigning = false
 				Toast.success(.localized("Signed successfully"), systemImage: "checkmark.seal.fill")
+
+				// Remember the exact settings + certificate so "Re-sign with last settings"
+				// and Update All can reproduce this identity later.
+				SigningProfileStore.shared.capture(
+					options: _temporaryOptions,
+					certificate: _selectedCert(),
+					for: app
+				)
 
 				let finish = {
 					let deletesSource = _temporaryOptions.post_deleteAppAfterSigned && !app.isSigned

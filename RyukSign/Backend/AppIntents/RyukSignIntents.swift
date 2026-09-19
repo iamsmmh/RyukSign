@@ -1,0 +1,132 @@
+//
+//  RyukSignIntents.swift
+//  RyukSign
+//
+//  Shortcuts / Home Screen quick actions over the existing managers. Each intent is one
+//  call into a manager that already exists, so they are thin by design.
+//
+
+import Foundation
+import AppIntents
+import SwiftUI
+
+// MARK: - Update All
+
+@available(iOS 17.0, *)
+struct UpdateAllIntent: AppIntent {
+	static var title: LocalizedStringResource = "Update All Apps"
+	static var description = IntentDescription("Checks every source and signs + queues every app with an available update.")
+
+	@MainActor
+	func perform() async throws -> some IntentResult & ProvidesDialog {
+		let result: AutomationRunResult? = await BackgroundAutomation.run(fromBackground: true)
+
+		let signed = result?.signed ?? 0
+		let found = result?.foundUpdates ?? 0
+
+		if found == 0 {
+			return .result(dialog: IntentDialog(stringLiteral: .localized("Everything is up to date.")))
+		} else if signed == 0 {
+			return .result(dialog: IntentDialog(stringLiteral: String.localized("%lld updates found. Enable “Sign & queue” in Settings → Automation to sign them automatically.", arguments: found)))
+		} else {
+			return .result(dialog: IntentDialog(stringLiteral: String.localized("%lld apps signed and queued for install.", arguments: signed)))
+		}
+	}
+}
+
+// MARK: - Clean Now
+
+@available(iOS 17.0, *)
+struct CleanNowIntent: AppIntent {
+	static var title: LocalizedStringResource = "Clean Now"
+	static var description = IntentDescription("Runs the automatic cleanup sweep immediately.")
+
+	func perform() async throws -> some IntentResult & ProvidesDialog {
+		let summary: CleanupSummary = await MainActor.run {
+			CleanupManager.shared.cleanNow()
+		}
+
+		if summary.isIdle {
+			return .result(dialog: IntentDialog(stringLiteral: .localized("Nothing to clean up.")))
+		}
+		return .result(dialog: IntentDialog(stringLiteral: String.localized("Freed %@.", arguments: summary.freedBytes.formattedFileSize)))
+	}
+}
+
+// MARK: - Sign Latest Download
+
+@available(iOS 17.0, *)
+struct SignLatestDownloadIntent: AppIntent {
+	static var title: LocalizedStringResource = "Sign Latest Download"
+	static var description = IntentDescription("Signs the most recently added unsigned app with your saved options.")
+
+	@MainActor
+	func perform() async throws -> some IntentResult & ProvidesDialog {
+		let unsigned = Storage.shared.getAllApps().filter { !$0.isSigned }
+		// Most recent first.
+		let latest = unsigned.sorted { ($0.date ?? .distantPast) > ($1.date ?? .distantPast) }.first
+
+		guard let app = latest else {
+			return .result(dialog: IntentDialog(stringLiteral: .localized("There is nothing to sign.")))
+		}
+
+		let result = await AutoSignManager.shared.sign(app)
+		switch result {
+		case .success:
+			return .result(dialog: IntentDialog(stringLiteral: String.localized("Signed %@.", arguments: app.name ?? .localized("the app"))))
+		case .failure(let error):
+			throw error
+		}
+	}
+}
+
+// MARK: - Open IPA Explorer
+
+@available(iOS 17.0, *)
+struct OpenIPAExplorerIntent: AppIntent {
+	static var title: LocalizedStringResource = "Open IPA Explorer"
+	static var description = IntentDescription("Opens the IPA Explorer to browse and edit an app bundle.")
+
+	static var openAppWhenRun: Bool = true
+
+	@MainActor
+	func perform() async throws -> some IntentResult {
+		// Navigate the UI to the explorer.
+		AppNavigationManager.shared.openIPAExplorer()
+		return .result()
+	}
+}
+
+// MARK: - Shortcuts provider
+
+/// Binds the intents into the Shortcuts gallery.
+@available(iOS 17.0, *)
+struct RyukSignShortcutsProvider: AppShortcutsProvider {
+	@AppShortcutsBuilder
+	static var appShortcuts: [AppShortcut] {
+		AppShortcut(
+			intent: UpdateAllIntent(),
+			phrases: ["Update all apps in \(.applicationName)"],
+			shortTitle: "Update All",
+			systemImageName: "arrow.triangle.2.circlepath"
+		)
+		AppShortcut(
+			intent: CleanNowIntent(),
+			phrases: ["Clean \(.applicationName) storage now"],
+			shortTitle: "Clean Now",
+			systemImageName: "sparkles"
+		)
+		AppShortcut(
+			intent: SignLatestDownloadIntent(),
+			phrases: ["Sign my latest download in \(.applicationName)"],
+			shortTitle: "Sign Latest Download",
+			systemImageName: "signature"
+		)
+		AppShortcut(
+			intent: OpenIPAExplorerIntent(),
+			phrases: ["Open the IPA Explorer in \(.applicationName)"],
+			shortTitle: "Open IPA Explorer",
+			systemImageName: "doc.text.magnifyingglass"
+		)
+	}
+}

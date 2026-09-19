@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 // MARK: - Class extension: Apps (Shared)
 extension Storage {
@@ -52,6 +53,21 @@ extension Storage {
 		let signed = (try? context.fetch(Signed.fetchRequest())) ?? []
 		let imported = (try? context.fetch(Imported.fetchRequest())) ?? []
 		return signed.map { $0 as AppInfoPresentable } + imported.map { $0 as AppInfoPresentable }
+	}
+
+	/// Fetched results helpers for callers that pass them into `AppUpdateChecker`.
+	/// `FetchRequest` backs the same on-demand `FetchedResults` the SwiftUI views get, so the
+	/// automation paths can use the checker without owning a `@FetchRequest`.
+	func getSignedApps() -> FetchedResults<Signed> {
+		let fetchRequest = Signed.fetchRequest()
+		fetchRequest.sortDescriptors = []
+		return FetchRequest(fetchRequest: fetchRequest).wrappedValue
+	}
+
+	func getImportedApps() -> FetchedResults<Imported> {
+		let fetchRequest = Imported.fetchRequest()
+		fetchRequest.sortDescriptors = []
+		return FetchRequest(fetchRequest: fetchRequest).wrappedValue
 	}
 
 	func app(withUuid uuid: String) -> AppInfoPresentable? {

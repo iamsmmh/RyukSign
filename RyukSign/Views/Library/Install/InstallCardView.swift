@@ -14,6 +14,8 @@ struct InstallCardView: View {
 	@ObservedObject var installer: AppInstaller
 	var upcoming: [AnyApp] = []
 	var onCancel: () -> Void
+	var onPause: (() -> Void)? = nil
+	var isPaused: Bool = false
 
 	var body: some View {
 		ZStack {
@@ -22,7 +24,9 @@ struct InstallCardView: View {
 				app: installer.app,
 				viewModel: installer.viewModel,
 				upcoming: upcoming,
-				onCancel: onCancel
+				onCancel: onCancel,
+				onPause: onPause,
+				isPaused: isPaused
 			)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -41,12 +45,14 @@ private struct InstallStatusView: View {
 	@ObservedObject var viewModel: InstallerStatusViewModel
 	var upcoming: [AnyApp]
 	var onCancel: () -> Void
+	var onPause: (() -> Void)?
+	var isPaused: Bool
 
 	var body: some View {
 		ZStack {
 			_status()
 			_button()
-			_close()
+			_controls()
 
 			if !upcoming.isEmpty {
 				_upNext()
@@ -55,18 +61,32 @@ private struct InstallStatusView: View {
 	}
 
 	@ViewBuilder
-	private func _close() -> some View {
+	private func _controls() -> some View {
 		ZStack {
 			if !viewModel.isCompleted {
-				Button(action: onCancel) {
-					Image(systemName: "xmark.circle.fill")
-						.font(.title3)
-						.symbolRenderingMode(.hierarchical)
-						.foregroundStyle(.secondary)
-						.contentShape(Circle())
+				VStack(spacing: 0) {
+					Button(action: onCancel) {
+						Image(systemName: "forward.fill")
+							.font(.title3)
+							.symbolRenderingMode(.hierarchical)
+							.foregroundStyle(.secondary)
+							.contentShape(Circle())
+					}
+					.buttonStyle(.plain)
+					.padding()
+
+					if let onPause {
+						Button(action: onPause) {
+							Image(systemName: isPaused ? "play.fill" : "pause.fill")
+								.font(.title3)
+								.symbolRenderingMode(.hierarchical)
+								.foregroundStyle(.secondary)
+								.contentShape(Circle())
+						}
+						.buttonStyle(.plain)
+						.padding()
+					}
 				}
-				.buttonStyle(.plain)
-				.padding()
 				.compatTransition()
 			}
 		}

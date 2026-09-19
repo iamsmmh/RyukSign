@@ -33,6 +33,12 @@ struct InstallationView: View {
 			
 			if _installationMethod == 0 {
 				ServerView()
+
+				Section {
+					NavigationLink(destination: AntiRevokeView()) {
+						Label(.localized("Anti-Revoke"), systemImage: "shield.lefthalf.filled")
+					}
+				}
 			} else if _installationMethod == 1 {
 				TunnelView()
 			}

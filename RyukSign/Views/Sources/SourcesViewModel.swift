@@ -50,7 +50,12 @@ final class SourcesViewModel: ObservableObject {
 	/// Loads every source's repository. Concurrent calls are serialized and coalesced.
 	@MainActor
 	func fetchSources(_ sources: FetchedResults<AltSource>, refresh: Bool = false, batchSize: Int = 4) async {
-		let sourcesArray = Array(sources)
+		await fetchSources(Array(sources), refresh: refresh, batchSize: batchSize)
+	}
+
+	/// Array-based overload for callers without a `FetchedResults` (Update All, background automation).
+	@MainActor
+	func fetchSources(_ sourcesArray: [AltSource], refresh: Bool = false, batchSize: Int = 4) async {
 		let newKey = key(for: sourcesArray)
 
 		// Coalesce: wait out any in-flight load. The task self-clears in its own

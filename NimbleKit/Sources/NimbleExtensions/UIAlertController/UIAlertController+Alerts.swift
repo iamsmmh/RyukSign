@@ -135,6 +135,26 @@ extension UIAlertController {
 			actions: actions
 		)
 	}
+	/// Presents an alert with a list of labelled actions and no auto-added Cancel.
+	/// - Parameters:
+	///   - presenter: View where it is presenting
+	///   - title: Alert title
+	///   - message: Alert message
+	///   - actions: (title, style, handler) tuples in display order
+	static public func showAlertWithOptions(
+		_ presenter: UIViewController = UIApplication.topViewController()!,
+		title: String?,
+		message: String?,
+		style: UIAlertController.Style = .alert,
+		actions: [(String, UIAlertAction.Style, (() -> Void)?)]
+	) {
+		let controller = Self(title: title, message: message, preferredStyle: style)
+		for (title, style, handler) in actions {
+			controller.addAction(UIAlertAction(title: title, style: style) { _ in handler?() })
+		}
+		presenter.present(controller, animated: true)
+	}
+
 	/// Presents an alert
 	/// - Parameters:
 	///   - presenter: View where its presenting

@@ -13,9 +13,11 @@ import NimbleExtensions
 // MARK: - View
 struct CleanupView: View {
 	@ObservedObject private var _manager = CleanupManager.shared
+	@ObservedObject private var _history = CleanupHistoryStore.shared
 
 	@AppStorage(CleanupManager.Key.enabled) private var _isEnabled: Bool = true
 	@AppStorage(CleanupManager.Key.oneTapInstall) private var _oneTapInstall: Bool = false
+	@AppStorage(StorageRules.keepOnlyLatestKey) private var _keepOnlyLatest: Bool = false
 
 	@AppStorage(CleanupManager.Key.deleteAfterInstall) private var _deleteAfterInstall: Bool = false
 	@AppStorage(CleanupManager.Key.deleteDownloadedIPA) private var _deleteDownloadedIPA: Bool = false
@@ -43,8 +45,10 @@ struct CleanupView: View {
 				_storage
 			}
 
+			_rulesSection
 			_nowSection
 			_lastRunSection
+			_historySection
 		}
 		.task { await _refreshReclaimable() }
 		.onChange(of: _isEnabled) { _ in Task { await _refreshReclaimable() } }
@@ -125,7 +129,7 @@ extension CleanupView {
 
 	@ViewBuilder
 	private var _nowSection: some View {
-		NBSection(.localized("Clean Now")) {
+		Section {
 			Button {
 				_clean()
 			} label: {
@@ -169,6 +173,49 @@ extension CleanupView {
 					Text(.localized("Never"))
 						.foregroundStyle(.secondary)
 				}
+			}
+		}
+	}
+
+	@ViewBuilder
+	private var _rulesSection: some View {
+		NBSection(.localized("Rules")) {
+			Toggle(.localized("Keep only the newest signed copy"), isOn: $_keepOnlyLatest)
+		} footer: {
+			Text(.localized("When an app has several signed copies, the automatic sweep keeps the highest version and removes the rest."))
+		}
+	}
+
+	@ViewBuilder
+	private var _historySection: some View {
+		if !_history.entries.isEmpty {
+			NBSection(.localized("History")) {
+				ForEach(_history.entries.prefix(20)) { entry in
+					HStack {
+						VStack(alignment: .leading, spacing: 1) {
+							Text(verbatim: entry.date.formatted(date: .abbreviated, time: .shortened))
+								.font(.subheadline.weight(.medium))
+							if !entry.removedApps.isEmpty {
+								Text(verbatim: entry.removedApps.joined(separator: ", "))
+									.font(.caption)
+									.foregroundStyle(.secondary)
+									.lineLimit(1)
+							}
+						}
+						Spacer()
+						Text(verbatim: entry.freedBytes.formattedFileSize)
+							.font(.caption)
+							.foregroundStyle(.secondary)
+					}
+				}
+
+				Button(role: .destructive) {
+					_history.clear()
+				} label: {
+					Label(.localized("Clear History"), systemImage: "trash")
+				}
+			} footer: {
+				Text(verbatim: String.localized("%@ freed across %lld recorded cleanups.", arguments: _history.totalFreedInHistory.formattedFileSize, _history.entries.count))
 			}
 		}
 	}

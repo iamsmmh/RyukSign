@@ -69,6 +69,9 @@ struct SettingsView: View {
 							}
 						}
 					}
+					NavigationLink(destination: AutomationView()) {
+						Label(.localized("Automation"), systemImage: "bolt.badge.clock")
+					}
                 }
                 
                 NBSection(.localized("Certificates")) {

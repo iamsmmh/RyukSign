@@ -41,6 +41,7 @@ enum IPAExplorerActions {
 
 		do {
 			try _fileManager.createDirectoryIfNeeded(at: target)
+			workspace.journalChange(kind: .added, url: target, backupName: nil)
 			workspace.markDirty()
 			Toast.success(.localized("Folder created"), systemImage: "folder.badge.plus")
 			return target
@@ -61,15 +62,25 @@ enum IPAExplorerActions {
 
 			let target = directory.appendingPathComponent(url.lastPathComponent)
 
-			if _fileManager.fileExists(atPath: target.path) {
+			// Capture the original before any remove so an overwrite can be undone.
+			let existedBefore = _fileManager.fileExists(atPath: target.path)
+
+			if existedBefore {
 				guard overwrite else { continue }
-				try? _fileManager.removeItem(at: target)
 			}
 
 			do {
+				// First copy for an existing path is "modified" (original bytes matter); a new
+				// path is "added" (undo = remove).
+				let backupName = existedBefore ? workspace.backupForUndo(target) : nil
+
+				if existedBefore {
+					try _fileManager.removeItem(at: target)
+				}
 				try _fileManager.copyItem(at: url, to: target)
 				// A replaced executable has to stay runnable.
 				_applyExecutablePermissionsIfNeeded(target)
+				workspace.journalChange(kind: existedBefore ? .modified : .added, url: target, backupName: backupName)
 				added += 1
 			} catch {
 				Toast.error(error.localizedDescription, duration: .long)
@@ -100,7 +111,12 @@ enum IPAExplorerActions {
 		}
 
 		do {
+			// A rename is recorded as two journal entries so undo is exact: "removed" restores
+			// the original name+bytes, "added" drops the moved-away file.
+			let backupName = workspace.backupForUndo(entry.url)
 			try _fileManager.moveItem(at: entry.url, to: target)
+			workspace.journalChange(kind: .removed, url: entry.url, backupName: backupName)
+			workspace.journalChange(kind: .added, url: target, backupName: nil)
 			workspace.markDirty()
 			Toast.success(.localized("Renamed"), systemImage: "pencil")
 			return target
@@ -117,9 +133,11 @@ enum IPAExplorerActions {
 		defer { if scoped { url.stopAccessingSecurityScopedResource() } }
 
 		do {
+			let backupName = workspace.backupForUndo(entry.url)
 			try _fileManager.removeItem(at: entry.url)
 			try _fileManager.copyItem(at: url, to: entry.url)
 			_applyExecutablePermissionsIfNeeded(entry.url)
+			workspace.journalChange(kind: .modified, url: entry.url, backupName: backupName)
 			workspace.markDirty()
 			Toast.success(.localized("File replaced"), systemImage: "arrow.triangle.2.circlepath")
 			return true
@@ -131,7 +149,9 @@ enum IPAExplorerActions {
 
 	static func delete(_ entry: IPAFileEntry, workspace: IPAWorkspace) {
 		do {
+			let backupName = workspace.backupForUndo(entry.url)
 			try _fileManager.removeItem(at: entry.url)
+			workspace.journalChange(kind: .removed, url: entry.url, backupName: backupName)
 			workspace.markDirty()
 			Toast.success(.localized("Deleted"), systemImage: "trash")
 		} catch {

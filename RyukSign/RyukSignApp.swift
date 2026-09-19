@@ -384,6 +384,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 		InstallCleanup.flushOnLaunch()
 		_addDefaultCertificates()
 		_registerBackgroundTasks()
+		scheduleAutomationMaintenance()
 
 		// Idempotent, no-op after first run.
 		RyukSignAPI.migrateIfNeeded()
@@ -440,6 +441,42 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
             using: nil
         ) { task in
             self._handleBackgroundRefresh(task: task as! BGAppRefreshTask)
+        }
+
+        // Scheduled automation: sources → updates → (optional) sign+queue → cleanup → notify.
+        // Only scheduled when the user opts in (Settings → Automation).
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: "ryuk.app.Feather.background.maintenance",
+            using: nil
+        ) { task in
+            self._handleMaintenance(task: task as! BGProcessingTask)
+        }
+    }
+
+    private func _handleMaintenance(task: BGProcessingTask) {
+        task.expirationHandler = {
+            task.setTaskCompleted(success: false)
+        }
+
+        Task { @MainActor in
+            let result = await BackgroundAutomation.run(fromBackground: true)
+            task.setTaskCompleted(success: result != nil)
+        }
+    }
+
+    /// Schedules the next automated maintenance pass. Call after a run and on launch when enabled.
+    func scheduleAutomationMaintenance() {
+        guard BackgroundAutomationPreferences.isEnabled else { return }
+
+        let request = BGProcessingTaskRequest(identifier: "ryuk.app.Feather.background.maintenance")
+        request.requiresNetworkConnectivity = true
+        request.requiresExternalPower = false
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 30 * 60) // up to a half-hour out
+
+        do {
+            try BGTaskScheduler.shared.submit(request)
+        } catch {
+            Logger.misc.error("Failed to schedule automation: \(error.localizedDescription)")
         }
     }
 	

@@ -16,6 +16,10 @@ import time
 
 DB_PATH = os.environ.get("RYUKSIGN_DB", os.path.join(os.path.dirname(__file__), "ryuksign.db"))
 
+# Shared with keygen.py and the admin API: keep O/0 and I/1 out of keys so a
+# key read off a phone screen and typed back is never ambiguous.
+KEY_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS keys (
     api_key     TEXT PRIMARY KEY,
@@ -73,3 +77,27 @@ def key_allows_downloads(api_key: str) -> bool:
     """A consumed, non-disabled key may download premium content."""
     row = get_key(api_key)
     return bool(row and row["used"] and not row["disabled"])
+
+
+def set_key_disabled(api_key: str, disabled: bool) -> None:
+    """Administratively disable (or re-enable) a key."""
+    with connect() as conn:
+        conn.execute(
+            "UPDATE keys SET disabled = ? WHERE api_key = ?",
+            (int(disabled), api_key),
+        )
+
+
+def reset_key(api_key: str) -> None:
+    """Make a consumed key fresh again (unbind its device)."""
+    with connect() as conn:
+        conn.execute(
+            "UPDATE keys SET used = 0, device_uuid = NULL WHERE api_key = ?",
+            (api_key,),
+        )
+
+
+def delete_key(api_key: str) -> None:
+    """Permanently remove a key."""
+    with connect() as conn:
+        conn.execute("DELETE FROM keys WHERE api_key = ?", (api_key,))

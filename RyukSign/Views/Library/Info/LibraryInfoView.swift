@@ -8,6 +8,7 @@
 import SwiftUI
 import NimbleViews
 import Zsign
+import UIKit
 
 // MARK: - View
 struct LibraryInfoView: View {
@@ -28,6 +29,8 @@ struct LibraryInfoView: View {
 				_bundleSection(for: app)
 				_executableSection(for: app)
 
+				_resignSection()
+
 				Section {
 					_linksSection(for: app)
 					Button(.localized("Open in Files"), systemImage: "folder") {
@@ -47,6 +50,45 @@ struct LibraryInfoView: View {
 
 // MARK: - Extension: View
 extension LibraryInfoView {
+	@ViewBuilder
+	private func _resignSection() -> some View {
+		if app.isSigned {
+			NBSection(.localized("Re-sign")) {
+				Button {
+					_resignWithLastSettings()
+				} label: {
+					Label(
+						.localized(SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil
+							? "Re-sign with last settings"
+							: "Sign again"),
+						systemImage: "signature"
+					)
+				}
+			} footer: {
+				Text(.localized("Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it."))
+			}
+		}
+	}
+
+	private func _resignWithLastSettings() {
+		guard AutoSignManager.canSign else {
+			UIAlertController.showAlertWithOk(
+				title: .localized("No Certificate"),
+				message: .localized("Auto sign needs a certificate. Import one in Settings → Certificates.")
+			)
+			return
+		}
+
+		Task {
+			switch await AutoSignManager.shared.sign(app) {
+			case .success:
+				Toast.success(.localized("Signed successfully"), systemImage: "checkmark.seal.fill")
+			case .failure(let error):
+				Toast.error(error.localizedDescription, duration: .sticky)
+			}
+		}
+	}
+
 	@ViewBuilder
 	private func _infoSection(for app: AppInfoPresentable) -> some View {
 		NBSection(.localized("Info")) {
