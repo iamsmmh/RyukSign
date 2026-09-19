@@ -32,8 +32,7 @@ public struct DynamicDNSRules: Codable, Sendable {
 	)
 }
 
-@MainActor
-public enum NovaDNSDynamic {
+public enum NovaDNSDynamic: Sendable {
 	private static let defaultRuleURL = "https://api.novadev.vip/api/novadns-dynamic/rules.json"
 	private static let cachedRulesKey = "RyukSign.dynamicDNSRulesCache"
 
