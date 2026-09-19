@@ -9,6 +9,10 @@ on:
           the newest Xcode installed on the runner image.
         required: false
         default: ''
+  # Compile-check every PR the same way a release builds, so `main` never
+  # merges red again. The release itself still only publishes from `main`.
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
@@ -110,6 +114,9 @@ jobs:
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Create Release
+        # PR runs are compile checks only — only a manual dispatch on `main`
+        # publishes a release.
+        if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v3
         with:
           name: RyukSign v${{ env.VERSION }}
