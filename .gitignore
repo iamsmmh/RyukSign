@@ -98,3 +98,4 @@ manifest-worker
 server/__pycache__/
 server/*.db
 server/.venv/
+server/premium.json

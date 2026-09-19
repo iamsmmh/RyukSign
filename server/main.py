@@ -17,10 +17,20 @@ expects:
 
 Out of the box, a successful redemption returns this server's built-in demo
 premium source (GET /repo/premium.json, gated by the same device/key headers),
-so the whole flow can be tested with zero extra hosting. Point the app at
-your real content by setting the environment variable:
+so the whole flow can be tested with zero extra hosting. For real content,
+either set PREMIUM_REPO_URLS (feeds hosted elsewhere) or drop your own
+AltStore-v1 feed at premium.json / PREMIUM_FEED_FILE (served here).
 
-    PREMIUM_REPO_URLS="https://host/premium1.json,https://host/premium2.json"
+Environment variables:
+    PREMIUM_REPO_URLS   Comma-separated feed URLs returned on redemption.
+    PREMIUM_FEED_FILE   Your feed JSON served at /repo/premium.json
+                        (default: premium.json next to main.py, re-read per
+                        request — content edits apply without a restart).
+    SEED_KEYS           Comma-separated keys (re)created on boot, idempotent.
+                        Lets hosts without shell access (Render free tier)
+                        restore keys after a redeploy wiped the DB.
+    PUBLIC_BASE_URL     Public base URL override for generated feed URLs.
+    RYUKSIGN_DB         SQLite path (default: ryuksign.db next to main.py).
 
 Run:
     pip install -r requirements.txt
@@ -28,7 +38,9 @@ Run:
     uvicorn main:app --host 0.0.0.0 --port 8000
 """
 
+import json
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Header, HTTPException, Request
 from fastapi.responses import FileResponse
@@ -49,7 +61,37 @@ INVALID_KEY_DETAIL = "Invalid API key. The key does not exist or has already bee
 DISABLED_KEY_DETAIL = "This API key has been disabled."
 NO_ACTIVATION_DETAIL = "No premium access is registered for this device ID."
 
-app = FastAPI(title="RyukSign Premium API", docs_url=None, redoc_url=None, openapi_url=None)
+
+def _seed_keys() -> None:
+    """Idempotently add SEED_KEYS on boot (comma-separated, upper-cased).
+
+    Keys that already exist are left untouched (device bindings preserved),
+    so this doubles as the recovery path after a redeploy wiped the DB on a
+    host without persistent storage or shell access.
+    """
+    raw = os.environ.get("SEED_KEYS", "")
+    added = 0
+    for key in (k.strip().upper() for k in raw.split(",") if k.strip()):
+        if db.get_key(key) is None:
+            db.add_key(key)
+            added += 1
+    if added:
+        print(f"[ryuksign] seeded {added} key(s) from SEED_KEYS", flush=True)
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    _seed_keys()
+    yield
+
+
+app = FastAPI(
+    title="RyukSign Premium API",
+    docs_url=None,
+    redoc_url=None,
+    openapi_url=None,
+    lifespan=lifespan,
+)
 
 
 class ValidateBody(BaseModel):
@@ -57,9 +99,23 @@ class ValidateBody(BaseModel):
 
 
 def _base_url(request: Request) -> str:
-    """Public base URL, respecting reverse-proxy forwarding headers."""
+    """Public base URL, respecting reverse-proxy forwarding headers.
+
+    `PUBLIC_BASE_URL` (env) wins over header inference — set it when the
+    proxy doesn't forward X-Forwarded-Host/X-Forwarded-Proto (e.g. e2b
+    sandbox previews), so the URLs handed to the app are always the public
+    ones it can actually reach.
+    """
+    override = os.environ.get("PUBLIC_BASE_URL")
+    if override:
+        return override.rstrip("/")
+
     proto = request.headers.get("x-forwarded-proto", request.url.scheme)
     host = request.headers.get("x-forwarded-host", request.headers.get("host", "localhost"))
+    # e2b preview proxies terminate TLS; if they omit X-Forwarded-Proto we'd
+    # otherwise hand the app a cleartext URL that iOS (ATS) rejects.
+    if host.endswith(".e2b.app") and proto == "http":
+        proto = "https"
     return f"{proto}://{host}".rstrip("/")
 
 
@@ -119,7 +175,7 @@ def urls(
 
 
 # ---------------------------------------------------------------------------
-# Built-in gated demo premium source
+# Gated premium source (your feed file, or the built-in demo as fallback)
 # ---------------------------------------------------------------------------
 
 def _require_premium_access(
@@ -135,6 +191,28 @@ def _require_premium_access(
     raise HTTPException(status_code=401, detail=NO_ACTIVATION_DETAIL)
 
 
+def _local_feed() -> dict | None:
+    """Your real feed, if present: PREMIUM_FEED_FILE (env) or a premium.json
+    next to main.py. Read on every request so edits apply without a restart.
+    Template: premium.example.json (exact shape ASRepository decodes)."""
+    path = os.environ.get("PREMIUM_FEED_FILE") or os.path.join(
+        os.path.dirname(__file__), "premium.json"
+    )
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding="utf-8") as f:
+            feed = json.load(f)
+    except (OSError, ValueError) as exc:
+        raise HTTPException(status_code=500, detail=f"Premium feed file is invalid: {exc}")
+    if not isinstance(feed, dict) or not feed.get("apps"):
+        raise HTTPException(
+            status_code=500,
+            detail="Premium feed must be a JSON object with a non-empty 'apps' array.",
+        )
+    return feed
+
+
 @app.get("/repo/premium.json")
 def premium_repo(
     request: Request,
@@ -142,6 +220,11 @@ def premium_repo(
     x_api_key: str | None = Header(default=None, alias="X-API-Key"),
 ) -> dict:
     _require_premium_access(ryuksign_uuid, x_api_key)
+
+    feed = _local_feed()
+    if feed is not None:
+        return feed
+
     base = _base_url(request)
 
     # Minimal AltStore v1 source (exact shape `ASRepository` decodes):
