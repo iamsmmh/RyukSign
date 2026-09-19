@@ -71,6 +71,10 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 	/// Last IPA produced by `rebuild()`.
 	@Published private(set) var builtArchive: URL?
 
+	/// Undo / history journal for this workspace (archive workspaces only; library apps are
+	/// edited in place, so their history is the Files app's own).
+	let journal: IPAChangeJournal?
+
 	private let _fileManager = FileManager.default
 
 	private init(id: String, appURL: URL, containerURL: URL, source: Source, name: String) {
@@ -79,6 +83,15 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 		self.containerURL = containerURL
 		self.source = source
 		self.name = name
+
+		// The journal lives next to the workspace root for archive workspaces; library apps are
+		// edited in place with no separate copy to snapshot, so they get no journal.
+		if case .archive = source {
+			let journalDirectory = Self.root.appendingPathComponent(id, isDirectory: true)
+			journal = IPAChangeJournal(directory: journalDirectory)
+		} else {
+			journal = nil
+		}
 	}
 
 	// MARK: Computed
@@ -212,6 +225,47 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 		changeCount = 0
 	}
 
+	// MARK: Undo journal
+
+	/// Backs up `url` for undo (only for archive workspaces) and returns the backup id.
+	func backupForUndo(_ url: URL) -> String? {
+		journal?.backup(at: url, container: containerURL)
+	}
+
+	/// Records a change so the "what changed" list and per-file undo know about it.
+	/// `backupName == nil` is fine for newly-added files (undo = remove).
+	func journalChange(kind: IPAChange.Kind, url: URL, backupName: String?) {
+		guard let journal else { return }
+		let change = IPAChange(
+			id: UUID().uuidString,
+			relativePath: IPAChangeJournal.relativePath(url, container: containerURL),
+			kind: kind,
+			backupName: backupName,
+			date: Date()
+		)
+		journal.record(change: change)
+	}
+
+	/// Undoes the newest change on `url`. Returns whether anything was reverted.
+	@discardableResult
+	func undoChange(at url: URL) -> Bool {
+		guard let journal else { return false }
+		let path = IPAChangeJournal.relativePath(url, container: containerURL)
+		let reverted = journal.undo(path: path, restoringTo: containerURL)
+		if reverted { markDirty() }
+		return reverted
+	}
+
+	/// Reverts the whole session. Returns how many files were restored.
+	@discardableResult
+	func discardChanges() -> Int {
+		guard let journal else { return 0 }
+		let reverted = journal.discardAll(restoringTo: containerURL)
+		if reverted > 0 { markDirty() }
+		return reverted
+	}
+
+
 	// MARK: Saving
 
 	/// Rebuilds the IPA from the edited bundle and returns the file.
@@ -247,6 +301,10 @@ final class IPAWorkspace: ObservableObject, Identifiable {
 
 			builtArchive = target
 			changeCount = 0
+
+			// A rebuilt IPA is a new clean baseline: nothing to undo from here.
+			journal?.clearAll()
+
 			return target
 		} catch {
 			if !hasPayload { try? _fileManager.removeItem(at: packaged) }

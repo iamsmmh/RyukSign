@@ -85,9 +85,17 @@ private struct InstallQueueSheet: View {
 	var body: some View {
 		Group {
 			if let installer = queue.installer, let current = queue.current {
-				InstallCardView(installer: installer, upcoming: queue.upcoming, onCancel: queue.skip)
-					.id(current.id)
-					.transition(.opacity)
+				InstallCardView(
+					installer: installer,
+					upcoming: queue.upcoming,
+					onCancel: queue.skip,
+					onPause: {
+						if queue.isPaused { queue.resume() } else { queue.pause() }
+					},
+					isPaused: queue.isPaused
+				)
+				.id(current.id)
+				.transition(.opacity)
 			} else {
 				Color(UIColor.secondarySystemBackground)
 			}

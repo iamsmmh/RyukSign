@@ -165,6 +165,57 @@ final class AppUpdateChecker: ObservableObject {
         return (highestVersion, matchingUUID)
     }
     
+    /// Detailed pending-update rows for the Updates screen and Update All, computed with the
+    /// same matching `computeUpdate` uses. Ignored apps are excluded.
+    func pendingUpdates(
+        sources: [ASRepository],
+        signedApps: FetchedResults<Signed>,
+        importedApps: FetchedResults<Imported>
+    ) -> [SourcedUpdate] {
+        var rows: [SourcedUpdate] = []
+        let ignored = SkippedUpdatesManager.persisted
+
+        for source in sources {
+            for app in source.apps {
+                let uniqueId = app.currentUniqueId
+                guard !ignored.contains(app.id ?? ""), appsWithUpdates.contains(uniqueId) else { continue }
+
+                guard let installed = findInstalledApp(
+                    for: app,
+                    signedApps: signedApps,
+                    importedApps: importedApps
+                ) else { continue }
+
+                rows.append(SourcedUpdate(
+                    id: uniqueId,
+                    app: app,
+                    sourceName: source.name ?? "",
+                    installedVersion: installed.version,
+                    sourceVersion: app.currentVersion
+                ))
+            }
+        }
+
+        return rows
+    }
+
+    func installedAppForUpdate(
+        app: ASRepository.App,
+        signedApps: FetchedResults<Signed>,
+        importedApps: FetchedResults<Imported>
+    ) -> AppInfoPresentable? {
+        guard let match = findInstalledApp(for: app, signedApps: signedApps, importedApps: importedApps) else {
+            return nil
+        }
+
+        let uuid = match.uuid
+        let signed = signedApps.first { $0.uuid == uuid }
+        if let signed { return signed }
+        let imported = importedApps.first { $0.uuid == uuid }
+        if let imported { return imported }
+        return nil
+    }
+
     func hasUpdate(installedVersion: String?, sourceVersion: String?) -> Bool {
         guard let currentVersion = installedVersion,
               let newVersion = sourceVersion else { return false }
@@ -235,5 +286,18 @@ final class AppUpdateChecker: ObservableObject {
         
         self.appsWithUpdates = updatesSet
         self.updateCount = uniqueApps.count
+    }
+
+    // MARK: - Detailed update rows
+
+    struct SourcedUpdate: Identifiable {
+        let id: String
+        let app: ASRepository.App
+        let sourceName: String
+        let installedVersion: String?
+        let sourceVersion: String?
+
+        var displayName: String { app.currentName }
+        var downloadURL: URL? { app.currentDownloadUrl }
     }
 }

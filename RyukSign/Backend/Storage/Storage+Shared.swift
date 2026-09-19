@@ -54,6 +54,15 @@ extension Storage {
 		return signed.map { $0 as AppInfoPresentable } + imported.map { $0 as AppInfoPresentable }
 	}
 
+	/// Fetched results helpers for callers that pass them into `AppUpdateChecker`.
+	func getSignedApps() -> FetchedResults<Signed> {
+		FetchedResults(fetchRequest: Signed.fetchRequest(), managedObjectContext: context)
+	}
+
+	func getImportedApps() -> FetchedResults<Imported> {
+		FetchedResults(fetchRequest: Imported.fetchRequest(), managedObjectContext: context)
+	}
+
 	func app(withUuid uuid: String) -> AppInfoPresentable? {
 		getAllApps().first { $0.uuid == uuid }
 	}

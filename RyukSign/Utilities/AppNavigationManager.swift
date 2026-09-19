@@ -71,4 +71,14 @@ class AppNavigationManager: ObservableObject {
         clearPendingNavigation()
         navigateToApp(appId: appId, appName: appName, sourceIdentifier: sourceIdentifier)
     }
+
+    /// Opens the IPA Explorer home screen from anywhere (Shortcut / automation).
+    func openIPAExplorer() {
+        TabSelectionObserver.shared.selectedTab = .library
+        NotificationCenter.default.post(name: .openIPAExplorer, object: nil)
+    }
+}
+
+extension Notification.Name {
+    static let openIPAExplorer = Notification.Name("RyukSign.openIPAExplorer")
 }

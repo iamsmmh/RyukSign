@@ -148,6 +148,9 @@ struct LibraryView: View {
                 } message: {
                     Text("This action cannot be undone.")
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .openIPAExplorer)) { _ in
+                    Presentation.afterDismiss { _isExplorerPresenting = true }
+                }
         }
     }
 

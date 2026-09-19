@@ -224,11 +224,21 @@ final class CleanupManager: ObservableObject {
 	/// off and they only want a one-off sweep.
 	@discardableResult
 	func cleanNow() -> CleanupSummary {
+		var summary = CleanupSummary()
+
 		var categories = enabledCategories
 		if categories.isEmpty {
 			categories = [.caches, .temporary, .leftovers]
 		}
-		let summary = purge(categories)
+		summary.absorb(purge(categories))
+
+		// Optional "keep only the newest signed copy of each app" rule.
+		if StorageRules.keepOnlyLatestSigned {
+			let pruned = StorageRules.pruneDuplicateSignedApps()
+			summary.freedBytes += pruned.freed
+			summary.removedApps += pruned.removed
+		}
+
 		report(summary, trigger: .manual, silent: false)
 		return summary
 	}
@@ -287,6 +297,13 @@ final class CleanupManager: ObservableObject {
 			lastSummary = summary
 			_defaults.set(Date(), forKey: Key.lastRun)
 			_defaults.set(summary.freedBytes, forKey: Key.lastFreed)
+
+			// Keep the invisible tool trustable: a rolling line-item history of what was removed.
+			CleanupHistoryStore.shared.record(
+				apps: summary.removedApps,
+				categories: summary.categories,
+				freedBytes: summary.freedBytes
+			)
 		}
 
 		guard !silent else { return }

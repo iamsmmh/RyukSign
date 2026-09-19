@@ -218,10 +218,27 @@ struct DownloadButtonView: View {
 					.buttonStyle(.borderless)
 				}
 			} else if !isCheckingInstalled {
-				Button {
-					NBHaptic.tap()
-					if let url = app.currentDownloadUrl {
-						_ = downloadManager.startDownload(from: url, id: app.currentUniqueId, appName: app.currentName, appDescription: app.localizedDescription)
+				Menu {
+					Button {
+						NBHaptic.tap()
+						if let url = app.currentDownloadUrl {
+							_ = downloadManager.startDownload(from: url, id: app.currentUniqueId, appName: app.currentName, appDescription: app.localizedDescription)
+						}
+					} label: {
+						Label(.localized("Download"), systemImage: "arrow.down.circle")
+					}
+
+					Button {
+						NBHaptic.tap()
+						// Flip the store-like pipeline on, then download: import → sign → install → clean.
+						if !CleanupManager.shared.isOneTapInstall {
+							CleanupManager.shared.setOneTapInstall(true)
+						}
+						if let url = app.currentDownloadUrl {
+							_ = downloadManager.startDownload(from: url, id: app.currentUniqueId, appName: app.currentName, appDescription: app.localizedDescription)
+						}
+					} label: {
+						Label(.localized("Download, Sign & Install"), systemImage: "wand.and.stars")
 					}
 				} label: {
 					HStack(spacing: 4) {

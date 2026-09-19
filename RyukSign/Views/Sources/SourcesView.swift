@@ -119,7 +119,11 @@ struct SourcesView: View {
 		NBListAdaptable {
 			if !_filteredSources.isEmpty {
 				allRepositoriesSection
+				updatesSection
 				repositoriesSection
+			} else {
+				// Still offer the updates row when there are no repos but updates are known.
+				updatesSection
 			}
 		}
 		.searchable(text: $_searchText, placement: .platform())
@@ -174,6 +178,34 @@ struct SourcesView: View {
 					_activeIndividualSource = nil
 				}
 			}
+		}
+		.disabled(_isEditMode)
+	}
+
+	/// One-tap listing of every pending app update, with "Update All".
+	@ViewBuilder
+	private var updatesSection: some View {
+		Section {
+			NavigationLink(destination: UpdatesView()) {
+				HStack(spacing: 18) {
+					Image(systemName: "arrow.triangle.2.circlepath")
+						.appIconStyle(tint: .accentColor)
+					NBTitleWithSubtitleView(
+						title: .localized("Updates"),
+						subtitle: .localized("See every app that has a newer version")
+					)
+					Spacer()
+					if AppUpdateChecker.shared.updateCount > 0 {
+						Text(verbatim: AppUpdateChecker.shared.updateCount.description)
+							.font(.subheadline.weight(.semibold))
+							.foregroundStyle(.white)
+							.padding(.horizontal, 9)
+							.padding(.vertical, 3)
+							.background(Color.accentColor, in: Capsule())
+					}
+				}
+			}
+			.buttonStyle(.plain)
 		}
 		.disabled(_isEditMode)
 	}

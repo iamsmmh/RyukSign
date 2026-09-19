@@ -13,7 +13,8 @@ extension Image {
 		size: CGFloat = 56,
 		lineWidth: CGFloat = 1,
 		isCircle: Bool = false,
-		background: Color = .clear
+		background: Color = .clear,
+		tint: Color? = nil
 	) -> some View {
 		var multiplier: CGFloat = 0.2337
 		if #available(iOS 26.0, *) {
@@ -22,9 +23,21 @@ extension Image {
 
 		let radius = isCircle ? (size / 2) : (size * multiplier)
 
-		return self.resizable()
-			.scaledToFit()
-			.frame(width: size, height: size)
+		let base: some View = {
+			let resized = self
+				.resizable()
+				.scaledToFit()
+				.frame(width: size, height: size)
+
+			if let tint {
+				return AnyView(
+					resized.renderingMode(.template).foregroundStyle(tint)
+				)
+			}
+			return AnyView(resized)
+		}()
+
+		return base
 			.background(
 				RoundedRectangle(cornerRadius: radius, style: .continuous)
 					.fill(background)
@@ -36,4 +49,3 @@ extension Image {
 			.clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
 	}
 }
-

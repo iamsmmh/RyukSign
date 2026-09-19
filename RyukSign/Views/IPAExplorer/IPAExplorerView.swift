@@ -330,6 +330,12 @@ extension IPAExplorerView {
 
 				Divider()
 
+				if let journal = _workspace.journal {
+					NavigationLink(.localized("Undo / Recent Changes"), systemImage: "arrow.uturn.backward") {
+						IPAChangeListView(workspace: _workspace, journal: journal)
+					}
+				}
+
 				Toggle(.localized("Show Hidden Files"), isOn: $_showsHidden)
 
 				if !_workspace.isLibraryApp {
