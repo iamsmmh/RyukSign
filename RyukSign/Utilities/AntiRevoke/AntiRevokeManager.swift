@@ -21,15 +21,10 @@ final class AntiRevokeManager {
 	static let shared = AntiRevokeManager()
 
 	/// Apple's certificate-verification hosts. These are what the pinned DoH server has to
-	/// sinkhole for the protection to do anything. Shown in Settings so the user can verify
-	/// their endpoint actually blocks them.
-	static let revocationHosts: [String] = [
-		"ocsp.apple.com",
-		"ocsp2.apple.com",
-		"valid.apple.com",
-		"certs.apple.com",
-		"crl.apple.com"
-	]
+	/// sinkhole for the protection to do anything. Dynamically synced via NovaDNSDynamic.
+	static var revocationHosts: [String] {
+		NovaDNSDynamic.loadCachedRules().blockedHosts
+	}
 
 	private init() {}
 

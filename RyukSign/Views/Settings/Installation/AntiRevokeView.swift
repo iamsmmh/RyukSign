@@ -5,6 +5,7 @@
 //  Settings → Installation → Anti-Revoke: builds a per-device DNS profile that pins a
 //  DNS-over-HTTPS resolver for Apple's revocation-check hosts. The user supplies the endpoint
 //  (a sinkhole DoH they trust) because RyukSign ships no hosted service of its own.
+//  Also supports NovaDNS Dynamic for automated PPQ bypass during installation.
 //
 
 import SwiftUI
@@ -13,19 +14,29 @@ import NimbleExtensions
 
 // MARK: - View
 struct AntiRevokeView: View {
+	@AppStorage("RyukSign.useNovaDNSDynamic") private var _useNovaDNSDynamic: Bool = false
 	@State private var _endpoint = ""
 	@State private var _isBuilding = false
+	@State private var _isSyncingRules = false
 	@State private var _lastBuiltURL: URL?
+	@State private var _currentRules: DynamicDNSRules = NovaDNSDynamic.loadCachedRules()
 
 	private var _hasProfile: Bool { AntiRevokeManager.shared.profileURL != nil }
-	private var _defaultEndpoint: String { "https://example.com/dns-query" }
+	private var _defaultEndpoint: String { _currentRules.primaryEndpoint }
 
 	// MARK: Body
 	var body: some View {
 		NBList(.localized("Anti-Revoke")) {
 			_statusSection
+			_novaDNSSection
 			_configSection
 			_hostsSection
+		}
+		.task {
+			_currentRules = NovaDNSDynamic.loadCachedRules()
+			if _endpoint.isEmpty {
+				_endpoint = _currentRules.primaryEndpoint
+			}
 		}
 	}
 
@@ -38,6 +49,52 @@ struct AntiRevokeView: View {
 			}
 		} footer: {
 			Text(.localized("iOS only installs DNS profiles from Settings, so the profile is shared for you to save and open there. It cannot un-revoke a certificate Apple has already revoked — it slows down future checks and keep a still-valid certificate working longer."))
+		}
+	}
+
+	@ViewBuilder
+	private var _novaDNSSection: some View {
+		Section {
+			HStack {
+				Toggle(isOn: $_useNovaDNSDynamic) {
+					Text(.localized("Use NovaDNS Dynamic"))
+				}
+				Button {
+					guard let url = URL(string: "https://sideloading.net/dns/") else { return }
+					Task { @MainActor in
+						UIApplication.shared.open(url)
+					}
+				} label: {
+					Image(systemName: "questionmark.circle.fill")
+						.foregroundColor(.accentColor)
+				}
+				.buttonStyle(.plain)
+			}
+
+			Button {
+				_syncRemoteRules()
+			} label: {
+				HStack {
+					if _isSyncingRules {
+						ProgressView()
+							.padding(.trailing, 2)
+						Text(.localized("Updating Rules…"))
+					} else {
+						Label(.localized("Sync Dynamic Rules"), systemImage: "arrow.triangle.2.circlepath")
+					}
+					Spacer()
+					if let updated = _currentRules.lastUpdated {
+						Text(updated)
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+				}
+			}
+			.disabled(_isSyncingRules)
+		} header: {
+			Text(.localized("Dynamic Anti-Revoke"))
+		} footer: {
+			Text(.localized("NovaDNS Dynamic automatically temporarily unblocks Apple PPQ checks during installation so apps install smoothly while keeping revocation blocking active."))
 		}
 	}
 
@@ -101,6 +158,19 @@ struct AntiRevokeView: View {
 	}
 
 	// MARK: Actions
+
+	private func _syncRemoteRules() {
+		_isSyncingRules = true
+		Task {
+			let updated = await NovaDNSDynamic.fetchRules()
+			_currentRules = updated
+			if _endpoint.isEmpty {
+				_endpoint = updated.primaryEndpoint
+			}
+			_isSyncingRules = false
+			Toast.success(.localized("Dynamic rules synced"), systemImage: "checkmark.seal")
+		}
+	}
 
 	private func _build() {
 		let raw = _endpoint.trimmingCharacters(in: .whitespacesAndNewlines)

@@ -136,6 +136,7 @@ final class BatchJobRunner: ObservableObject {
 		isCancelled = true
 		currentInstaller?.stop()
 		_resumeInstall(.success(()))
+		SigningLiveActivityManager.shared.cancel()
 
 		for index in items.indices where items[index].state == .queued || items[index].state == .working {
 			items[index].state = .skipped
@@ -170,6 +171,16 @@ final class BatchJobRunner: ObservableObject {
 			let options = _overrides[items[index].id] ?? _options.resolved(for: app)
 			let icon = _icons[items[index].id]
 
+			SigningLog.shared.info(
+				.localized("Batch: signing %@ (%lld/%lld)", arguments: app.name ?? "", index + 1, items.count),
+				category: "batch"
+			)
+			SigningLiveActivityManager.shared.start(
+				appName: app.name ?? "App",
+				currentApp: index + 1,
+				totalApps: items.count
+			)
+
 			let result = await withCheckedContinuation { (continuation: CheckedContinuation<Result<Signed, Error>, Never>) in
 				FR.signPackageFile(app, using: options, icon: icon, certificate: _certificate) { result in
 					continuation.resume(returning: result)
@@ -180,6 +191,10 @@ final class BatchJobRunner: ObservableObject {
 			case .success(let signed):
 				items[index].signed = signed
 				items[index].state = .signed
+				SigningLog.shared.success(
+					.localized("Batch: signed %@", arguments: app.name ?? ""),
+					category: "batch"
+				)
 
 				// Per-app option first, then the global Auto Cleanup toggle.
 				if !app.isSigned, options.post_deleteAppAfterSigned || CleanupManager.shared.deletesSourceAfterSign {
@@ -187,8 +202,14 @@ final class BatchJobRunner: ObservableObject {
 				}
 			case .failure(let error):
 				items[index].state = .failed(error.localizedDescription)
+				SigningLog.shared.error(
+					.localized("Batch: failed %@: %@", arguments: app.name ?? "", error.localizedDescription),
+					category: "batch"
+				)
 			}
 		}
+
+		SigningLiveActivityManager.shared.complete()
 
 		// One shared sweep for the whole batch: the apps were handled above, so this only
 		// clears whichever storage toggles are on.

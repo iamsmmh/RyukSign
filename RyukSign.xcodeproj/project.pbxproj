@@ -85,6 +85,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Backend/Observable/DownloadProgressAttributes.swift,
+				Backend/Observable/SigningActivityAttributes.swift,
 			);
 			target = 3A2F0EE42E96DA5A009DE4CE /* RyukSignWidgetExtensionExtension */;
 		};

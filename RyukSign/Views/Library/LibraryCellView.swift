@@ -189,6 +189,17 @@ extension LibraryCellView {
 			Presentation.afterDismiss { _explorerApp = AnyApp(base: app) }
 		}
 
+		Button(.localized("Duplicate"), systemImage: "plus.square.on.square") {
+			Task {
+				do {
+					_ = try await AppCloner.shared.clone(app: app)
+					Toast.success(.localized("App duplicated"), systemImage: "plus.square.on.square")
+				} catch {
+					Toast.error(error.localizedDescription)
+				}
+			}
+		}
+
 		if app.isSigned {
 			if let id = app.identifier {
 				Button(.localized("Open"), systemImage: "app.badge.checkmark") {
@@ -205,11 +216,11 @@ extension LibraryCellView {
 				InstallQueue.shared.enqueue(app, exporting: true)
 			}
 		} else {
-			Button(.localized("Install"), systemImage: "square.and.arrow.down") {
-				InstallQueue.shared.enqueue(app)
-			}
 			Button(.localized("Sign"), systemImage: "signature") {
 				Presentation.afterDismiss { selectedSigningAppPresenting = AnyApp(base: app) }
+			}
+			Button(.localized("Install Without Signing"), systemImage: "bolt.badge.checkmark") {
+				InstallQueue.shared.enqueue(app)
 			}
 		}
 	}

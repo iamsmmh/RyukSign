@@ -13,15 +13,21 @@ struct SigningPropertiesView: View {
 	@Environment(\.dismiss) var dismiss
 	
 	@State private var text: String = ""
+	@State private var prefix: String = ""
+	@State private var suffix: String = ""
 	
 	var saveButtonDisabled: Bool {
-		text == initialValue
+		text == initialValue && prefix.isEmpty && suffix.isEmpty
 	}
 	
 	var title: String
 	var initialValue: String
 	@Binding var bindingValue: String?
 	var suggestion: String? = nil
+
+	private var isIdentifier: Bool {
+		title == .localized("Identifier")
+	}
 
 	// MARK: Body
 	var body: some View {
@@ -30,6 +36,32 @@ struct SigningPropertiesView: View {
 				TextField(initialValue, text: $text)
 					.textInputAutocapitalization(.none)
 			}
+
+			if isIdentifier {
+				Section {
+					HStack {
+						TextField(.localized("Prefix"), text: $prefix)
+							.textInputAutocapitalization(.none)
+							.autocorrectionDisabled()
+						Divider()
+						TextField(.localized("Suffix"), text: $suffix)
+							.textInputAutocapitalization(.none)
+							.autocorrectionDisabled()
+					}
+					if !prefix.isEmpty || !suffix.isEmpty {
+						Button(.localized("Apply to Identifier")) {
+							text = "\(prefix)\(text)\(suffix)"
+							prefix = ""
+							suffix = ""
+						}
+					}
+				} header: {
+					Text(verbatim: .localized("Prefix & Suffix"))
+				} footer: {
+					Text(.localized("Add a custom prefix or suffix to ensure unique bundle IDs when cloning or testing apps."))
+				}
+			}
+
 			if let suggestion, suggestion != text {
 				Section {
 					Button {
@@ -51,7 +83,11 @@ struct SigningPropertiesView: View {
 				isDisabled: saveButtonDisabled
 			) {
 				if !saveButtonDisabled {
-					bindingValue = text
+					var result = text
+					if !prefix.isEmpty || !suffix.isEmpty {
+						result = "\(prefix)\(result)\(suffix)"
+					}
+					bindingValue = result
 					dismiss()
 				}
 			}
@@ -61,3 +97,4 @@ struct SigningPropertiesView: View {
 		}
 	}
 }
+

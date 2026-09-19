@@ -1,6 +1,1568 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Everything is up to date." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everything is up to date."
+          }
+        }
+      }
+    },
+    "%lld updates found. Enable “Sign & queue” in Settings → Automation to sign them automatically." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld updates found. Enable “Sign & queue” in Settings → Automation to sign them automatically."
+          }
+        }
+      }
+    },
+    "%lld apps signed and queued for install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld apps signed and queued for install."
+          }
+        }
+      }
+    },
+    "Nothing to clean up." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing to clean up."
+          }
+        }
+      }
+    },
+    "Freed %@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Freed %@."
+          }
+        }
+      }
+    },
+    "There is nothing to sign." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is nothing to sign."
+          }
+        }
+      }
+    },
+    "Signed %@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signed %@."
+          }
+        }
+      }
+    },
+    "the app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "the app"
+          }
+        }
+      }
+    },
+    "Server failed, falling back to idevice installation…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server failed, falling back to idevice installation…"
+          }
+        }
+      }
+    },
+    "Batch: signing %@ (%lld/%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batch: signing %@ (%lld/%lld)"
+          }
+        }
+      }
+    },
+    "Batch: signed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batch: signed %@"
+          }
+        }
+      }
+    },
+    "Batch: failed %@: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batch: failed %@: %@"
+          }
+        }
+      }
+    },
+    "The Apple certificate status check failed." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Apple certificate status check failed."
+          }
+        }
+      }
+    },
+    "%lld categories cleaned" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld categories cleaned"
+          }
+        }
+      }
+    },
+    "Install Failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install Failed"
+          }
+        }
+      }
+    },
+    "%lld more apps are waiting." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld more apps are waiting."
+          }
+        }
+      }
+    },
+    "Stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        }
+      }
+    },
+    "Missing bundle identifier" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing bundle identifier"
+          }
+        }
+      }
+    },
+    "The app has no bundle identifier, so iOS may reject the install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app has no bundle identifier, so iOS may reject the install."
+          }
+        }
+      }
+    },
+    "Suspicious bundle identifier" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suspicious bundle identifier"
+          }
+        }
+      }
+    },
+    "“%@” does not look like a reverse-DNS identifier (no dots), which can break installed detection and updates." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” does not look like a reverse-DNS identifier (no dots), which can break installed detection and updates."
+          }
+        }
+      }
+    },
+    "No version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No version"
+          }
+        }
+      }
+    },
+    "The app has no short version. It will still sign, but the version shown in Settings may be empty." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app has no short version. It will still sign, but the version shown in Settings may be empty."
+          }
+        }
+      }
+    },
+    "Unreadable Info.plist" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unreadable Info.plist"
+          }
+        }
+      }
+    },
+    "The app bundle's Info.plist could not be read. Signing may still work, but the app may crash on launch." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The app bundle's Info.plist could not be read. Signing may still work, but the app may crash on launch."
+          }
+        }
+      }
+    },
+    "Missing Info.plist key" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missing Info.plist key"
+          }
+        }
+      }
+    },
+    "“%@” is missing from the app's Info.plist." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” is missing from the app's Info.plist."
+          }
+        }
+      }
+    },
+    "No certificate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No certificate"
+          }
+        }
+      }
+    },
+    "The default signing option needs a certificate; none is selected. Import one in Settings → Certificates." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The default signing option needs a certificate; none is selected. Import one in Settings → Certificates."
+          }
+        }
+      }
+    },
+    "Certificate expired" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate expired"
+          }
+        }
+      }
+    },
+    "The selected certificate expired on %@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected certificate expired on %@."
+          }
+        }
+      }
+    },
+    "Certificate expiring soon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate expiring soon"
+          }
+        }
+      }
+    },
+    "The selected certificate expires %@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The selected certificate expires %@."
+          }
+        }
+      }
+    },
+    "Duplicate dylib" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate dylib"
+          }
+        }
+      }
+    },
+    "“%@” is injected %lld times. Duplicate injections can make the sign fail." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” is injected %lld times. Duplicate injections can make the sign fail."
+          }
+        }
+      }
+    },
+    "Architecture mismatch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Architecture mismatch"
+          }
+        }
+      }
+    },
+    "“%@” is not built for the app's architecture and may fail to load." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” is not built for the app's architecture and may fail to load."
+          }
+        }
+      }
+    },
+    "Signing…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signing…"
+          }
+        }
+      }
+    },
+    "Purged %@: freed %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purged %@: freed %@"
+          }
+        }
+      }
+    },
+    "%lld files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld files"
+          }
+        }
+      }
+    },
+    "Install Anti-Revoke Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install Anti-Revoke Profile"
+          }
+        }
+      }
+    },
+    "Save the profile to Files (or AirDrop it), tap it there, then choose Install in Settings. Apple never installs a profile straight from an app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save the profile to Files (or AirDrop it), tap it there, then choose Install in Settings. Apple never installs a profile straight from an app."
+          }
+        }
+      }
+    },
+    "Share Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Profile"
+          }
+        }
+      }
+    },
+    "Enter an https:// DNS-over-HTTPS endpoint." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter an https:// DNS-over-HTTPS endpoint."
+          }
+        }
+      }
+    },
+    "The profile could not be written." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The profile could not be written."
+          }
+        }
+      }
+    },
+    "Modifying…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifying…"
+          }
+        }
+      }
+    },
+    "Finalizing…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finalizing…"
+          }
+        }
+      }
+    },
+    "App files not found." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App files not found."
+          }
+        }
+      }
+    },
+    "Failed to duplicate app files." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to duplicate app files."
+          }
+        }
+      }
+    },
+    "Failed to update Info.plist." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to update Info.plist."
+          }
+        }
+      }
+    },
+    "Removing %lld app extension(s)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removing %lld app extension(s)"
+          }
+        }
+      }
+    },
+    "%@ that hooks via CydiaSubstrate." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ that hooks via CydiaSubstrate."
+          }
+        }
+      }
+    },
+    "%@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@."
+          }
+        }
+      }
+    },
+    "%@ app extension." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ app extension."
+          }
+        }
+      }
+    },
+    "%lld dylibs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld dylibs"
+          }
+        }
+      }
+    },
+    "%lld frameworks" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld frameworks"
+          }
+        }
+      }
+    },
+    "%lld bundles" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld bundles"
+          }
+        }
+      }
+    },
+    "Added" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Added"
+          }
+        }
+      }
+    },
+    "Removed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Removed"
+          }
+        }
+      }
+    },
+    "Valid To: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valid To: %@"
+          }
+        }
+      }
+    },
+    "Failed to fetch %@." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to fetch %@."
+          }
+        }
+      }
+    },
+    "The NexCerts API response could not be parsed." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The NexCerts API response could not be parsed."
+          }
+        }
+      }
+    },
+    "NexCerts did not return any certificates." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NexCerts did not return any certificates."
+          }
+        }
+      }
+    },
+    "The downloaded NexCerts certificate password is invalid." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The downloaded NexCerts certificate password is invalid."
+          }
+        }
+      }
+    },
+    "%@ - %lld Versions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ - %lld Versions"
+          }
+        }
+      }
+    },
+    "%lld versions available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld versions available"
+          }
+        }
+      }
+    },
+    "Recent Changes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Changes"
+          }
+        }
+      }
+    },
+    "No changes yet." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No changes yet."
+          }
+        }
+      }
+    },
+    "Undo restores a file to how it was before that change. Changes are recorded until you rebuild the IPA, which starts a clean history." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo restores a file to how it was before that change. Changes are recorded until you rebuild the IPA, which starts a clean history."
+          }
+        }
+      }
+    },
+    "Discard All Changes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard All Changes"
+          }
+        }
+      }
+    },
+    "Undo" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo"
+          }
+        }
+      }
+    },
+    "Undone" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undone"
+          }
+        }
+      }
+    },
+    "Could not undo that change" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not undo that change"
+          }
+        }
+      }
+    },
+    "Discard All Changes?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discard All Changes?"
+          }
+        }
+      }
+    },
+    "Every file in this workspace is rolled back to how it looked when you opened it. There is no undo for this." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every file in this workspace is rolled back to how it looked when you opened it. There is no undo for this."
+          }
+        }
+      }
+    },
+    "%lld files reverted" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld files reverted"
+          }
+        }
+      }
+    },
+    "Undo / Recent Changes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo / Recent Changes"
+          }
+        }
+      }
+    },
+    "Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it."
+          }
+        }
+      }
+    },
+    "Auto sign needs a certificate. Import one in Settings → Certificates." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auto sign needs a certificate. Import one in Settings → Certificates."
+          }
+        }
+      }
+    },
+    "App duplicated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App duplicated"
+          }
+        }
+      }
+    },
+    "Scheduled Updates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scheduled Updates"
+          }
+        }
+      }
+    },
+    "RyukSign periodically checks your sources for updates while the app runs, so the Updates list is already ready when you open it." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RyukSign periodically checks your sources for updates while the app runs, so the Updates list is already ready when you open it."
+          }
+        }
+      }
+    },
+    "What To Do" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "What To Do"
+          }
+        }
+      }
+    },
+    "When updates are found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When updates are found"
+          }
+        }
+      }
+    },
+    "Run Now" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Now"
+          }
+        }
+      }
+    },
+    "Runs one automation pass immediately, exactly as the scheduled task would. Installations are never started without you." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Runs one automation pass immediately, exactly as the scheduled task would. Installations are never started without you."
+          }
+        }
+      }
+    },
+    "Sources checked" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sources checked"
+          }
+        }
+      }
+    },
+    "Updates found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updates found"
+          }
+        }
+      }
+    },
+    "Queued for install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Queued for install"
+          }
+        }
+      }
+    },
+    "Cleaned up" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cleaned up"
+          }
+        }
+      }
+    },
+    "Official (NexCerts)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official (NexCerts)"
+          }
+        }
+      }
+    },
+    "Certificate Files" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificate Files"
+          }
+        }
+      }
+    },
+    "Refresh Apple Status" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh Apple Status"
+          }
+        }
+      }
+    },
+    "Official Certificates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official Certificates"
+          }
+        }
+      }
+    },
+    "Certificates are fetched from the NexCerts API and imported directly into RyukSign." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Certificates are fetched from the NexCerts API and imported directly into RyukSign."
+          }
+        }
+      }
+    },
+    "Fetching NexCerts..." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fetching NexCerts..."
+          }
+        }
+      }
+    },
+    "Couldn't Load NexCerts" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't Load NexCerts"
+          }
+        }
+      }
+    },
+    "Rules" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rules"
+          }
+        }
+      }
+    },
+    "Keep only the newest signed copy" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep only the newest signed copy"
+          }
+        }
+      }
+    },
+    "When an app has several signed copies, the automatic sweep keeps the highest version and removes the rest." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When an app has several signed copies, the automatic sweep keeps the highest version and removes the rest."
+          }
+        }
+      }
+    },
+    "History" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        }
+      }
+    },
+    "Clear History" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear History"
+          }
+        }
+      }
+    },
+    "%@ freed across %lld recorded cleanups." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ freed across %lld recorded cleanups."
+          }
+        }
+      }
+    },
+    "Anti-Revoke" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anti-Revoke"
+          }
+        }
+      }
+    },
+    "Ready to install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to install"
+          }
+        }
+      }
+    },
+    "Not protected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not protected"
+          }
+        }
+      }
+    },
+    "iOS only installs DNS profiles from Settings, so the profile is shared for you to save and open there. It cannot un-revoke a certificate Apple has already revoked — it slows down future checks and keep a still-valid certificate working longer." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iOS only installs DNS profiles from Settings, so the profile is shared for you to save and open there. It cannot un-revoke a certificate Apple has already revoked — it slows down future checks and keep a still-valid certificate working longer."
+          }
+        }
+      }
+    },
+    "Use NovaDNS Dynamic" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use NovaDNS Dynamic"
+          }
+        }
+      }
+    },
+    "Dynamic Anti-Revoke" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dynamic Anti-Revoke"
+          }
+        }
+      }
+    },
+    "NovaDNS Dynamic automatically temporarily unblocks Apple PPQ checks during installation so apps install smoothly while keeping revocation blocking active." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "NovaDNS Dynamic automatically temporarily unblocks Apple PPQ checks during installation so apps install smoothly while keeping revocation blocking active."
+          }
+        }
+      }
+    },
+    "DNS-over-HTTPS endpoint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DNS-over-HTTPS endpoint"
+          }
+        }
+      }
+    },
+    "Building…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Building…"
+          }
+        }
+      }
+    },
+    "Generate Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Generate Profile"
+          }
+        }
+      }
+    },
+    "Profile removed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile removed"
+          }
+        }
+      }
+    },
+    "Delete Profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Profile"
+          }
+        }
+      }
+    },
+    "Resolver" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resolver"
+          }
+        }
+      }
+    },
+    "Point this at a DNS-over-HTTPS server that refuses to answer Apple's revocation hosts. Without a blocking resolver the profile does nothing — RyukSign runs no server of its own." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point this at a DNS-over-HTTPS server that refuses to answer Apple's revocation hosts. Without a blocking resolver the profile does nothing — RyukSign runs no server of its own."
+          }
+        }
+      }
+    },
+    "Hosts to block" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hosts to block"
+          }
+        }
+      }
+    },
+    "Profile ready" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile ready"
+          }
+        }
+      }
+    },
+    "Prefix & Suffix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prefix & Suffix"
+          }
+        }
+      }
+    },
+    "Prefix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prefix"
+          }
+        }
+      }
+    },
+    "Suffix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suffix"
+          }
+        }
+      }
+    },
+    "Apply to Identifier" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply to Identifier"
+          }
+        }
+      }
+    },
+    "Add a custom prefix or suffix to ensure unique bundle IDs when cloning or testing apps." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a custom prefix or suffix to ensure unique bundle IDs when cloning or testing apps."
+          }
+        }
+      }
+    },
+    "%lld extensions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld extensions"
+          }
+        }
+      }
+    },
+    "%lld selected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld selected"
+          }
+        }
+      }
+    },
+    "Check Before Signing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Before Signing"
+          }
+        }
+      }
+    },
+    "Sign Anyway" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Anyway"
+          }
+        }
+      }
+    },
+    "Warnings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warnings"
+          }
+        }
+      }
+    },
+    "Download, Sign & Install" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download, Sign & Install"
+          }
+        }
+      }
+    },
+    "%lld Updates" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Updates"
+          }
+        }
+      }
+    },
+    "See every app that has a newer version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See every app that has a newer version"
+          }
+        }
+      }
+    },
+    "com.example.app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "com.example.app"
+          }
+        }
+      }
+    },
+    "%lld versions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld versions"
+          }
+        }
+      }
+    },
+    "Update All downloads each app, signs it with its original settings and queues the installs in order. You still confirm each install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update All downloads each app, signs it with its original settings and queues the installs in order. You still confirm each install."
+          }
+        }
+      }
+    },
+    "Update All (%lld)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update All (%lld)"
+          }
+        }
+      }
+    },
+    "(?)" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(?)"
+          }
+        }
+      }
+    },
+    "Updating %lld apps…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updating %lld apps…"
+          }
+        }
+      }
+    },
+    "Update All" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update All"
+          }
+        }
+      }
+    },
+    "Nothing was updated." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nothing was updated."
+          }
+        }
+      }
+    },
+    "%lld updated and queued for install." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld updated and queued for install."
+          }
+        }
+      }
+    },
+    "%lld updated, %lld failed." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld updated, %lld failed."
+          }
+        }
+      }
+    },
     "Hide Filters" : {
       "extractionState" : "manual",
       "localizations" : {

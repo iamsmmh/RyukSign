@@ -8,15 +8,23 @@
 import SwiftUI
 import NimbleViews
 
+private enum CertificateAddSheet: String, Identifiable {
+	case certificateFiles
+	case official
+
+	var id: String { rawValue }
+}
+
 // MARK: - View
 struct CertificatesView: View {
 	@AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
 	
-	@State private var _isAddingPresenting = false
+	@State private var _addSheet: CertificateAddSheet?
 	@State private var _isRenamingPresenting = false
 	@State private var _isSelectedInfoPresenting: CertificatePair?
 	@State private var _certToRename: CertificatePair?
 	@State private var _newNickname: String = ""
+	@State private var _isBatchChecking = false
 
 	// MARK: Fetch
 	@FetchRequest(
@@ -49,8 +57,8 @@ struct CertificatesView: View {
 					systemImage: "questionmark.folder.fill",
 					description: .localized("Get started signing by importing your first certificate.")
 				) {
-					Button {
-						_isAddingPresenting = true
+					Menu {
+						_addOptions()
 					} label: {
 						NBButton(.localized("Import"), style: .text)
 					}
@@ -59,21 +67,33 @@ struct CertificatesView: View {
 		}
 		.toolbar {
 			if _bindingSelectedCert == nil {
-				NBToolbarButton(
-					systemImage: "plus",
-					style: .icon,
-					placement: .topBarTrailing
-				) {
-					_isAddingPresenting = true
+				ToolbarItemGroup(placement: .topBarTrailing) {
+					if !_certificates.isEmpty {
+						Button {
+							_batchCheckCertificates()
+						} label: {
+							if _isBatchChecking {
+								ProgressView()
+							} else {
+								Image(systemName: "arrow.triangle.2.circlepath")
+							}
+						}
+						.disabled(_isBatchChecking)
+					}
+
+					Menu {
+						_addOptions()
+					} label: {
+						Image(systemName: "plus")
+					}
 				}
 			}
 		}
 		.sheet(item: $_isSelectedInfoPresenting) { cert in
 			CertificatesInfoView(cert: cert)
 		}
-		.sheet(isPresented: $_isAddingPresenting) {
-			CertificatesAddView()
-				.presentationDetents([.medium])
+		.sheet(item: $_addSheet) { sheet in
+			_addSheetView(for: sheet)
 		}
 		.alert(.localized("Change Nickname"), isPresented: $_isRenamingPresenting, presenting: _certToRename) { cert in
 			TextField(.localized("Nickname"), text: $_newNickname)
@@ -88,6 +108,29 @@ struct CertificatesView: View {
 
 // MARK: - View extension
 extension CertificatesView {
+	@ViewBuilder
+	private func _addOptions() -> some View {
+		Button(.localized("Official (NexCerts)")) {
+			_addSheet = .official
+		}
+
+		Button(.localized("Certificate Files")) {
+			_addSheet = .certificateFiles
+		}
+	}
+
+	@ViewBuilder
+	private func _addSheetView(for sheet: CertificateAddSheet) -> some View {
+		switch sheet {
+		case .certificateFiles:
+			CertificatesAddView()
+				.presentationDetents([.medium])
+		case .official:
+			OfficialCertificatesView()
+				.presentationDetents([.large])
+		}
+	}
+
 	@ViewBuilder
 	private func _cellButton(for cert: CertificatePair, at index: Int) -> some View {
 		let cornerRadius = NBRadius.large
@@ -147,8 +190,28 @@ extension CertificatesView {
 			}
 		}
 		Divider()
+		Button(.localized("Refresh Apple Status"), systemImage: "arrow.clockwise") {
+			CertificateStatusManager.shared.refreshStatus(for: cert)
+		}
 		Button(.localized("Check Revokage"), systemImage: "person.text.rectangle") {
 			Storage.shared.revokagedCertificate(for: cert)
+		}
+	}
+
+	private func _batchCheckCertificates() {
+		guard !_isBatchChecking, !_certificates.isEmpty else { return }
+		_isBatchChecking = true
+
+		Task {
+			for cert in _certificates {
+				CertificateStatusManager.shared.refreshStatus(for: cert, forceRemote: true)
+			}
+			try? await Task.sleep(nanoseconds: 1_500_000_000)
+			_isBatchChecking = false
+			Toast.success(
+				String.localized("Checked %lld certificates", arguments: Int64(_certificates.count)),
+				systemImage: "checkmark.seal"
+			)
 		}
 	}
 }

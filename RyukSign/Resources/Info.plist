@@ -181,6 +181,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>feather</string>
+				<string>ryuksign</string>
 			</array>
 		</dict>
 	</array>

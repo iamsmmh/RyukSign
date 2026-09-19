@@ -12,5 +12,6 @@ import SwiftUI
 struct RyukSignWidgetExtensionBundle: WidgetBundle {
     var body: some Widget {
         DownloadLiveActivity()
+        SigningLiveActivity()
     }
 }

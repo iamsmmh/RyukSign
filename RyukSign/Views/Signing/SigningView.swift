@@ -124,15 +124,26 @@ struct SigningView: View {
 						.frame(height: 38)
 						.foregroundStyle(.primary)
 				}
-				NBToolbarButton(
-					.localized("Reset"),
-					style: .text,
-					placement: .topBarTrailing
-				) {
-					// Reset drops PPQ protection and every override, back to the app's own identity.
-					_temporaryOptions = OptionsManager.shared.options
-					_temporaryOptions.resetPerApp(for: app)
-					appIcon = nil
+				ToolbarItemGroup(placement: .topBarTrailing) {
+					Menu {
+						Button {
+							dismiss()
+							InstallQueue.shared.enqueue(app)
+						} label: {
+							Label(.localized("Install Without Signing"), systemImage: "bolt.badge.checkmark")
+						}
+
+						Divider()
+
+						Button(.localized("Reset")) {
+							// Reset drops PPQ protection and every override, back to the app's own identity.
+							_temporaryOptions = OptionsManager.shared.options
+							_temporaryOptions.resetPerApp(for: app)
+							appIcon = nil
+						}
+					} label: {
+						Image(systemName: "ellipsis.circle")
+					}
 				}
 			}
 			.sheet(isPresented: $_isLogPresenting, onDismiss: {

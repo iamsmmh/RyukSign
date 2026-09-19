@@ -17,7 +17,7 @@ struct CertificatesAddView: View {
 	@State private var _provisionURL: URL? = nil
 	@State private var _p12Password: String = ""
 	@State private var _certificateName: String = ""
-	
+	@State private var _showCracker: Bool = false
 	
 	var saveButtonDisabled: Bool {
 		_p12URL == nil || _provisionURL == nil
@@ -41,6 +41,15 @@ struct CertificatesAddView: View {
 				}
 				NBSection(.localized("Password")) {
 					SecureField(.localized("Enter Password"), text: $_p12Password)
+
+					if let _ = _p12URL {
+						Button {
+							_showCracker = true
+						} label: {
+							Label(.localized("Recover / Find Password"), systemImage: "key.viewfinder")
+								.font(.footnote)
+						}
+					}
 				} footer: {
 					Text(.localized("Enter the password associated with the private key. Leave it blank if theres no password required."))
 				}
@@ -50,6 +59,14 @@ struct CertificatesAddView: View {
 				}
 			}
 			.dismissableKeyboard()
+			.sheet(isPresented: $_showCracker) {
+				if let p12URL = _p12URL {
+					P12CrackerView(p12URL: p12URL) { recovered in
+						_p12Password = recovered
+						Toast.success(.localized("Password recovered!"), systemImage: "checkmark.seal.fill")
+					}
+				}
+			}
 			.toolbar {
 				NBToolbarButton(role: .cancel)
 				

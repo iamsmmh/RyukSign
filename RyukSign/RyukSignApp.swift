@@ -145,7 +145,8 @@ struct RyukSignApp: App {
     }
 	
 	private func _handleURL(_ url: URL) {
-		if url.scheme == "feather" {
+		let scheme = url.scheme?.lowercased()
+		if scheme == "feather" || scheme == "ryuksign" {
 			/// feather://import-certificate?p12=<base64>&mobileprovision=<base64>&password=<base64>
 			if url.host == "import-certificate" {
 				guard
@@ -219,6 +220,26 @@ struct RyukSignApp: App {
 			/// feather://source/<url>
 			if let fullPath = url.validatedScheme(after: "/source/") {
 				FR.handleSource(fullPath) { _ in }
+			}
+			/// feather://direct-install?url=<url>&sign=<true|false> or feather://direct-install/<url>
+			if url.host == "direct-install" || url.path.hasPrefix("/direct-install") {
+				var targetURLString: String? = nil
+
+				if let components = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+					if let urlParam = components.queryItems?.first(where: { $0.name.lowercased() == "url" })?.value {
+						targetURLString = urlParam
+					}
+				}
+
+				if targetURLString == nil {
+					targetURLString = url.validatedScheme(after: "/direct-install/")
+				}
+
+				if let targetURLString, let downloadURL = URL(string: targetURLString) {
+					_ = DownloadManager.shared.startDownload(from: downloadURL)
+					Toast.info(.localized("Direct download started"), systemImage: "arrow.down.app")
+				}
+				return
 			}
 			/// feather://install/<url.ipa>
 			if
