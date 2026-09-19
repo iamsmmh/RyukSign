@@ -85,8 +85,9 @@ source. To give your users real repos, pick one:
   entries, done. The server serves it at `/repo/premium.json` behind the same
   key gating and re-reads the file on every request, so content edits apply
   without a restart. Point `PREMIUM_FEED_FILE` at another path if you prefer.
-  (On Render this file must be committed to the deploy branch or hosted
-  elsewhere — see Option B.)
+  (On Render the file must be **tracked** — it's gitignored by default, so run
+  `git add -f server/premium.json` to ship it in the deploy; safe when your
+  `downloadURL`s are already public. On a VPS the local file is enough.)
 - **Option B — use existing feeds:** set `PREMIUM_REPO_URLS` to comma-separated
   AltStore-style JSON URLs, e.g.
   `PREMIUM_REPO_URLS="https://you.com/premium1.json,https://you.com/premium2.json"`
