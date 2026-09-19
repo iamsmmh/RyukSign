@@ -2,7 +2,7 @@
 //  UIAlertController+Alerts.swift
 //  NimbleKit
 //
-//  Created by samara on 28.04.2025.
+//  Created by iamsmmh on 28.04.2025.
 //
 
 import UIKit.UIAlertController

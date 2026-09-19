@@ -2,7 +2,7 @@
 //  SettingsDonationCellView.swift
 //  VexSign
 //
-//  Created by samara on 30.04.2025.
+//  Created by iamsmmh on 19.09.2026.
 //
 #if !NIGHTLY && !DEBUG
 import SwiftUI
@@ -15,24 +15,29 @@ struct SettingsDonationCellView: View {
 	var body: some View {
 		Section {
 			VStack(spacing: 14) {
-				Image(systemName: "heart.fill")
+				Image(systemName: "star.fill")
 					.font(.system(size: 54))
-					.foregroundStyle(.pink)
+					.foregroundStyle(Color.accentColor)
 					.padding(.top, 12)
 
 				VStack(spacing: 4) {
 					Text("VexSign")
 						.font(.title3.bold())
-					Text(.localized("A modified version of VexSign, by Vex."))
+					Text("by @iamsmmh — The most powerful signer")
 						.font(.subheadline)
 						.foregroundStyle(.secondary)
 						.multilineTextAlignment(.center)
+					Text("IPA Explorer • File Transfer • Live Activities • Auto Cleanup • Batch Signing")
+						.font(.caption2)
+						.foregroundStyle(.secondary)
+						.multilineTextAlignment(.center)
+						.padding(.top, 2)
 				}
 
 				Button {
 					UIApplication.open(site)
 				} label: {
-					Text(.localized("Donate to Vex"))
+					Text("⭐ Star on GitHub — @iamsmmh")
 						.font(.subheadline.weight(.semibold))
 						.foregroundStyle(.white)
 						.padding(.horizontal, 28)

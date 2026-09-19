@@ -2,8 +2,8 @@
 //  Certificate.swift
 //  vexsign
 //
-//  Created by samara on 5/18/24.
-//  Copyright (c) 2024 Samara M (khcrysalis)
+//  Created by iamsmmh on 5/18/24.
+//  Copyright (c) 2026 iamsmmh - VexSign
 //
 
 import Foundation

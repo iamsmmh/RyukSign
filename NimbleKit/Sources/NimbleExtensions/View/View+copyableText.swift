@@ -2,7 +2,7 @@
 //  View+copyable.swift
 //  VexSign
 //
-//  Created by samara on 5.06.2025.
+//  Created by iamsmmh on 5.06.2025.
 //
 
 import SwiftUI

@@ -594,7 +594,7 @@
 				INFOPLIST_FILE = VexSign/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VexSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2024 Samara M";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 iamsmmh - VexSign";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -662,7 +662,7 @@
 				INFOPLIST_FILE = VexSign/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VexSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2024 Samara M";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 iamsmmh - VexSign";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -794,7 +794,7 @@
 				INFOPLIST_FILE = VexSign/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VexSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2024 Samara M";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 iamsmmh - VexSign";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -942,7 +942,7 @@
 				INFOPLIST_FILE = VexSign/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VexSign;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = NO;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2024 Samara M";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright (c) 2026 iamsmmh - VexSign";
 				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;

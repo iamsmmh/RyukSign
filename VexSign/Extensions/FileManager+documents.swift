@@ -2,7 +2,7 @@
 //  FileManager+documents.swift
 //  VexSign
 //
-//  Created by samara on 11.04.2025.
+//  Created by iamsmmh on 11.04.2025.
 //
 
 import Foundation.NSFileManager

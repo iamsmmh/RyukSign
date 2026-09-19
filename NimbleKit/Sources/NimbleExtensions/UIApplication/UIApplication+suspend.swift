@@ -2,7 +2,7 @@
 //  UIApplication+exitAndSuspend.swift
 //  Loader
 //
-//  Created by samara on 13.03.2025.
+//  Created by iamsmmh on 13.03.2025.
 //
 
 import UIKit.UIApplication

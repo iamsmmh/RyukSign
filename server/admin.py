@@ -67,7 +67,7 @@ def mint_keys(body: MintBody, x_admin_token: str | None = Header(default=None, a
     keys = []
     for _ in range(count):
         while True:
-            key = "RYK-" + "-".join(
+            key = "VEX-" + "-".join(
                 "".join(secrets.choice(db.KEY_ALPHABET) for _ in range(4)) for _ in range(3)
             )
             if db.get_key(key) is None:

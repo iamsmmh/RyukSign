@@ -2,7 +2,7 @@
 //  Key.swift
 //  Esign
 //
-//  Created by samara on 11.04.2025.
+//  Created by iamsmmh on 11.04.2025.
 //
 
 let esign_key: [UInt8] = [
@@ -435,7 +435,7 @@ let esign_key_len: Int = 5055
 /// Premium repository API key switching station.
 ///
 /// Set `EsignSourceKey.customApiKey` once at app startup with the user's key
-/// (e.g. `EsignSourceKey.customApiKey = "RYK-XXXX-XXXX-XXXX"`). Every repository
+/// (e.g. `EsignSourceKey.customApiKey = "VEX-XXXX-XXXX-XXXX"`). Every repository
 /// manifest fetch and decryption path reads this value and forwards it to the server
 /// as the `X-API-Key` HTTP header / `apikey` query parameter automatically.
 public struct EsignSourceKey {

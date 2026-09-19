@@ -2,7 +2,7 @@
 //  CertificatesView.swift
 //  VexSign
 //
-//  Created by samara on 15.04.2025.
+//  Created by iamsmmh on 15.04.2025.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  AppDataModel.swift
 //  VexSign
 //
-//  Created by samara on 22.04.2025.
+//  Created by iamsmmh on 22.04.2025.
 //
 
 struct AppDataModel {

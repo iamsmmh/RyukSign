@@ -2,7 +2,7 @@
 //  UIApplication+topController.swift
 //  Loader
 //
-//  Created by samara on 18.03.2025.
+//  Created by iamsmmh on 18.03.2025.
 //
 
 import UIKit.UIApplication

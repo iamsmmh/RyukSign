@@ -2,7 +2,7 @@
 //  NBSheetButton.swift
 //  NimbleKit
 //
-//  Created by samara on 8.05.2025.
+//  Created by iamsmmh on 8.05.2025.
 //
 
 import SwiftUI

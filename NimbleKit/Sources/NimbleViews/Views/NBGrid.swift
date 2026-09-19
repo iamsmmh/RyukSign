@@ -2,7 +2,7 @@
 //  NBGrid.swift
 //  NimbleKit
 //
-//  Created by samara on 10.05.2025.
+//  Created by iamsmmh on 10.05.2025.
 //
 
 import SwiftUI

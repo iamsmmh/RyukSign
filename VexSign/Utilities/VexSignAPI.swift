@@ -61,22 +61,22 @@ enum VexSignAPI {
 	// MARK: - Premium API Key
 
 	/// Developer override: hardcode your own key here and it is picked up on first
-	/// launch (e.g. `static let developerPremiumAPIKey = "RYK-XXXX-XXXX-XXXX"`).
+	/// launch (e.g. `static let developerPremiumAPIKey = "VEX-XXXX-XXXX-XXXX"`).
 	/// Leave empty to rely on the in-app "Redeem Key" flow, which persists the key
 	/// so it survives relaunches.
 	static let developerPremiumAPIKey = ""
 
 	// MARK: - Self-managed / local premium mode
 	//
-	// If you don't own a key from https://vexsign.com, you can run your own
+	// If you don't own a key from https://github.com/iamsmmh/VexSign, you can run your own
 	// "premium" setup without that server. Set `localModePremiumKey` to any
-	// RYK-…-formatted key you invent, and `localModePremiumURLs` to the repository
+	// VEX-…-formatted key you invent, and `localModePremiumURLs` to the repository
 	// feeds that key should unlock. Then redeeming that exact key in the app skips
 	// the remote /validate call entirely and activates your local repo list.
 
 	/// The key accepted in local mode (empty disables local mode). Must keep the
-	/// client-side "RYK-" format check happy (prefix + at least 16 chars).
-	static let localModePremiumKey = "" // e.g. "RYK-LOCAL-DEV-KEY-0001"
+	/// client-side "VEX-" format check happy (prefix + at least 16 chars).
+	static let localModePremiumKey = "" // e.g. "VEX-LOCAL-DEV-KEY-0001"
 
 	/// Repository URLs that a matching local key unlocks — e.g. your own altstore
 	/// JSON feeds: ["https://your-host.com/premium.json", …].

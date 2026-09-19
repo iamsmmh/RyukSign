@@ -2,7 +2,7 @@
 //  UIUserInterfaceStyle+cases.swift
 //  VexSign
 //
-//  Created by samara on 14.06.2025.
+//  Created by iamsmmh on 14.06.2025.
 //
 
 import UIKit

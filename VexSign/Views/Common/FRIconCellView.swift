@@ -2,7 +2,7 @@
 //  FRIconCellView.swift
 //  NimbleKit
 //
-//  Created by samara on 3.05.2025.
+//  Created by iamsmmh on 3.05.2025.
 //
 
 import SwiftUI

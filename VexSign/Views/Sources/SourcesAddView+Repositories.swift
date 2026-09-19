@@ -143,8 +143,8 @@ extension SourcesAddView {
 	func _validatePremiumAPIKey() {
 		let apiKey = _premiumAPIKey.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
-		guard apiKey.hasPrefix("RYK-"), apiKey.count >= 16 else {
-			_premiumErrorMessage = VexSignAPI.errorMessage("Invalid key format. Keys should be in format: RYK-XXXX-XXXX-XXXX")
+		guard apiKey.hasPrefix("VEX-"), apiKey.count >= 16 else {
+			_premiumErrorMessage = VexSignAPI.errorMessage("Invalid key format. Keys should be in format: VEX-XXXX-XXXX-XXXX")
 			_showPremiumError = true
 			return
 		}

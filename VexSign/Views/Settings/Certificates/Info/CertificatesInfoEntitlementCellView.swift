@@ -2,7 +2,7 @@
 //  CertificatesInfoEntitlementCellView.swift
 //  VexSign
 //
-//  Created by samara on 27.04.2025.
+//  Created by iamsmmh on 27.04.2025.
 //
 
 import SwiftUI

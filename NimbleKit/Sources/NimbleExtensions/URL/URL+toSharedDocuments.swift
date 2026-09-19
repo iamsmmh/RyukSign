@@ -2,7 +2,7 @@
 //  URL+toSharedDocuments.swift
 //  VexSign
 //
-//  Created by samara on 14.04.2025.
+//  Created by iamsmmh on 14.04.2025.
 //
 
 import Foundation.NSURL

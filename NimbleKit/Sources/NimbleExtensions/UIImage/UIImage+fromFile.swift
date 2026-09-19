@@ -2,7 +2,7 @@
 //  UIImage+url.swift
 //  VexSign
 //
-//  Created by samara on 18.04.2025.
+//  Created by iamsmmh on 18.04.2025.
 //
 
 import UIKit.UIImage

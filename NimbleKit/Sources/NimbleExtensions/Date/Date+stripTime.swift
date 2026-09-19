@@ -2,7 +2,7 @@
 //  Date+stripTime.swift
 //  VexSign
 //
-//  Created by samara on 21.06.2025.
+//  Created by iamsmmh on 21.06.2025.
 //
 
 import Foundation.NSDate

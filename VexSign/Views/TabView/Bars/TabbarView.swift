@@ -2,7 +2,7 @@
 //  TabbarView.swift
 //  vexsign
 //
-//  Created by samara on 23.03.2025.
+//  Created by iamsmmh on 23.03.2025.
 //
 import SwiftUI
 

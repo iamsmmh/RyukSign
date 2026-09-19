@@ -2,7 +2,7 @@
 //  UIColor+expiration.swift
 //  VexSign
 //
-//  Created by samara on 16.04.2025.
+//  Created by iamsmmh on 16.04.2025.
 //
 
 import SwiftUI

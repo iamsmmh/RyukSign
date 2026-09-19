@@ -3,7 +3,7 @@
 
 A key row looks like:
 
-    api_key      TEXT PRIMARY KEY  -- e.g. RYK-ABCD-EFGH-IJKL
+    api_key      TEXT PRIMARY KEY  -- e.g. VEX-ABCD-EFGH-IJKL
     used         INTEGER           -- 0 = fresh, 1 = consumed by a device
     device_uuid  TEXT              -- the VexSign device that consumed it
     disabled     INTEGER           -- 1 = administratively disabled (403)

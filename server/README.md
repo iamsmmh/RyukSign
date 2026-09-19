@@ -8,7 +8,7 @@ create and issue keys yourself, and no key paid to someone else is required.
 
 | Endpoint | Auth | Purpose |
 | --- | --- | --- |
-| `POST /api/validate` | `X-API-Key: RYK-…` header + `{"device_uuid": "…"}` body | Redeems a key: consumes it, binds it to the device, returns its premium repo URLs |
+| `POST /api/validate` | `X-API-Key: VEX-…` header + `{"device_uuid": "…"}` body | Redeems a key: consumes it, binds it to the device, returns its premium repo URLs |
 | `GET /api/urls` | `vexSignUUID: <device>` header | "Restore Repositories" — re-lists a device's premium URLs without consuming anything |
 | `GET /api/health` | – | Liveness check |
 | `GET /repo/premium.json` | `vexSignUUID` / `X-API-Key` | Built-in **gated** demo premium source (works out of the box) |
@@ -28,7 +28,7 @@ Keys are **single-use and device-bound**, exactly like the app expects:
 ```bash
 cd server
 python3 -m pip install -r requirements.txt
-python keygen.py create          # prints your first key, e.g. RYK-ABCD-EFGH-IJKL
+python keygen.py create          # prints your first key, e.g. VEX-ABCD-EFGH-IJKL
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
@@ -38,7 +38,7 @@ Test it:
 curl http://localhost:8000/api/health
 curl -X POST http://localhost:8000/api/validate \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: RYK-ABCD-EFGH-IJKL" \
+  -H "X-API-Key: VEX-ABCD-EFGH-IJKL" \
   -d '{"device_uuid": "test-device"}'
 # -> {"urls":[{"url":"http://localhost:8000/repo/premium.json"}]}
 ```
@@ -70,11 +70,11 @@ cleartext URLs.)
 
 ```bash
 python keygen.py create -n 10        # generate a batch
-python keygen.py add RYK-VIP-0001    # add a specific key (RYK- prefix, 16+ chars)
+python keygen.py add VEX-VIP-0001    # add a specific key (VEX- prefix, 16+ chars)
 python keygen.py list                # status of every key (FRESH / USED / DISABLED)
-python keygen.py disable RYK-…       # app reports "key has been disabled"
-python keygen.py reset RYK-…         # unbind device, make it redeemable again
-python keygen.py revoke RYK-…        # delete it
+python keygen.py disable VEX-…       # app reports "key has been disabled"
+python keygen.py reset VEX-…         # unbind device, make it redeemable again
+python keygen.py revoke VEX-…        # delete it
 ```
 
 Keys live in `vexsign.db` (SQLite, override with `VEXSIGN_DB=/path/file.db`).
@@ -113,24 +113,24 @@ curl -s "$S/api/admin/health"
 curl -s -X POST "$S/api/admin/keys" \
   -H "X-Admin-Token: $T" -H "Content-Type: application/json" \
   -d '{"count": 5}'
-# -> {"count": 5, "keys": ["RYK-…", …]}
+# -> {"count": 5, "keys": ["VEX-…", …]}
 
 # List every key and its status:
 curl -s "$S/api/admin/keys" -H "X-Admin-Token: $T"
 
 # Manage a single key (body: the key to act on):
 curl -s -X POST "$S/api/admin/keys/disable" -H "X-Admin-Token: $T" \
-  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+  -H "Content-Type: application/json" -d '{"key": "VEX-…"}'
 curl -s -X POST "$S/api/admin/keys/enable"  -H "X-Admin-Token: $T" \
-  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+  -H "Content-Type: application/json" -d '{"key": "VEX-…"}'
 curl -s -X POST "$S/api/admin/keys/reset"   -H "X-Admin-Token: $T" \
-  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+  -H "Content-Type: application/json" -d '{"key": "VEX-…"}'
 curl -s -X POST "$S/api/admin/keys/revoke"  -H "X-Admin-Token: $T" \
-  -H "Content-Type: application/json" -d '{"key": "RYK-…"}'
+  -H "Content-Type: application/json" -d '{"key": "VEX-…"}'
 ```
 
 > **Selling flow:** buyer contacts you → you run the `mint` curl (count 1) →
-> paste the fresh `RYK-…` key back → they redeem it in-app. Because the free
+> paste the fresh `VEX-…` key back → they redeem it in-app. Because the free
 > tier has no persistent disk, **also append each issued key to `SEED_KEYS`**
 > in the dashboard so a redeploy doesn't strand your buyers.
 
@@ -174,7 +174,7 @@ testing. Easiest paths:
 2. Render → **New → Blueprint** → pick the repo. The `render.yaml` at the repo
    root configures everything (rootDir `server`, build/start, health check).
 3. After the first deploy, add private env vars to the service:
-   - `SEED_KEYS=RYK-AAAA-BBBB-CCCC,RYK-…` — keys are (re)created idempotently
+   - `SEED_KEYS=VEX-AAAA-BBBB-CCCC,VEX-…` — keys are (re)created idempotently
      on every boot. This is how keys survive free-tier redeploys (no
      persistent disk): the key text is in your dashboard, not on the box.
    - `ADMIN_TOKEN=<openssl rand -hex 24>` — optional: enables the §3b

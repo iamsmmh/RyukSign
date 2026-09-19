@@ -11,9 +11,9 @@
     {
       "name": "VexSign",
       "bundleIdentifier": "com.vexsign.app",
-      "developerName": "VexSign Team",
-      "subtitle": "On-device iOS app signer and installer.",
-      "localizedDescription": "VexSign is a powerful on-device iOS app signer and installer. Sign and install apps with a .p12 / .mobileprovision pair, manage tweaks (.dylib/.deb/.framework/.bundle/.appex), transfer files over HTTP/WebDAV, and track app updates — entirely on-device.",
+      "developerName": "iamsmmh",
+      "subtitle": "The most powerful on-device iOS signer by @iamsmmh",
+      "localizedDescription": "VexSign by @iamsmmh — The most powerful on-device iOS app signer. Sign & install IPAs with .p12 / .mobileprovision, inject tweaks, IPA Explorer, File Transfer Server, Live Activities, Auto Cleanup, Batch Signing, Update All, Backup & Restore and more — entirely on-device. No PC needed.",
       "iconURL": "https://raw.githubusercontent.com/iamsmmh/VexSign/main/repo-icon.png",
       "tintColor": "C96FAD",
       "category": "utilities",

@@ -2,7 +2,7 @@
 //  SourcesAddView.swift
 //  VexSign
 //
-//  Created by samara on 1.05.2025.
+//  Created by iamsmmh on 1.05.2025.
 //
 
 import SwiftUI
@@ -88,7 +88,7 @@ struct SourcesAddView: View {
 					Text(vexReposFetchError ?? "An unknown error occurred")
 				}
 				.alert("Premium Access", isPresented: $_showPremiumKeyPrompt) {
-					TextField("RYK-XXXX-XXXX-XXXX", text: $_premiumAPIKey)
+					TextField("VEX-XXXX-XXXX-XXXX", text: $_premiumAPIKey)
 						.textInputAutocapitalization(.characters)
 						.autocorrectionDisabled()
 						.font(.system(.body, design: .monospaced))

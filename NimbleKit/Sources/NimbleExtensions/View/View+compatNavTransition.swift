@@ -2,7 +2,7 @@
 //  View+NavTransition.swift
 //  Luce
 //
-//  Created by samara on 30.01.2025.
+//  Created by iamsmmh on 30.01.2025.
 //
 
 import SwiftUI

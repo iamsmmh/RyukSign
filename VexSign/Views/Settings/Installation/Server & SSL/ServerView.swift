@@ -2,7 +2,7 @@
 //  ServerView.swift
 //  VexSign
 //
-//  Created by samara on 6.05.2025.
+//  Created by iamsmmh on 6.05.2025.
 //
 
 import SwiftUI

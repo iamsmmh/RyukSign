@@ -2,8 +2,8 @@
 //  Decompression.swift
 //  vexsign
 //
-//  Created by samara on 21.08.2024.
-//  Copyright (c) 2024 Samara M (khcrysalis)
+//  Created by iamsmmh on 21.08.2024.
+//  Copyright (c) 2026 iamsmmh - VexSign
 //
 
 import Foundation

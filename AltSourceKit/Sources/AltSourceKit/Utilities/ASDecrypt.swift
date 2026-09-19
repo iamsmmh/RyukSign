@@ -2,7 +2,7 @@
 //  ESignKey.swift
 //  vexsign
 //
-//  Created by samara on 20.01.2025.
+//  Created by iamsmmh on 20.01.2025.
 //
 
 import Foundation

@@ -2,7 +2,7 @@
 //  FRExpirationPillView.swift
 //  VexSign
 //
-//  Created by samara on 7.05.2025.
+//  Created by iamsmmh on 7.05.2025.
 //
 
 import SwiftUI

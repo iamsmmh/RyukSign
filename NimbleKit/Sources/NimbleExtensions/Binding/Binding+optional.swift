@@ -2,7 +2,7 @@
 //  Binding+optional.swift
 //  VexSign
 //
-//  Created by samara on 19.04.2025.
+//  Created by iamsmmh on 19.04.2025.
 //
 
 import SwiftUI

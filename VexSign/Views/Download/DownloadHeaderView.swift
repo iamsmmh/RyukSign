@@ -2,7 +2,7 @@
 //  DownloadHeaderView.swift
 //  VexSign
 //
-//  Created by samara on 16.05.2025.
+//  Created by iamsmmh on 16.05.2025.
 //
 import SwiftUI
 import Foundation

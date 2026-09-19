@@ -3,12 +3,12 @@
 
 Usage:
     python keygen.py create [-n 5]          Generate n fresh keys (default 1)
-    python keygen.py add RYK-XXXX-XXXX-XXXX Add a specific key manually
+    python keygen.py add VEX-XXXX-XXXX-XXXX Add a specific key manually
     python keygen.py list                   List all keys and their status
-    python keygen.py disable RYK-...        App will report the key as disabled (403)
-    python keygen.py enable RYK-...
-    python keygen.py reset RYK-...          Make a consumed key fresh again (unbinds device)
-    python keygen.py revoke RYK-...         Delete the key entirely
+    python keygen.py disable VEX-...        App will report the key as disabled (403)
+    python keygen.py enable VEX-...
+    python keygen.py reset VEX-...          Make a consumed key fresh again (unbinds device)
+    python keygen.py revoke VEX-...         Delete the key entirely
 """
 
 import argparse
@@ -21,7 +21,7 @@ import db
 
 def generate_key() -> str:
     parts = ("".join(secrets.choice(db.KEY_ALPHABET) for _ in range(4)) for _ in range(3))
-    return "RYK-" + "-".join(parts)
+    return "VEX-" + "-".join(parts)
 
 
 def cmd_create(count: int) -> None:

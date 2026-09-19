@@ -2,7 +2,7 @@
 //  SigningAppPropertiesView.swift
 //  VexSign
 //
-//  Created by samara on 17.04.2025.
+//  Created by iamsmmh on 17.04.2025.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  SourceNewsCardInfoView.swift
 //  VexSign
 //
-//  Created by samara on 8.06.2025.
+//  Created by iamsmmh on 8.06.2025.
 //
 
 import SwiftUI

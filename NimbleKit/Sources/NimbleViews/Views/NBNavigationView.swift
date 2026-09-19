@@ -2,7 +2,7 @@
 //  NavigationViewWrapper.swift
 //  Stars
 //
-//  Created by samara on 7.04.2025.
+//  Created by iamsmmh on 7.04.2025.
 //
 
 import SwiftUI

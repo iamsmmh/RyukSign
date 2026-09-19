@@ -2,7 +2,7 @@
 //  SettingsTunnelView.swift
 //  VexSign (idevice)
 //
-//  Created by samara on 29.04.2025.
+//  Created by iamsmmh on 29.04.2025.
 //
 
 import SwiftUI

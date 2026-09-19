@@ -2,7 +2,7 @@
 //  SourcesView.swift
 //  VexSign
 //
-//  Created by samara on 10.04.2025.
+//  Created by iamsmmh on 10.04.2025.
 //
 import CoreData
 import AltSourceKit
