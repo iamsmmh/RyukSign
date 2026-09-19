@@ -32,6 +32,13 @@ Added by RyukSign:
 - **File Transfer server** — upload IPAs and tweaks over HTTP (drag-and-drop browser page) or WebDAV (mount in Finder / the Files app), with optional password protection.
 - **App update checker** — flags installed apps that have a newer version available in your sources, with per-app ignore/skip.
 - **Curated repositories** and a fully configurable tab bar.
+- **Batch signing** — select multiple apps in the Library (or queued downloads) and sign, install, or sign-and-install them in one run, with per-app status and background keep-alive.
+- **Logs tab** — a dedicated tab streaming every activity line (downloads, signing, installs, batch runs, tweak injection, cleanup) in real time, with level filters, sharing, and clear. History is kept on disk in `Documents/Logs/` and viewable under Settings → Activity Logs.
+- **Backup & Restore** — password-protected zips of certificates, sources, settings and tweaks (Settings → Backup & Restore), with a manifest and per-item restore summary.
+- **Files** — an in-app browser for RyukSign's Documents container (Settings → Files): browse, edit text files in place, create, rename, delete, and share.
+- **Game Mode** — one toggle (Settings → Downloads) that pauses network downloads, auto signing, update checks and scheduled background tasks to save battery and data while you play; in-flight downloads resume when it's off.
+- **Anti-Revoke (DNS)** — generates and installs a `.mobileconfig` that points the device DNS at resolvers that don't serve Apple's revocation checks, slowing the ~7 day revocation of signed apps (Settings → Anti-Revoke).
+- **Self-hosted premium backend** — the `server/` FastAPI app (keygen, Dockerfile, Render deploy) replaces the hosted premium API; `RyukSignAPI` points at it and keys are generated with `python server/keygen.py create`.
 
 ## Automation
 

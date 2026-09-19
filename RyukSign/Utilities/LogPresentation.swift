@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum LogKind {
+enum LogKind: Equatable {
 	case info, success, error, detail
 }
 

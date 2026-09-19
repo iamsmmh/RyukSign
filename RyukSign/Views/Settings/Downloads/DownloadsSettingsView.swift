@@ -9,6 +9,9 @@ import NimbleViews
 
 // MARK: - View
 struct DownloadsSettingsView: View {
+	/// Local mirror so the toggle re-renders; `GameMode.setEnabled(_:)` is the single write path.
+	@State private var _gameModeOn: Bool = GameMode.isOn
+
 	@AppStorage("Feather.downloadDisplayMode")
 	private var _downloadDisplayMode: String = "floating"
 
@@ -103,6 +106,24 @@ struct DownloadsSettingsView: View {
 					Text(.localized("When enabled, the overlay automatically adjusts its height based on the number of active downloads. When disabled, the overlay uses a fixed size."))
 				}
 			}
+		}
+
+		NBSection(.localized("Game Mode")) {
+			Toggle(isOn: $_gameModeOn) {
+				Label(.localized("Pause Background Activity"), systemImage: "gamecontroller")
+			}
+			.onChange(of: _gameModeOn) { _, newValue in
+				GameMode.setEnabled(newValue)
+				if newValue && DownloadManager.shared.hasUnfinishedWork {
+					Toast.info(
+						.localized("Game Mode is on — downloads are paused"),
+						systemImage: "pause.circle.fill",
+						duration: .long
+					)
+				}
+			}
+		} footer: {
+			Text(.localized("Stops network downloads, auto signing, and update checks while you play to save battery and data. In-flight downloads pause and resume when Game Mode is turned back off. Explicit signing from the Library still works."))
 		}
 	}
 }

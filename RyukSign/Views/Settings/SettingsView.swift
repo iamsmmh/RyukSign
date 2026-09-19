@@ -98,6 +98,12 @@ struct SettingsView: View {
                     NavigationLink(destination: FilesCompressionView()) {
                         Label(.localized("Files & Compression"), systemImage: "archivebox")
                     }
+                    NavigationLink(destination: FileManagerView()) {
+                        Label(.localized("Files"), systemImage: "folder")
+                    }
+                    NavigationLink(destination: AntiRevokeView()) {
+                        Label(.localized("Anti-Revoke"), systemImage: "antenna.radiowaves.left.and.right")
+                    }
                     NavigationLink(destination: InstallationView()) {
                         Label(.localized("Installation"), systemImage: "arrow.down.app")
                     }

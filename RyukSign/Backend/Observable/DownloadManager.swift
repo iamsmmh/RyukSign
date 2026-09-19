@@ -521,8 +521,29 @@ class DownloadManager: NSObject, ObservableObject {
             return existingDownload
         }
 
-        let download = Download(id: id, url: url, appName: appName, appDescription: appDescription)
-        download.isActive = true
+		let download = Download(id: id, url: url, appName: appName, appDescription: appDescription)
+
+		if GameMode.isOn {
+			// Game Mode pauses background network work. The entry is kept, paused, so a
+			// deliberate tap on its resume control can still start it.
+			download.isPaused = true
+
+			FileLogger.log("Download blocked (Game Mode): \(download.fileName)", category: "download")
+
+			DispatchQueue.main.async {
+				self.objectWillChange.send()
+				self.downloads.append(download)
+				Toast.info(
+					.localized("Game Mode is on — downloads are paused"),
+					systemImage: "pause.circle.fill",
+					duration: .long
+				)
+			}
+
+			return download
+		}
+
+		download.isActive = true
 
 		let session = isAppInBackground ? _backgroundSession! : _foregroundSession!
 
@@ -540,6 +561,8 @@ class DownloadManager: NSObject, ObservableObject {
 		download.task = task
 		task.priority = 1.0
 		task.resume()
+
+		FileLogger.log("Download started: \(download.fileName)", category: "download")
 
 		DispatchQueue.main.async {
 			self.objectWillChange.send()
@@ -569,6 +592,8 @@ class DownloadManager: NSObject, ObservableObject {
 	func startArchive(from url: URL, id: String = UUID().uuidString, appName: String? = nil, completion: ((Error?) -> Void)? = nil) -> Download {
 		let download = Download(id: id, url: url, onlyArchiving: true, appName: appName)
 		download.isActive = true
+
+		FileLogger.log("Import started: \(download.fileName)", category: "download")
 
 		DispatchQueue.main.async {
 			self.objectWillChange.send()

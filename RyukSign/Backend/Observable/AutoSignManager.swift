@@ -40,6 +40,11 @@ final class AutoSignManager {
 	}
 
 	private static func _perform(_ app: AppInfoPresentable) async -> Result<Signed, Error> {
+		guard !GameMode.isOn else {
+			FileLogger.log("Auto sign paused (Game Mode): \(app.name ?? "app")", category: "auto")
+			return .failure(AutoSignError.gameMode)
+		}
+
 		let options = Options.batchBase.resolved(for: app)
 		let certificate = _certificate()
 
@@ -54,6 +59,8 @@ final class AutoSignManager {
 		}
 
 		guard case .success(let signed) = result else { return result }
+
+		FileLogger.success("Auto signed: \(app.name ?? "app")", category: "auto")
 
 		// The unsigned copy only existed to feed the signer. Deleted before the cleanup runs so
 		// nothing below reads an already deleted object.
@@ -81,10 +88,12 @@ final class AutoSignManager {
 
 enum AutoSignError: LocalizedError {
 	case noCertificate
+	case gameMode
 
 	var errorDescription: String? {
 		switch self {
 		case .noCertificate: return .localized("Auto sign needs a certificate. Import one in Settings, or turn auto sign off.")
+		case .gameMode: return .localized("Game Mode is on, so auto sign is paused. Sign the app from the Library, or turn Game Mode off in Settings → Downloads.")
 		}
 	}
 }

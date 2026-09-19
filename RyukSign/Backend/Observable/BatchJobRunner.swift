@@ -43,6 +43,14 @@ final class BatchJobRunner: ObservableObject {
 
 		var signs: Bool { self != .install }
 		var installs: Bool { self != .sign }
+
+		var description: String {
+			switch self {
+			case .sign: return "sign"
+			case .install: return "install"
+			case .signAndInstall: return "sign + install"
+			}
+		}
 	}
 
 	enum Phase: Equatable {
@@ -111,6 +119,8 @@ final class BatchJobRunner: ObservableObject {
 		guard !_started else { return }
 		_started = true
 
+		FileLogger.log("Batch started: \(items.count) app(s) — \(mode.description)", category: "batch")
+
 		// One assertion for the whole queue per-app ones drop to zero between apps and let iOS suspend us
 		let keepAlive = BackgroundTaskManager(
 			taskName: "Batch",
@@ -129,6 +139,14 @@ final class BatchJobRunner: ObservableObject {
 		}
 
 		phase = .finished
+
+		let succeeded = items.filter { entry in
+			switch entry.state {
+			case .signed, .installed, .alreadySigned: true
+			default: false
+			}
+		}.count
+		FileLogger.log("Batch finished: \(succeeded)/\(items.count) succeeded", category: "batch")
 	}
 
 	func cancel() {
@@ -180,6 +198,7 @@ final class BatchJobRunner: ObservableObject {
 			case .success(let signed):
 				items[index].signed = signed
 				items[index].state = .signed
+				FileLogger.success("Batch signed: \(app.name ?? items[index].id)", category: "batch")
 
 				// Per-app option first, then the global Auto Cleanup toggle.
 				if !app.isSigned, options.post_deleteAppAfterSigned || CleanupManager.shared.deletesSourceAfterSign {
@@ -187,6 +206,7 @@ final class BatchJobRunner: ObservableObject {
 				}
 			case .failure(let error):
 				items[index].state = .failed(error.localizedDescription)
+				FileLogger.error("Batch sign failed: \(app.name ?? items[index].id) — \(error.localizedDescription)", category: "batch")
 			}
 		}
 
@@ -234,9 +254,11 @@ final class BatchJobRunner: ObservableObject {
 			switch result {
 			case .success:
 				items[index].state = .installed
+				FileLogger.success("Batch installed: \(items[index].app.name ?? items[index].id)", category: "batch")
 				InstallCleanup.stage(items[index].installable)
 			case .failure(let error):
 				items[index].state = .failed(error.localizedDescription)
+				FileLogger.error("Batch install failed: \(items[index].app.name ?? items[index].id) — \(error.localizedDescription)", category: "batch")
 			}
 		}
 	}

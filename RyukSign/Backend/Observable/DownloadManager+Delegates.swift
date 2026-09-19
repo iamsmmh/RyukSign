@@ -35,6 +35,8 @@ extension DownloadManager: URLSessionDownloadDelegate {
 			try FileManager.default.removeFileIfNeeded(at: destinationURL)
 			try FileManager.default.moveItem(at: location, to: destinationURL)
 
+			FileLogger.success("Download finished: \(download.fileName)", category: "download")
+
 			// ID-keyed so duplicates count correctly (drives the X/Y counter).
 			finishedDownloadingIDs.insert(download.id)
 
@@ -49,6 +51,8 @@ extension DownloadManager: URLSessionDownloadDelegate {
 
 			try handlePackageFile(url: destinationURL, dl: download)
 		} catch {
+			FileLogger.error("Download failed: \(download.fileName) — \(error.localizedDescription)", category: "download")
+
 			if isAppInBackground {
 				sendCompletionNotification(for: download, status: "❌ Download failed")
 			}
@@ -133,6 +137,8 @@ extension DownloadManager: URLSessionDownloadDelegate {
 				saveResumeData(for: download)
 			}
 
+			FileLogger.log("Download paused (network): \(download.fileName) — \(nsError.localizedDescription)", category: "download")
+
 			sendSystemNotification(
 				title: "Download paused",
 				body: "\(download.fileName) - will resume when you reopen the app",
@@ -162,6 +168,8 @@ extension DownloadManager: URLSessionDownloadDelegate {
 		   nsError.code == NSURLErrorResourceUnavailable ||
 		   nsError.code == NSURLErrorFileDoesNotExist ||
 		   nsError.code == NSURLErrorNoPermissionsToReadFile {
+			FileLogger.error("Download failed: \(download.fileName) — \(nsError.localizedDescription)", category: "download")
+
 			if isAppInBackground {
 				sendCompletionNotification(for: download, status: "❌ Download failed - cannot connect to server")
 			} else {
@@ -195,6 +203,8 @@ extension DownloadManager: URLSessionDownloadDelegate {
 		}
 
 		// Any other non-recoverable error — drop the download.
+		FileLogger.error("Download failed: \(download.fileName) — \(nsError.localizedDescription)", category: "download")
+
 		if isAppInBackground {
 			sendCompletionNotification(for: download, status: "❌ Download failed")
 		} else {

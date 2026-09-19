@@ -13,7 +13,7 @@ final class TabBarPreferences: ObservableObject {
 	static let shared = TabBarPreferences()
 
 	/// `settings` excluded so the user can always reach this screen to undo changes.
-	static let hideableTabs: [TabEnum] = [.sources, .library, .tweaks]
+	static let hideableTabs: [TabEnum] = [.sources, .library, .tweaks, .logs]
 
 	@Published private(set) var order: [TabEnum]
 	@Published private(set) var hidden: Set<TabEnum>
@@ -57,13 +57,19 @@ final class TabBarPreferences: ObservableObject {
 			loadedOrder = stored.order.compactMap { TabEnum(rawValue: $0) }
 			loadedHidden = Set(stored.hidden.compactMap { TabEnum(rawValue: $0) })
 			loadedLaunch = TabEnum(rawValue: stored.defaultLaunch) ?? .library
-		} else if defaults.object(forKey: "Feather.showTweaksTab") != nil,
-				  defaults.bool(forKey: "Feather.showTweaksTab") == false {
-			// Migrate the old showTweaksTab toggle.
-			loadedHidden = [.tweaks]
-		}
+	} else if defaults.object(forKey: "Feather.showTweaksTab") != nil,
+			  defaults.bool(forKey: "Feather.showTweaksTab") == false {
+		// Migrate the old showTweaksTab toggle.
+		loadedHidden = [.tweaks]
+	}
 
-		self.order = loadedOrder
+	// A saved order predating the Logs tab would otherwise get it appended after
+	// Settings (see `orderedTabs`). Slot it in before Settings for a natural layout.
+	if !loadedOrder.contains(.logs), let settingsIndex = loadedOrder.firstIndex(of: .settings) {
+		loadedOrder.insert(.logs, at: settingsIndex)
+	}
+
+	self.order = loadedOrder
 		self.hidden = loadedHidden
 		self.defaultLaunch = loadedLaunch
 

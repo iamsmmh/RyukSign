@@ -100,6 +100,77 @@ final class RyukSignTests: XCTestCase {
 	}
 }
 
+// MARK: - Log classification (Logs tab / activity log)
+
+extension RyukSignTests {
+	func testLogParserClassifiesErrors() {
+		let error = LogParser.classify("ERROR: signing failed")
+		XCTAssertEqual(error.kind, .error)
+		XCTAssertEqual(error.text, "signing failed")
+
+		let explicit = LogParser.classify("boom", level: .error)
+		XCTAssertEqual(explicit.kind, .error)
+	}
+
+	func testLogParserClassifiesDetailAndSuccess() {
+		let detail = LogParser.classify(">>> zsign 1.2.3")
+		XCTAssertEqual(detail.kind, .detail)
+		XCTAssertEqual(detail.text, "zsign 1.2.3")
+
+		let success = LogParser.classify("Install succeeded", level: .success)
+		XCTAssertEqual(success.kind, .success)
+	}
+
+	func testLogParserRoundTripsFileLines() {
+		// The on-disk format must re-classify the same as the in-memory entries:
+		// "ERROR:" prefix and ">>>" marker survive a write + parse cycle.
+		let file = """
+		2026-09-19T12:00:00Z [sign] ERROR: bad plist
+		2026-09-19T12:00:01Z [sign] >>> zsign 1.2.3
+		2026-09-19T12:00:02Z [download] Download finished: app.ipa
+		"""
+		let entries = LogParser.parseFile(file)
+		XCTAssertEqual(entries.count, 3)
+		XCTAssertEqual(entries[0].kind, .info)    // newest first
+		XCTAssertEqual(entries[0].category, "download")
+		XCTAssertEqual(entries[1].kind, .detail)
+		XCTAssertEqual(entries[2].kind, .error)
+	}
+}
+
+// MARK: - Game Mode
+
+extension RyukSignTests {
+	func testGameModeDefaultsOff() {
+		let defaults = UserDefaults.standard
+		defaults.removeObject(forKey: GameMode.key)
+		XCTAssertFalse(GameMode.isOn)
+	}
+}
+
+// MARK: - Anti-Revoke profile
+
+extension RyukSignTests {
+	func testAntiRevokeProfileStructure() throws {
+		let data = AntiRevokeManager.profileData()
+		XCTAssertFalse(data.isEmpty)
+
+		let payload = try XCTUnwrap(
+			try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any]
+		)
+		XCTAssertEqual(payload["PayloadType"] as? String, "Configuration")
+		XCTAssertEqual(payload["PayloadIdentifier"] as? String, AntiRevokeManager.identifier)
+
+		let content = try XCTUnwrap(payload["PayloadContent"] as? [[String: Any]])
+		XCTAssertEqual(content.first?["PayloadType"] as? String, "com.apple.dns.settings")
+
+		let dns = try XCTUnwrap(content.first?["PayloadContent"] as? [[String: Any]])
+		let servers = try XCTUnwrap(dns.first?["ServerAddresses"] as? [String])
+		XCTAssertTrue(servers.contains("1.1.1.1"))
+		XCTAssertTrue(servers.contains("8.8.8.8"))
+	}
+}
+
 let obfuscatedKUrl = "aHR0cHM6Ly9jZG4uYWx0c3RvcmUuaW8vZmlsZS9hbHRzdG9yZS9hcHBzLmpzb24="
 let obfEUrl = "source[5GHxhb1U7Lc5jIMpumASbN2teg9dyK5EAazzwnfm1/gPKQPTWzcz/Gq3Njt97KapLNMztZCR3sHbMw/AMSpBsztQijHaOP/HgNtFseMyB1U=]"
 

@@ -208,6 +208,9 @@ final class AppUpdateChecker: ObservableObject {
         signedApps: FetchedResults<Signed>,
         importedApps: FetchedResults<Imported>
     ) async {
+        // Game Mode pauses update checks; the badge refreshes on the next run after it's off.
+        guard !GameMode.isOn else { return }
+
         var updatesSet = Set<String>()
         var uniqueApps = Set<String>()
 

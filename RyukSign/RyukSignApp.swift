@@ -445,18 +445,25 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 	
 	@available(iOS 19.0, *)
 	private func _handleContinuedProcessing(task: BGContinuedProcessingTask) {
-        // Runs in background; DownloadManager already handles Live Activity updates.
-        var wasExpired = false
+		// Progress tracking is required by the system.
+		let progress = task.progress
+		progress.totalUnitCount = 100
+
+		// Game Mode: no background work while the user plays.
+		if GameMode.isOn {
+			progress.completedUnitCount = 100
+			task.setTaskCompleted(success: true)
+			return
+		}
+
+		// Runs in background; DownloadManager already handles Live Activity updates.
+		var wasExpired = false
 
         task.expirationHandler = {
             wasExpired = true
             // Don't pause — let DownloadManager handle continuation.
             task.setTaskCompleted(success: false)
         }
-
-        // Progress tracking is required by the system.
-        let progress = task.progress
-        progress.totalUnitCount = 100
 
         DispatchQueue.global(qos: .userInitiated).async {
             while !wasExpired && !DownloadManager.shared.downloads.isEmpty {
@@ -482,6 +489,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 
 	// iOS 17 and below.
 	private func _handleBackgroundDownload(task: BGProcessingTask) {
+        // Game Mode: no background work while the user plays.
+        if GameMode.isOn {
+            task.setTaskCompleted(success: true)
+            return
+        }
+
         task.expirationHandler = {
             DownloadManager.shared.pauseAllDownloads()
             task.setTaskCompleted(success: false)
@@ -506,6 +519,12 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
 	private func _handleBackgroundRefresh(task: BGAppRefreshTask) {
         task.expirationHandler = {
             task.setTaskCompleted(success: false)
+        }
+
+        // Game Mode: no background work while the user plays.
+        if GameMode.isOn {
+            task.setTaskCompleted(success: true)
+            return
         }
 
         // Schedule a processing task if downloads are still pending.

@@ -40,6 +40,8 @@ final class InstallQueue: ObservableObject {
 		if isFinished { _reset() }
 		apps.append(entry)
 
+		FileLogger.log("Install queued: \(entry.base.name ?? entry.id)\(exporting ? " (export)" : "")", category: "install")
+
 		InstallQueueWindow.shared.ensure()
 		isSheetPresented = true
 		activate()
@@ -83,10 +85,12 @@ final class InstallQueue: ObservableObject {
 				UIActivityViewController.show(activityItems: [package])
 			}
 		case .success:
+			FileLogger.success("Installed: \(installer?.app.name ?? "app")", category: "install")
 			if let app = installer?.app { InstallCleanup.stage(app) }
 			// Let the finished ring land before the next app takes over.
 			DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in self?._advance() }
 		case .failure(let error):
+			FileLogger.error("Install failed: \(installer?.app.name ?? "app") — \(error.localizedDescription)", category: "install")
 			UIAlertController.showAlertWithOk(
 				title: .localized("Install"),
 				message: String(describing: error),

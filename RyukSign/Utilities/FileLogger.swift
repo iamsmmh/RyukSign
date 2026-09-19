@@ -6,6 +6,9 @@
 //  pull it over USB (Documents is exposed via UIFileSharingEnabled) or via Web Manager.
 //  Mirrors to OSLog. Used to debug signing/tweak issues that otherwise vanish on device.
 //
+//  Every call is mirrored into `ActivityLogStore` (in-memory ring, drives the live Logs
+//  tab). The disk format is unchanged: `ISO8601 [category] message`, rotated at ~2 MB.
+//
 
 import Foundation
 import OSLog
@@ -24,9 +27,25 @@ enum FileLogger {
 		logFileURL.deletingPathExtension().appendingPathExtension("1.log")
 	}
 
+	// MARK: Public API — feeds memory + disk
+
 	static func log(_ message: String, category: String = "general") {
-		Logger.misc.info("[\(category, privacy: .public)] \(message, privacy: .public)")
-		let line = "\(_timestamp()) [\(category)] \(message)\n"
+		ActivityLogStore.shared.log(message, category: category)
+	}
+
+	static func success(_ message: String, category: String = "general") {
+		ActivityLogStore.shared.success(message, category: category)
+	}
+
+	static func error(_ message: String, category: String = "general") {
+		ActivityLogStore.shared.error(message, category: category)
+	}
+
+	/// Disk-only write. Called by `ActivityLogStore` with a line that already carries
+	/// the classification markers (`ERROR:`, `>>>`), so file history re-parses identically.
+	static func writeDisk(_ line: String, category: String) {
+		Logger.misc.info("[\(category, privacy: .public)] \(line, privacy: .public)")
+		let formatted = "\(_timestamp()) [\(category)] \(line)\n"
 		_queue.async {
 			let url = logFileURL
 			do {
@@ -35,18 +54,14 @@ enum FileLogger {
 				if let handle = try? FileHandle(forWritingTo: url) {
 					defer { try? handle.close() }
 					try handle.seekToEnd()
-					handle.write(Data(line.utf8))
+					handle.write(Data(formatted.utf8))
 				} else {
-					try Data(line.utf8).write(to: url, options: .atomic)
+					try Data(formatted.utf8).write(to: url, options: .atomic)
 				}
 			} catch {
 				Logger.misc.error("FileLogger write failed: \(error.localizedDescription)")
 			}
 		}
-	}
-
-	static func error(_ message: String, category: String = "general") {
-		log("ERROR: \(message)", category: category)
 	}
 
 	/// Current log contents (for an in-app share/export).
@@ -61,6 +76,11 @@ enum FileLogger {
 	}
 
 	static func clear() {
+		ActivityLogStore.shared.clear()
+	}
+
+	/// Disk-only clear. Called by `ActivityLogStore.clear()`.
+	static func clearDisk() {
 		_queue.async {
 			try? _fm.removeItem(at: logFileURL)
 			try? _fm.removeItem(at: _rotatedFileURL)
