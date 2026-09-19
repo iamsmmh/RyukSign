@@ -166,8 +166,10 @@ enum PreflightChecks {
 			_architectureCheck(file, app: app, into: &issues)
 		}
 		for spec in options.tweakInjections ?? [] where spec.enabled {
-			_register(spec.fileName, in: &names)
-			_architectureCheck(spec.url, app: app, into: &issues)
+			for file in spec.files where file.enabled {
+				_register(file.fileName, in: &names)
+				_architectureCheck(file.fileURL, app: app, into: &issues)
+			}
 		}
 
 		for (name, count) in names where count > 1 {

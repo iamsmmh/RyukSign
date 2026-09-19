@@ -56,12 +56,18 @@ extension Storage {
 	}
 
 	/// Fetched results helpers for callers that pass them into `AppUpdateChecker`.
+	/// `FetchRequest` backs the same on-demand `FetchedResults` the SwiftUI views get, so the
+	/// automation paths can use the checker without owning a `@FetchRequest`.
 	func getSignedApps() -> FetchedResults<Signed> {
-		FetchedResults(fetchRequest: Signed.fetchRequest(), managedObjectContext: context)
+		let fetchRequest = Signed.fetchRequest()
+		fetchRequest.sortDescriptors = []
+		return FetchRequest(fetchRequest: fetchRequest).wrappedValue
 	}
 
 	func getImportedApps() -> FetchedResults<Imported> {
-		FetchedResults(fetchRequest: Imported.fetchRequest(), managedObjectContext: context)
+		let fetchRequest = Imported.fetchRequest()
+		fetchRequest.sortDescriptors = []
+		return FetchRequest(fetchRequest: fetchRequest).wrappedValue
 	}
 
 	func app(withUuid uuid: String) -> AppInfoPresentable? {

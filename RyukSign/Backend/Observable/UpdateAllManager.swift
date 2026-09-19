@@ -123,9 +123,9 @@ final class UpdateAllManager: ObservableObject {
 			switch await _update(at: index) {
 			case .success:
 				succeeded += 1
-			case .failure(let message):
+			case .failure(let error):
 				failed += 1
-				tasks[index].state = .failed(message)
+				tasks[index].state = .failed(error.localizedDescription)
 			}
 		}
 

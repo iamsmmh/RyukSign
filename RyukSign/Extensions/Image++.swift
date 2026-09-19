@@ -23,16 +23,19 @@ extension Image {
 
 		let radius = isCircle ? (size / 2) : (size * multiplier)
 
-		let base: some View = {
-			let resized = self
+		let image: Image = {
+			guard tint != nil else { return self }
+			return self.renderingMode(.template)
+		}()
+
+		let base: AnyView = {
+			let resized = image
 				.resizable()
 				.scaledToFit()
 				.frame(width: size, height: size)
 
 			if let tint {
-				return AnyView(
-					resized.renderingMode(.template).foregroundStyle(tint)
-				)
+				return AnyView(resized.foregroundStyle(tint))
 			}
 			return AnyView(resized)
 		}()

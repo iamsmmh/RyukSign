@@ -331,8 +331,10 @@ extension IPAExplorerView {
 				Divider()
 
 				if let journal = _workspace.journal {
-					NavigationLink(.localized("Undo / Recent Changes"), systemImage: "arrow.uturn.backward") {
+					NavigationLink {
 						IPAChangeListView(workspace: _workspace, journal: journal)
+					} label: {
+						Label(.localized("Undo / Recent Changes"), systemImage: "arrow.uturn.backward")
 					}
 				}
 
