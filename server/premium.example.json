@@ -1,0 +1,22 @@
+{
+  "name": "VexSign Premium",
+  "identifier": "com.yourname.premium",
+  "subtitle": "Your private premium source",
+  "iconURL": "https://raw.githubusercontent.com/iamsmmh/VexSign/main/icon.png",
+  "sourceURL": "https://YOUR-HOST/repo/premium.json",
+  "apps": [
+    {
+      "name": "Example App",
+      "bundleIdentifier": "com.example.app",
+      "developerName": "You",
+      "subtitle": "One entry per app — replace me",
+      "description": "Shown on the app's info page (multi-line ok).",
+      "version": "1.0.0",
+      "versionDate": "2026-09-19T00:00:00Z",
+      "downloadURL": "https://YOUR-HOST/path/to/app.ipa",
+      "iconURL": "https://YOUR-HOST/path/to/icon.png",
+      "size": 52428800,
+      "category": "Utilities"
+    }
+  ]
+}

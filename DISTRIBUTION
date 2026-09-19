@@ -1,0 +1,17 @@
+VexSign by @iamsmmh
+https://github.com/iamsmmh/VexSign
+
+The most powerful on-device iOS signer.
+Features added by @iamsmmh:
+- IPA Explorer
+- File Transfer Server (HTTP/WebDAV)
+- Live Activities & Dynamic Island
+- Auto Cleanup Pipeline
+- Batch Signing & Update All
+- Backup & Restore
+- Logs & File Manager
+- And more...
+
+Bundle: com.vexsign.app
+Author: iamsmmh (https://github.com/iamsmmh)
+License: GPL-3.0
