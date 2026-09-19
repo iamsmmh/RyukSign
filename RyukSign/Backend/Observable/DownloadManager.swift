@@ -524,6 +524,20 @@ class DownloadManager: NSObject, ObservableObject {
 			return Download(id: id, url: url, appName: appName, appDescription: appDescription)
 		}
 
+		if DownloadPreferences.wifiOnly, DownloadPreferences.isOnExpensivePath {
+			Task { @MainActor in
+				Toast.error(.localized("Wi-Fi only is on. Connect to Wi-Fi or turn the setting off."), duration: .long)
+			}
+			return Download(id: id, url: url, appName: appName, appDescription: appDescription)
+		}
+
+		let running = downloads.filter { !$0.onlyArchiving && ($0.isActive || $0.progress > 0) && $0.progress < 1.0 && !$0.isPaused }.count
+		if running >= DownloadPreferences.maxParallel {
+			Task { @MainActor in
+				Toast.info(.localized("Waiting for a download slot (%lld max).", arguments: DownloadPreferences.maxParallel), systemImage: "arrow.down.circle")
+			}
+		}
+
         if let existingDownload = downloads.first(where: { $0.url == url }) {
             resumeDownload(existingDownload)
             return existingDownload
@@ -537,8 +551,8 @@ class DownloadManager: NSObject, ObservableObject {
 		var request = URLRequest(url: url)
 		request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
 		request.networkServiceType = .responsiveData
-		request.allowsExpensiveNetworkAccess = true
-		request.allowsConstrainedNetworkAccess = true
+		request.allowsExpensiveNetworkAccess = !DownloadPreferences.wifiOnly
+		request.allowsConstrainedNetworkAccess = !DownloadPreferences.wifiOnly
 		request.setValue("gzip, deflate, br", forHTTPHeaderField: "Accept-Encoding")
 
 		// Auth headers for premium sources.

@@ -86,6 +86,9 @@ enum GameMode {
 		FileLogger.log("Game Mode off", category: "download")
 		SigningLog.shared.info(.localized("Game Mode off"), category: "download")
 		Toast.info(.localized("Game Mode is off"), systemImage: "gamecontroller")
+		if DownloadPreferences.resumeAfterGameMode {
+			DownloadManager.shared.resumeAllDownloads()
+		}
 	}
 
 	// MARK: Reporting

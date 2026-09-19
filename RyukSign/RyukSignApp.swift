@@ -21,6 +21,8 @@ struct RyukSignApp: App {
     @StateObject var downloadManager = DownloadManager.shared
     @StateObject private var tabSelection = TabSelectionObserver.shared
     @StateObject private var selfUpdate = SelfUpdateManager.shared
+    @AppStorage("RyukSign.onboardingCompleted") private var _onboardingCompleted = false
+    @State private var _showOnboarding = false
     let storage = Storage.shared
 
     private var activeManualDownloads: [Download] {
@@ -121,6 +123,16 @@ struct RyukSignApp: App {
             }
             .task {
                 await selfUpdate.checkOnLaunch()
+                StorageRules.warnIfOverLimit()
+                if !_onboardingCompleted {
+                    _showOnboarding = true
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .ryukShowOnboarding)) { _ in
+                _showOnboarding = true
+            }
+            .sheet(isPresented: $_showOnboarding) {
+                OnboardingView()
             }
             .sheet(isPresented: $selfUpdate.presentUpdatePrompt) {
                 if let release = selfUpdate.available {

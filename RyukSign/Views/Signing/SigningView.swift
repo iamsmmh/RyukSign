@@ -136,10 +136,31 @@ struct SigningView: View {
 						Divider()
 
 						Button(.localized("Reset")) {
-							// Reset drops PPQ protection and every override, back to the app's own identity.
 							_temporaryOptions = OptionsManager.shared.options
 							_temporaryOptions.resetPerApp(for: app)
 							appIcon = nil
+						}
+						if !NamedSigningProfileStore.shared.profiles.isEmpty {
+							Section(.localized("Apply Profile")) {
+								ForEach(NamedSigningProfileStore.shared.profiles) { profile in
+									Button(profile.name) {
+										_temporaryOptions = profile.options.resolved(for: app)
+										if let uuid = profile.certificateUUID,
+										   let index = certificates.firstIndex(where: { $0.uuid == uuid }) {
+											_temporaryCertificate = index
+										}
+									}
+								}
+							}
+						}
+						Button(.localized("Save as Named Profile")) {
+							let name = app.name ?? .localized("Profile")
+							NamedSigningProfileStore.shared.save(NamedSigningProfile(
+								name: name,
+								options: _temporaryOptions,
+								certificateUUID: _selectedCert()?.uuid
+							))
+							Toast.success(.localized("Saved profile"), systemImage: "person.crop.rectangle.stack")
 						}
 					} label: {
 						Image(systemName: "ellipsis.circle")

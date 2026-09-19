@@ -173,8 +173,13 @@ final class SourcesViewModel: ObservableObject {
 			}
 
 			for (idx, repo) in fetched {
+				let item = items[idx]
+				let id = item.source.identifier ?? item.url.absoluteString
 				if let repo {
-					working[items[idx].source] = repo
+					working[item.source] = repo
+					SourcePreferences.recordFetch(id: id, error: nil)
+				} else {
+					SourcePreferences.recordFetch(id: id, error: .localized("Couldn't load this source"))
 				}
 			}
 

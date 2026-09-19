@@ -91,10 +91,28 @@ final class CleanupHistoryStore: ObservableObject {
 /// exercised by the automatic sweep.
 enum StorageRules {
 	static let keepOnlyLatestKey = "RyukSign.storage.keepOnlyLatestSigned"
+	static let warnGigabytesKey = "RyukSign.storage.warnGigabytes"
 
 	static var keepOnlyLatestSigned: Bool {
 		get { UserDefaults.standard.bool(forKey: keepOnlyLatestKey) }
 		set { UserDefaults.standard.set(newValue, forKey: keepOnlyLatestKey) }
+	}
+
+	/// 0 = off. Otherwise toast when RyukSign's documents folder exceeds this many GB.
+	static var warnGigabytes: Int {
+		get { UserDefaults.standard.object(forKey: warnGigabytesKey) as? Int ?? 0 }
+		set { UserDefaults.standard.set(newValue, forKey: warnGigabytesKey) }
+	}
+
+	static func warnIfOverLimit() {
+		guard warnGigabytes > 0 else { return }
+		let used = FileManager.default.allocatedSize(at: URL.documentsDirectory)
+		let limit = Int64(warnGigabytes) * 1_000_000_000
+		guard used > limit else { return }
+		Toast.error(
+			.localized("RyukSign is using %@ — over the %lld GB warning.", arguments: used.formattedFileSize, warnGigabytes),
+			duration: .long
+		)
 	}
 
 	/// Prunes duplicate signed copies of the same bundle id, keeping the highest version.

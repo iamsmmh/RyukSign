@@ -105,6 +105,13 @@ struct DownloadItemCardView: View {
                             .animation(.easeOut(duration: 0.2), value: model.bytesDownloaded)
                         Text("of")
                         Text(model.totalBytes.formattedByteCount)
+                        if let eta = DownloadPreferences.etaString(
+                            bytesRemaining: max(0, model.totalBytes - model.bytesDownloaded),
+                            bytesPerSecond: DownloadManager.shared.currentDownloadSpeed
+                        ) {
+                            Text("·")
+                            Text(eta)
+                        }
                     }
                     .font(.caption)
                     .foregroundColor(.secondary)

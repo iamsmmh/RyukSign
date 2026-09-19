@@ -29,6 +29,8 @@ struct LibraryView: View {
 
     @State private var _searchText = ""
     @State private var _selectedScope: Scope = .all
+    @AppStorage(LibraryDisplayPreferences.sortKey) private var _sortRaw: String = LibrarySort.manual.rawValue
+    @AppStorage(LibraryDisplayPreferences.ascendingKey) private var _sortAscending: Bool = true
 
     @State private var scrollProxy: ScrollViewProxy?
     
@@ -48,17 +50,44 @@ struct LibraryView: View {
     ) private var _importedApps: FetchedResults<Imported>
     
     // MARK: Computed Properties
+    private var _sort: LibrarySort { LibrarySort(rawValue: _sortRaw) ?? .manual }
+
     private var filteredSignedApps: [Signed] {
-        _signedApps.filter { app in
+        let filtered = _signedApps.filter { app in
             _searchText.isEmpty ||
             (app.name?.localizedCaseInsensitiveContains(_searchText) ?? false)
         }
+        return _sorted(filtered)
     }
     
     private var filteredImportedApps: [Imported] {
-        _importedApps.filter { app in
+        let filtered = _importedApps.filter { app in
             _searchText.isEmpty ||
             (app.name?.localizedCaseInsensitiveContains(_searchText) ?? false)
+        }
+        return _sorted(filtered)
+    }
+
+    private func _sorted<T: AppInfoPresentable>(_ apps: [T]) -> [T] {
+        switch _sort {
+        case .manual: return apps
+        case .name:
+            return apps.sorted { lhs, rhs in
+                let cmp = (lhs.name ?? "").localizedCaseInsensitiveCompare(rhs.name ?? "")
+                return _sortAscending ? cmp == .orderedAscending : cmp == .orderedDescending
+            }
+        case .date:
+            return apps.sorted { lhs, rhs in
+                let l = lhs.date ?? .distantPast
+                let r = rhs.date ?? .distantPast
+                return _sortAscending ? l < r : l > r
+            }
+        case .size:
+            return apps.sorted { lhs, rhs in
+                let l = Storage.shared.getUuidDirectory(for: lhs).map { FileManager.default.allocatedSize(at: $0) } ?? 0
+                let r = Storage.shared.getUuidDirectory(for: rhs).map { FileManager.default.allocatedSize(at: $0) } ?? 0
+                return _sortAscending ? l < r : l > r
+            }
         }
     }
     
@@ -104,6 +133,25 @@ struct LibraryView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         if !_editMode.isEditing {
                             Menu {
+                                Section(.localized("Sort")) {
+                                    ForEach(LibrarySort.allCases, id: \.rawValue) { option in
+                                        Button {
+                                            if _sortRaw == option.rawValue {
+                                                _sortAscending.toggle()
+                                            } else {
+                                                _sortRaw = option.rawValue
+                                            }
+                                        } label: {
+                                            HStack {
+                                                Text(option.title)
+                                                if _sortRaw == option.rawValue {
+                                                    Image(systemName: _sortAscending ? "chevron.up" : "chevron.down")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                Divider()
                                 importMenuActions
                             } label: {
                                 Image(systemName: "plus")
@@ -237,7 +285,7 @@ struct LibraryView: View {
                 .compatMatchedTransitionSource(id: app.uuid ?? "", ns: _namespace)
                 .id(app.uuid)
             }
-            .onMove(perform: _searchText.isEmpty ? _moveSignedApps : nil)
+            .onMove(perform: (_searchText.isEmpty && _sort == .manual) ? _moveSignedApps : nil)
         }
     }
 
@@ -269,7 +317,7 @@ struct LibraryView: View {
                 .compatMatchedTransitionSource(id: app.uuid ?? "", ns: _namespace)
                 .id(app.uuid)
             }
-            .onMove(perform: _searchText.isEmpty ? _moveImportedApps : nil)
+            .onMove(perform: (_searchText.isEmpty && _sort == .manual) ? _moveImportedApps : nil)
         }
     }
 
