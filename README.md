@@ -163,28 +163,66 @@ Set your own team in Signing & Capabilities, or build unsigned via `make`.
 
 ---
 
-### 🧰 Tech Stack & Credits
+### 🙏 Credits & Acknowledgements
 
-**Base by Feather — Special Thanks:**
+VexSign is made possible by amazing open source developers. **Full proper credits below — thank you to everyone!**
 
-- **[Feather](https://github.com/claration/Feather) by @claration (Samara)** — The original on-device signer, base for VexSign. Without Feather, VexSign wouldn't exist. GPL-3.0. **Please star Feather too!**
+#### 🌟 Base Project — Feather
 
-**Other Open Source Projects:**
+| Developer | GitHub | Contribution | License |
+|-----------|--------|--------------|---------|
+| **Samara / @claration** | [@claration](https://github.com/claration) | **[Feather](https://github.com/claration/Feather) — Original on-device signer, base for VexSign. Pioneered on-device signing on stock iOS. Without Feather, VexSign wouldn't exist.** | GPL-3.0 |
 
-- **[idevice](https://github.com/jkcoxson/idevice)** by jkcoxson — Backend for AFC communication with `installd`
-- **[Vapor](https://github.com/vapor/vapor)** — Server-side Swift HTTP framework for local install server
-- **[Zsign](https://github.com/zhlynn/zsign)** by zhlynn — On-device IPA signing, reimplemented for iOS
-- **[ElleKit](https://github.com/tealbathingsuit/ellekit)** by tealbathingsuit — Tweak injection
-- **[LiveContainer](https://github.com/LiveContainer/LiveContainer)** — Fixes and compatibility help
-- **[Nuke](https://github.com/kean/Nuke)** by kean — Image caching
-- **[ZIPFoundation](https://github.com/weichsel/ZIPFoundation) / [SWCompression](https://github.com/tsolomko/SWCompression)** — Archive handling
-- **[AltSourceKit](https://github.com/claration/AltSourceKit)** — AltStore source parsing (by Feather team)
-- **[NimbleKit](https://github.com/claration/NimbleKit)** — UI components and extensions (by Feather team)
-- **[*.backloop.dev](https://backloop.dev/)** — localhost with public-CA-signed SSL certificate
-- **[Asspp](https://github.com/Lakr233/Asspp)** — HTTP server setup reference
-- **[plistserver](https://github.com/nekohaxx/plistserver)** — Hosted on api.palera.in
+> **Special Thanks to Feather:** VexSign is built on top of Feather by @claration. Feather pioneered on-device signing on stock iOS without jailbreak and open sourced it under GPL-3.0. We are deeply grateful. **Please star [Feather](https://github.com/claration/Feather) too!**
 
-All dependencies retain their original licenses (MIT, BSD-3-Clause, GPL-3.0). See `license_plist.yml` and `LICENSE`.
+**What VexSign uses from Feather:**
+- Base signing engine and Zsign integration
+- CoreData model and Storage layer (with migration `Feather.sqlite → VexSign.sqlite`)
+- SwiftUI UI architecture and Navigation
+- AltSourceKit and NimbleKit libraries
+- Certificate and Library management
+
+#### 👨‍💻 Lead Developer — VexSign Exclusive Features
+
+| Developer | GitHub | Contribution |
+|-----------|--------|--------------|
+| **@iamsmmh** | [@iamsmmh](https://github.com/iamsmmh) | **Lead Developer — All exclusive features:** IPA Explorer, File Transfer Server (HTTP/WebDAV), Live Activities & Dynamic Island, Auto Cleanup Pipeline, Batch Signing, Update All, Backup & Restore (.vexbackup), Logs & File Manager, Anti-Revoke, Game Mode, Automation, Named Profiles, and more QoL. |
+
+#### 🔧 Core Dependencies — The Engine
+
+| Developer | Project | GitHub | What it does | License |
+|-----------|---------|--------|--------------|---------|
+| **jkcoxson** | **idevice** | [@jkcoxson](https://github.com/jkcoxson) | AFC backend for direct install via `installd` — communicates with iOS without PC. Used in Pairing Install. | MIT |
+| **Vapor Team** | **Vapor** | [vapor/vapor](https://github.com/vapor/vapor) | Server-side Swift HTTP framework — powers VexSign's local HTTPS install server. | MIT |
+| **zhlynn** | **Zsign** | [@zhlynn](https://github.com/zhlynn) | On-device IPA signing — reimplemented for iOS. Signs IPAs with p12/mobileprovision. | MIT |
+| **tealbathingsuit** | **ElleKit** | [@tealbathingsuit](https://github.com/tealbathingsuit) | Tweak injection — injects dylibs into IPAs. Supports ElleKit & CydiaSubstrate. | BSD-3 |
+| **LiveContainer Team** | **LiveContainer** | [LiveContainer/LiveContainer](https://github.com/LiveContainer/LiveContainer) | Fixes and compatibility help for sideloaded apps. | GPL-3.0 |
+
+#### 📚 Libraries & UI
+
+| Developer | Project | GitHub | What it does | License |
+|-----------|---------|--------|--------------|---------|
+| **kean** | **Nuke** | [@kean](https://github.com/kean) | Image caching — fast async image loading for app icons and screenshots. | MIT |
+| **Weichsel** | **ZIPFoundation** | [weichsel/ZIPFoundation](https://github.com/weichsel/ZIPFoundation) | ZIP handling — extracting and creating IPAs (which are ZIPs). | MIT |
+| **Tsolomko** | **SWCompression** | [tsolomko/SWCompression](https://github.com/tsolomko/SWCompression) | Additional archive formats — TAR, etc. for tweak extraction. | MIT |
+| **@claration** | **AltSourceKit** | [claration/AltSourceKit](https://github.com/claration/AltSourceKit) | AltStore source parsing — decrypts and parses AltStore repositories. | MIT |
+| **@claration** | **NimbleKit** | [claration/NimbleKit](https://github.com/claration/NimbleKit) | UI components — NBList, NBButton, extensions used throughout VexSign. | MIT |
+
+#### 🌐 Services & References
+
+| Developer / Service | GitHub / URL | Contribution |
+|---------------------|--------------|--------------|
+| **backloop.dev** | [backloop.dev](https://backloop.dev/) | **Public-CA-signed SSL for localhost** — `*.backloop.dev` gives VexSign local server a trusted cert without manual install. Critical for `itms-services` install. |
+| **Lakr233** | [@Lakr233](https://github.com/Lakr233) | **Asspp** — HTTP server setup reference, inspired VexSign's local server implementation. |
+| **nekohaxx** | [@nekohaxx](https://github.com/nekohaxx) | **plistserver** — Hosted on `api.palera.in`, reference for manifest hosting. |
+| **Apple** | — | iOS, SwiftUI, Xcode — the platform. |
+
+#### 💝 Additional Thanks
+
+- **All contributors and translators** — Thank you for PRs, issues, translations!
+- **Feather contributors** — Everyone who contributed to Feather base.
+- **Testers** — Everyone who tested VexSign betas and reported bugs.
+- **You** — For using VexSign and starring the repo!
 
 ---
 
@@ -194,39 +232,12 @@ All dependencies retain their original licenses (MIT, BSD-3-Clause, GPL-3.0). Se
 
 VexSign is licensed under GPL-3.0, same as Feather. As a derivative of Feather (GPL-3.0), we preserve that license and give full credit to upstream.
 
-Copyright (c) 2026 [@iamsmmh](https://github.com/iamsmmh) & VexSign Team. Base (c) 2024 Samara / @claration (Feather).
+**Copyright:**
+- VexSign exclusive features: (c) 2026 [@iamsmmh](https://github.com/iamsmmh) & VexSign Team
+- Base: (c) 2024 Samara / @claration (Feather) — [github.com/claration/Feather](https://github.com/claration/Feather)
+- Dependencies: Respective owners (MIT, BSD-3-Clause, GPL-3.0) — see `license_plist.yml` and `LICENSE`
 
 By contributing, you agree to license your code under GPL-3.0, ensuring it remains free and open.
-
----
-
-### 🙏 Acknowledgements
-
-**Special Thanks to Feather — The Base:**
-
-> **VexSign is built on top of [Feather](https://github.com/claration/Feather) by [@claration](https://github.com/claration) (Samara).** Feather pioneered on-device signing on stock iOS without jailbreak and open sourced it under GPL-3.0. We are deeply grateful for the open source foundation. All upstream work and attribution is preserved — see Credits in app and below. **If you use VexSign, please consider starring [Feather](https://github.com/claration/Feather) as well!**
-
-**What VexSign uses from Feather:**
-- Base signing engine and Zsign integration
-- CoreData model and Storage layer
-- SwiftUI UI architecture and Navigation
-- AltSourceKit and NimbleKit libraries
-- Certificate and Library management
-
-**What @iamsmmh added exclusively (not in Feather):**
-- IPA Explorer, File Transfer Server, Live Activities, Auto Cleanup, Batch Signing, Update All, Backup & Restore, Logs, File Manager, Anti-Revoke, Game Mode, Automation, and more.
-
-**Additional Thanks:**
-
-- **@iamsmmh** — Lead Developer, all exclusive features (IPA Explorer, File Transfer, Live Activities, Auto Cleanup, Batch Signing, etc.)
-- **@claration / Samara** — Feather base, AltSourceKit, NimbleKit
-- **@jkcoxson** — idevice backend
-- **@zhlynn** — Zsign
-- **@tealbathingsuit** — ElleKit
-- **@kean** — Nuke
-- **@Lakr233** — Asspp reference
-- **@nekohaxx** — plistserver
-- All contributors and translators
 
 ---
 
@@ -241,5 +252,6 @@ Use at your own risk. Sideloading may violate Apple Developer Program terms. Not
 <p align="center">
   <b>Made with ❤️ by <a href="https://github.com/iamsmmh">@iamsmmh</a> — VexSign</b><br>
   Based on <a href="https://github.com/claration/Feather">Feather by @claration</a> — Please star both!<br>
+  Built with help from amazing open source devs — see Credits above<br>
   If VexSign saves your time, please ⭐ star the repo!
 </p>
