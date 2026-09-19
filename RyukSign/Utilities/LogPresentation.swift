@@ -8,7 +8,28 @@
 import UIKit
 
 enum LogKind {
-	case info, success, error, detail
+	case info, success, warn, error, detail
+
+	/// Filter label used by the Logs tab.
+	var title: String {
+		switch self {
+		case .info: .localized("Info")
+		case .success: .localized("Success")
+		case .warn: .localized("Warning")
+		case .error: .localized("Error")
+		case .detail: .localized("Detail")
+		}
+	}
+
+	var systemImage: String {
+		switch self {
+		case .info: "info.circle"
+		case .success: "checkmark.circle"
+		case .warn: "exclamationmark.triangle"
+		case .error: "xmark.octagon"
+		case .detail: "text.alignleft"
+		}
+	}
 }
 
 struct LogEntry: Identifiable {
@@ -46,6 +67,15 @@ enum LogParser {
 				? String(message.dropFirst(6)).trimmingCharacters(in: .whitespaces)
 				: message
 			return (.error, text)
+		}
+
+		// Warnings are re-written with the same marker `FileLogger` uses, so a line reads the
+		// same in the console and in the exported file.
+		if level == .warn || message.hasPrefix("WARNING:") {
+			let text = message.hasPrefix("WARNING:")
+				? String(message.dropFirst(8)).trimmingCharacters(in: .whitespaces)
+				: message
+			return (.warn, text)
 		}
 
 		var text = message

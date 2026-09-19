@@ -14,6 +14,8 @@ import IDeviceSwift
 // MARK: - View
 struct SettingsView: View {
     @AppStorage("feather.selectedCert") private var _storedSelectedCert: Int = 0
+    /// Mirrors the same key `GameMode` reads; the switch itself is the fastest way to flip it.
+    @AppStorage(GameMode.enabledKey) private var _gameMode: Bool = false
     @State private var _currentIcon: String? = UIApplication.shared.alternateIconName
     @ObservedObject private var _selfUpdate = SelfUpdateManager.shared
 
@@ -72,6 +74,20 @@ struct SettingsView: View {
 					NavigationLink(destination: AutomationView()) {
 						Label(.localized("Automation"), systemImage: "bolt.badge.clock")
 					}
+                }
+
+                NBSection(.localized("Game Mode"), systemName: "gamecontroller") {
+                    Toggle(isOn: $_gameMode) {
+                        Label(.localized("Game Mode"), systemImage: "gamecontroller")
+                    }
+                    .onChange(of: _gameMode) { enabled in
+                        enabled ? GameMode.enable() : GameMode.disable()
+                    }
+                    NavigationLink(destination: GameModeView()) {
+                        Label(.localized("What It Pauses"), systemImage: "info.circle")
+                    }
+                } footer: {
+                    Text(.localized("Stops downloads and the background update pass while you play. Signing and installing what you already have keeps working."))
                 }
                 
                 NBSection(.localized("Certificates")) {
@@ -179,6 +195,9 @@ extension SettingsView {
     @ViewBuilder
     private func _directories() -> some View {
         NBSection(.localized("Misc")) {
+            NavigationLink(destination: FileManagerView(directory: URL.documentsDirectory, isRoot: true)) {
+                Label(.localized("File Manager"), systemImage: "folder.badge.gearshape")
+            }
             Button(.localized("Open Documents"), systemImage: "folder") {
                 UIApplication.open(URL.documentsDirectory.toSharedDocumentsURL()!)
             }
@@ -189,7 +208,7 @@ extension SettingsView {
                 UIApplication.open(FileManager.default.certificates.toSharedDocumentsURL()!)
             }
         } footer: {
-            Text(.localized("All of the apps files are contained in the documents directory, here are some quick links to these."))
+            Text(.localized("File Manager browses everything RyukSign stores, with editing and import built in. The buttons below hand the same folders to the Files app."))
         }
     }
     

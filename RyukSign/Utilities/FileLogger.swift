@@ -49,6 +49,12 @@ enum FileLogger {
 		log("ERROR: \(message)", category: category)
 	}
 
+	/// Warnings keep a `WARNING:` marker so `LogParser` classifies them again when the file is
+	/// read back (Settings → Activity Logs, the Logs tab).
+	static func warn(_ message: String, category: String = "general") {
+		log("WARNING: \(message)", category: category)
+	}
+
 	/// Current log contents (for an in-app share/export).
 	static func read() -> String {
 		(try? String(contentsOf: logFileURL, encoding: .utf8)) ?? ""

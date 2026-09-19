@@ -33,10 +33,11 @@ struct LogsHistoryView: View {
 						.disabled(_entries.isEmpty)
 						Button(.localized("Refresh"), systemImage: "arrow.clockwise") { _load() }
 						Divider()
-						Button(.localized("Clear"), systemImage: "trash", role: .destructive) {
-							FileLogger.clear()
-							_entries = []
-						}
+					Button(.localized("Clear"), systemImage: "trash", role: .destructive) {
+						// Same store the Logs tab reads, so clearing here clears there too.
+						SigningLog.shared.clear()
+						_entries = []
+					}
 					}
 				}
 				.onAppear(perform: _load)

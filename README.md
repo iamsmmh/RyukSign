@@ -30,7 +30,14 @@ Added by RyukSign:
 - **Live Activities & Dynamic Island** — watch download progress live from the Lock Screen and Dynamic Island, plus an in-app download overlay.
 - **Enhanced download manager** — fast background downloads that keep running while you use other apps.
 - **File Transfer server** — upload IPAs and tweaks over HTTP (drag-and-drop browser page) or WebDAV (mount in Finder / the Files app), with optional password protection.
-- **App update checker** — flags installed apps that have a newer version available in your sources, with per-app ignore/skip.
+- **App update checker** — flags installed apps that have a newer version available in your sources, with per-app ignore/skip, plus **Update All** to re-sign and queue every update in one tap.
+- **Batch signing** — select any number of apps in the Library and sign (and install) them in one queue, with per-app properties, icons and certificates.
+- **Logs tab** — a live console of everything the app does (signing, tweak injection, installs, downloads, automation) with level filters, on-disk history, and share/copy/clear.
+- **File Manager** — browse all of RyukSign's documents, edit text and `.plist` files, create, import, move, share and delete, with Library and Certificates kept in sync when a managed folder is removed.
+- **Backup & Restore** — export certificates, sources, tweaks and settings to an encrypted `.ryukbackup` archive and restore them on another install.
+- **Anti-Revoke** — generate a DNS-over-HTTPS configuration profile that pins the resolver used for Apple's certificate-verification hosts, for you to install yourself.
+- **Game Mode** — stops downloads and the background update pass while you play, so RyukSign uses no data and next to no battery. (Separately, Signing Options → Game Mode stamps `GCSupportsGameMode` into an app you sign.)
+- **Automation** — an opt-in scheduled pass that checks sources for updates, optionally signs and queues them, runs the cleanup sweep and posts one summary notification.
 - **Curated repositories** and a fully configurable tab bar.
 
 ## Automation

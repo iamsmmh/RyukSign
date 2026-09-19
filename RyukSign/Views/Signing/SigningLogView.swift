@@ -26,15 +26,17 @@ struct SigningLogView: View {
 				}
 				.toolbar {
 					NBToolbarButton(role: .close)
-					NBToolbarButton(
-						.localized("Copy"),
-						style: .text,
-						placement: .topBarLeading,
-						isDisabled: _log.lines.isEmpty
-					) {
-						UIPasteboard.general.string = _log.exportText()
-						Toast.success(.localized("Copied"))
-					}
+			NBToolbarButton(
+					.localized("Copy"),
+					style: .text,
+					placement: .topBarLeading,
+					isDisabled: _log.lines.isEmpty
+				) {
+					// This sheet shows one signing run, so it exports one signing run — the Logs
+					// tab is where the history lives.
+					UIPasteboard.general.string = _log.exportText(_log.lines)
+					Toast.success(.localized("Copied"))
+				}
 				}
 		}
 	}

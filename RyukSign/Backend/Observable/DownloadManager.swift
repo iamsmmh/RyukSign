@@ -516,6 +516,14 @@ class DownloadManager: NSObject, ObservableObject {
 	// MARK: - Public Methods
 	
 	func startDownload(from url: URL, id: String = UUID().uuidString, appName: String? = nil, appDescription: String? = nil) -> Download {
+		// Game Mode (Settings → Game Mode): the one place every download funnels through, so
+		// nothing reaches the network while it is on. Callers discard the return value, and
+		// an unstarted download is never appended to `downloads`, so the UI stays on "Get".
+		if GameMode.isEnabled {
+			Task { @MainActor in GameMode.reportBlocked(.localized("Downloading")) }
+			return Download(id: id, url: url, appName: appName, appDescription: appDescription)
+		}
+
         if let existingDownload = downloads.first(where: { $0.url == url }) {
             resumeDownload(existingDownload)
             return existingDownload
@@ -608,6 +616,10 @@ class DownloadManager: NSObject, ObservableObject {
 	}
 	
 	func resumeDownload(_ download: Download) {
+		// Game Mode pauses downloads on purpose; the automatic paths (becoming active again,
+		// a background task waking up) must not quietly undo that.
+		guard !GameMode.isEnabled else { return }
+
 		if download.resumeData == nil {
 			download.resumeData = loadResumeData(for: download)
 		}
@@ -706,6 +718,18 @@ class DownloadManager: NSObject, ObservableObject {
 	}
 	
 	func resumeAllDownloads() {
+		// Resuming is user-initiated here (button, Live Activity, Shortcut), so say why
+		// nothing happened instead of leaving the button looking broken.
+		guard !GameMode.isEnabled else {
+			let paused = downloads.filter { $0.isPaused && $0.progress > 0 && $0.progress < 1.0 }
+			if !paused.isEmpty, !isAppInBackground {
+				Task { @MainActor in
+					GameMode.reportBlockedInline(.localized("Resuming downloads"))
+				}
+			}
+			return
+		}
+
 		for download in downloads where download.isPaused {
 			resumeDownload(download)
 		}
