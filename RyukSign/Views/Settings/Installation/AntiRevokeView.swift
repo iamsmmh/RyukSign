@@ -66,7 +66,7 @@ struct AntiRevokeView: View {
 
 			if let url = _lastBuiltURL ?? AntiRevokeManager.shared.profileURL {
 				Button {
-					AntiRevokeManager.shared.shareProfile(url)
+					AntiRevokeManager.shareProfile(url)
 				} label: {
 					Label(.localized("Share Profile"), systemImage: "square.and.arrow.up")
 				}

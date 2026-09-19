@@ -55,14 +55,14 @@ extension LibraryInfoView {
 		guard app.isSigned else { return }
 
 		let hasProfile = SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil
-		NBSection(.localized("Re-sign")) {
+		Section(.localized("Re-sign")) {
 			Button {
 				_resignWithLastSettings()
 			} label: {
 				Label(.localized(hasProfile ? "Re-sign with last settings" : "Sign again"), systemImage: "signature")
 			}
 		} footer: {
-			Text(.localized("Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it.")) 
+			Text(.localized("Signs this app again with the tweaks, entitlements and certificate it used before. Install it again afterwards, or export it."))
 		}
 	}
 

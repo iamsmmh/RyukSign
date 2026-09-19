@@ -458,10 +458,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, DownloadManager.ErrorDelegat
             task.setTaskCompleted(success: false)
         }
 
-        Task {
-            let result = await MainActor.run {
-                BackgroundAutomation.run(fromBackground: true)
-            }
+        Task { @MainActor in
+            let result = await BackgroundAutomation.run(fromBackground: true)
             task.setTaskCompleted(success: result != nil)
         }
     }

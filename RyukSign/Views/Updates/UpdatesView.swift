@@ -72,7 +72,7 @@ struct UpdatesView: View {
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing) {
 				if !_updates.isEmpty {
-					Button(.localized("Update All (%lld)", arguments: _updates.count)) {
+					Button(String.localized("Update All (%lld)", arguments: _updates.count)) {
 						_showProgress = true
 					}
 					.font(.subheadline.bold())
@@ -190,8 +190,8 @@ struct UpdateAllProgressView: View {
 					HStack {
 						Label(
 							_runner.isRunning
-								? .localized("Updating %lld apps…", arguments: _runner.tasks.count)
-								: .localized("%lld apps", arguments: _runner.tasks.count),
+								? String.localized("Updating %lld apps…", arguments: _runner.tasks.count)
+								: String.localized("%lld apps", arguments: _runner.tasks.count),
 							systemImage: "arrow.triangle.2.circlepath"
 						)
 						Spacer()
