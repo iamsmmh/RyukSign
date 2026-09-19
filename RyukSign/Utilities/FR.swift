@@ -206,7 +206,12 @@ enum FR {
 		showAlerts: Bool = true,
 		competion: @escaping (Result<String, Error>) -> Void
 	) {
-		guard let url = URL(string: urlString) else {
+		var cleaned = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+		if !cleaned.lowercased().hasPrefix("http://") && !cleaned.lowercased().hasPrefix("https://") {
+			cleaned = "https://" + cleaned
+		}
+
+		guard let url = URL(string: cleaned), url.host != nil else {
 			let error = NSError(domain: "Feather", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])
 			if showAlerts {
 				DispatchQueue.main.async {

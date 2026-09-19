@@ -17,10 +17,12 @@ struct AntiRevokeView: View {
 	@AppStorage("RyukSign.useNovaDNSDynamic") private var _useNovaDNSDynamic: Bool = false
 	@State private var _endpoint = ""
 	@State private var _isBuilding = false
+	@State private var _isSyncingRules = false
 	@State private var _lastBuiltURL: URL?
+	@State private var _currentRules: DynamicDNSRules = NovaDNSDynamic.loadCachedRules()
 
 	private var _hasProfile: Bool { AntiRevokeManager.shared.profileURL != nil }
-	private var _defaultEndpoint: String { "https://example.com/dns-query" }
+	private var _defaultEndpoint: String { _currentRules.primaryEndpoint }
 
 	// MARK: Body
 	var body: some View {
@@ -29,6 +31,12 @@ struct AntiRevokeView: View {
 			_novaDNSSection
 			_configSection
 			_hostsSection
+		}
+		.task {
+			_currentRules = NovaDNSDynamic.loadCachedRules()
+			if _endpoint.isEmpty {
+				_endpoint = _currentRules.primaryEndpoint
+			}
 		}
 	}
 
@@ -62,6 +70,27 @@ struct AntiRevokeView: View {
 				}
 				.buttonStyle(.plain)
 			}
+
+			Button {
+				_syncRemoteRules()
+			} label: {
+				HStack {
+					if _isSyncingRules {
+						ProgressView()
+							.padding(.trailing, 2)
+						Text(.localized("Updating Rules…"))
+					} else {
+						Label(.localized("Sync Dynamic Rules"), systemImage: "arrow.triangle.2.circlepath")
+					}
+					Spacer()
+					if let updated = _currentRules.lastUpdated {
+						Text(updated)
+							.font(.caption)
+							.foregroundColor(.secondary)
+					}
+				}
+			}
+			.disabled(_isSyncingRules)
 		} header: {
 			Text(.localized("Dynamic Anti-Revoke"))
 		} footer: {
@@ -129,6 +158,19 @@ struct AntiRevokeView: View {
 	}
 
 	// MARK: Actions
+
+	private func _syncRemoteRules() {
+		_isSyncingRules = true
+		Task {
+			let updated = await NovaDNSDynamic.fetchRules()
+			_currentRules = updated
+			if _endpoint.isEmpty {
+				_endpoint = updated.primaryEndpoint
+			}
+			_isSyncingRules = false
+			Toast.success(.localized("Dynamic rules synced"), systemImage: "checkmark.seal")
+		}
+	}
 
 	private func _build() {
 		let raw = _endpoint.trimmingCharacters(in: .whitespacesAndNewlines)

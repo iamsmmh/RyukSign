@@ -216,11 +216,11 @@ extension LibraryCellView {
 				InstallQueue.shared.enqueue(app, exporting: true)
 			}
 		} else {
-			Button(.localized("Install"), systemImage: "square.and.arrow.down") {
-				InstallQueue.shared.enqueue(app)
-			}
 			Button(.localized("Sign"), systemImage: "signature") {
 				Presentation.afterDismiss { selectedSigningAppPresenting = AnyApp(base: app) }
+			}
+			Button(.localized("Install Without Signing"), systemImage: "bolt.badge.checkmark") {
+				InstallQueue.shared.enqueue(app)
 			}
 		}
 	}

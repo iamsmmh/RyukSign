@@ -24,6 +24,7 @@ struct CertificatesView: View {
 	@State private var _isSelectedInfoPresenting: CertificatePair?
 	@State private var _certToRename: CertificatePair?
 	@State private var _newNickname: String = ""
+	@State private var _isBatchChecking = false
 
 	// MARK: Fetch
 	@FetchRequest(
@@ -66,12 +67,25 @@ struct CertificatesView: View {
 		}
 		.toolbar {
 			if _bindingSelectedCert == nil {
-				NBToolbarMenu(
-					systemImage: "plus",
-					style: .icon,
-					placement: .topBarTrailing
-				) {
-					_addOptions()
+				ToolbarItemGroup(placement: .topBarTrailing) {
+					if !_certificates.isEmpty {
+						Button {
+							_batchCheckCertificates()
+						} label: {
+							if _isBatchChecking {
+								ProgressView()
+							} else {
+								Image(systemName: "arrow.triangle.2.circlepath")
+							}
+						}
+						.disabled(_isBatchChecking)
+					}
+
+					Menu {
+						_addOptions()
+					} label: {
+						Image(systemName: "plus")
+					}
 				}
 			}
 		}
@@ -181,6 +195,23 @@ extension CertificatesView {
 		}
 		Button(.localized("Check Revokage"), systemImage: "person.text.rectangle") {
 			Storage.shared.revokagedCertificate(for: cert)
+		}
+	}
+
+	private func _batchCheckCertificates() {
+		guard !_isBatchChecking, !_certificates.isEmpty else { return }
+		_isBatchChecking = true
+
+		Task {
+			for cert in _certificates {
+				CertificateStatusManager.shared.refreshStatus(for: cert, forceRemote: true)
+			}
+			try? await Task.sleep(nanoseconds: 1_500_000_000)
+			_isBatchChecking = false
+			Toast.success(
+				String.localized("Checked %lld certificates", arguments: Int64(_certificates.count)),
+				systemImage: "checkmark.seal"
+			)
 		}
 	}
 }
