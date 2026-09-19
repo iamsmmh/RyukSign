@@ -32,11 +32,16 @@ struct SourcesCellView: View {
 		let isRegular = horizontalSizeClass != .compact
 
 		let cellContent = HStack {
-			FRIconCellView(
-				title: source.name ?? .localized("Unknown"),
-				subtitle: source.sourceURL?.absoluteString ?? "",
-				iconUrl: source.iconURL
-			)
+		FRIconCellView(
+			title: source.name ?? .localized("Unknown"),
+			subtitle: _subtitle,
+			iconUrl: source.iconURL
+		)
+			if SourcePreferences.isPinned(_sourceIdentifier) {
+				Image(systemName: "pin.fill")
+					.foregroundColor(.orange)
+					.font(.caption2)
+			}
 			if _isPremiumSource {
 				Image(systemName: "crown.fill")
 					.foregroundColor(.yellow)
@@ -48,6 +53,7 @@ struct SourcesCellView: View {
 					.font(.caption2)
 			}
 		}
+		.onAppear { _isExcluded = RyukSignAPI.isSourceExcluded(_sourceIdentifier) }
 		.padding(isRegular ? 12 : 0)
 		.background(
 			isRegular
@@ -88,10 +94,31 @@ extension SourcesCellView {
 		}
 	}
 
+	private var _subtitle: String {
+		if let error = SourcePreferences.lastError(for: _sourceIdentifier) {
+			return error
+		}
+		if let date = SourcePreferences.lastFetch(for: _sourceIdentifier) {
+			return "\(source.sourceURL?.host ?? "") · \(date.formatted(date: .omitted, time: .shortened))"
+		}
+		return source.sourceURL?.absoluteString ?? ""
+	}
+
 	@ViewBuilder
 	private func _contextActions(for source: AltSource) -> some View {
 		Button(.localized("Copy"), systemImage: "doc.on.clipboard") {
 			UIPasteboard.general.string = source.sourceURL?.absoluteString
+		}
+		if let url = source.sourceURL {
+			Button(.localized("Open in Browser"), systemImage: "safari") {
+				UIApplication.open(url)
+			}
+		}
+		Button(
+			SourcePreferences.isPinned(_sourceIdentifier) ? .localized("Unpin") : .localized("Pin"),
+			systemImage: SourcePreferences.isPinned(_sourceIdentifier) ? "pin.slash" : "pin"
+		) {
+			SourcePreferences.setPinned(_sourceIdentifier, pinned: !SourcePreferences.isPinned(_sourceIdentifier))
 		}
 	}
 

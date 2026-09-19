@@ -20,6 +20,17 @@ extension SourceAppsTableRepresentableView.Coordinator {
             let updatesFiltered = showUpdatesOnly ? 
                 filtered.filter { updateChecker.appsWithUpdates.contains($0.app.currentUniqueId) } : 
                 filtered
+
+            let deduped: [(source: ASRepository, app: ASRepository.App)]
+            if SourcePreferences.hideDuplicates {
+                var seen = Set<String>()
+                deduped = updatesFiltered.filter { entry in
+                    let key = entry.app.id ?? entry.app.currentUniqueId
+                    return seen.insert(key).inserted
+                }
+            } else {
+                deduped = updatesFiltered
+            }
             
             switch sortOption {
             case .default:

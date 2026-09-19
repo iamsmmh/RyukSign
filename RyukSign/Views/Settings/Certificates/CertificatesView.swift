@@ -45,6 +45,9 @@ struct CertificatesView: View {
 	// MARK: Body
 	var body: some View {
 		NBGrid {
+			if !_certificates.isEmpty {
+				_healthHeader
+			}
 			ForEach(Array(_certificates.enumerated()), id: \.element.uuid) { index, cert in
 				_cellButton(for: cert, at: index)
 			}
@@ -129,6 +132,47 @@ extension CertificatesView {
 			OfficialCertificatesView()
 				.presentationDetents([.large])
 		}
+	}
+
+	@ViewBuilder
+	private var _healthHeader: some View {
+		let certs = Array(_certificates)
+		let revoked = certs.filter { $0.revoked }.count
+		let expiring = certs.filter {
+			guard let date = $0.expiration else { return false }
+			return date.timeIntervalSinceNow > 0 && date.timeIntervalSinceNow < 7 * 24 * 3600
+		}.count
+		let apps = Storage.shared.getAllApps().filter(\.isSigned).count
+
+		VStack(alignment: .leading, spacing: 8) {
+			Text(.localized("Certificate Health"))
+				.font(.headline)
+			HStack(spacing: 12) {
+				_stat(.localized("%lld valid", arguments: certs.count - revoked), color: .green)
+				if expiring > 0 { _stat(.localized("%lld expiring", arguments: expiring), color: .orange) }
+				if revoked > 0 { _stat(.localized("%lld revoked", arguments: revoked), color: .red) }
+			}
+			Text(.localized("%lld signed apps in the library use a certificate from this list.", arguments: apps))
+				.font(.caption)
+				.foregroundStyle(.secondary)
+			Button(.localized("Refresh Apple Status")) {
+				for cert in certs { Storage.shared.revokagedCertificate(for: cert) }
+				Toast.info(.localized("Checking certificates…"), systemImage: "person.text.rectangle")
+			}
+			.font(.subheadline.weight(.semibold))
+		}
+		.padding()
+		.frame(maxWidth: .infinity, alignment: .leading)
+		.background(RoundedRectangle(cornerRadius: 18, style: .continuous).fill(Color(uiColor: .quaternarySystemFill)))
+	}
+
+	private func _stat(_ title: String, color: Color) -> some View {
+		Text(title)
+			.font(.caption.weight(.semibold))
+			.padding(.horizontal, 8)
+			.padding(.vertical, 4)
+			.background(color.opacity(0.15), in: Capsule())
+			.foregroundStyle(color)
 	}
 
 	@ViewBuilder

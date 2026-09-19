@@ -136,6 +136,22 @@ extension SourceAppsTableRepresentableView.Coordinator {
 
                 var actions: [UIMenuElement] = []
 
+                if let url = entry.app.currentDownloadUrl {
+                    let copyIPA = UIAction(
+                        title: .localized("Copy IPA URL"),
+                        image: UIImage(systemName: "link")
+                    ) { _ in
+                        UIPasteboard.general.string = url.absoluteString
+                    }
+                    let openIPA = UIAction(
+                        title: .localized("Open IPA in Browser"),
+                        image: UIImage(systemName: "safari")
+                    ) { _ in
+                        UIApplication.open(url)
+                    }
+                    actions.append(contentsOf: [copyIPA, openIPA])
+                }
+
                 if let bundleId = entry.app.id {
                     let appStoreAction = UIAction(
                         title: .localized("View on App Store"),

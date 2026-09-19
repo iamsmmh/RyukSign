@@ -88,6 +88,14 @@ struct LibraryCellView: View {
 		}
 		.swipeActions {
 			if !isEditing {
+				if SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil {
+					Button {
+						Task { await AutoSignManager.shared.sign(app) }
+					} label: {
+						Label(.localized("Re-sign Last"), systemImage: "signature")
+					}
+					.tint(.accentColor)
+				}
 				_actions(for: app)
 			}
 		}
@@ -211,6 +219,11 @@ extension LibraryCellView {
 			}
 			Button(.localized("Re-sign"), systemImage: "signature") {
 				Presentation.afterDismiss { selectedSigningAppPresenting = AnyApp(base: app) }
+			}
+			if SigningProfileStore.shared.profile(forBundleID: app.identifier) != nil {
+				Button(.localized("Re-sign with Last Settings"), systemImage: "clock.arrow.circlepath") {
+					Task { _ = await AutoSignManager.shared.sign(app) }
+				}
 			}
 			Button(.localized("Export"), systemImage: "square.and.arrow.up") {
 				InstallQueue.shared.enqueue(app, exporting: true)

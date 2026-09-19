@@ -41,7 +41,15 @@ struct SourcesView: View {
 	@ObservedObject private var _premiumFilter = PremiumFilterPreferences.shared
 
 	private var _filteredSources: [AltSource] {
-		_sources.filter { _searchText.isEmpty || ($0.name?.localizedCaseInsensitiveContains(_searchText) ?? false) }
+		let filtered = _sources.filter { _searchText.isEmpty || ($0.name?.localizedCaseInsensitiveContains(_searchText) ?? false) }
+		return filtered.sorted { lhs, rhs in
+			let lid = lhs.identifier ?? lhs.sourceURL?.absoluteString ?? ""
+			let rid = rhs.identifier ?? rhs.sourceURL?.absoluteString ?? ""
+			let lp = SourcePreferences.isPinned(lid)
+			let rp = SourcePreferences.isPinned(rid)
+			if lp != rp { return lp && !rp }
+			return (lhs.name ?? "") < (rhs.name ?? "")
+		}
 	}
 
 	@FetchRequest(

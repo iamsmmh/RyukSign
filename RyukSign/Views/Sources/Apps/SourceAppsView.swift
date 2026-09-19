@@ -128,6 +128,19 @@ struct SourceAppsView: View {
                         }
                     }
 
+                    Button {
+                        SourcePreferences.hideDuplicates.toggle()
+                        _forceUpdateTrigger += 1
+                    } label: {
+                        HStack {
+                            Text(.localized("Hide Duplicate Apps"))
+                            Spacer()
+                            if SourcePreferences.hideDuplicates {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+
                     if _localUpdateCount > 0 && !_sourcesShowUpdatesAsTab {
                         Divider()
 

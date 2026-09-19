@@ -109,6 +109,9 @@ struct SettingsView: View {
                     NavigationLink(destination: ConfigurationView()) {
                         Label(.localized("Signing Options"), systemImage: "signature")
                     }
+                    NavigationLink(destination: SigningProfilesView()) {
+                        Label(.localized("Signing Profiles"), systemImage: "person.crop.rectangle.stack")
+                    }
                     NavigationLink {
                         TweakLibraryList().navigationTitle(.localized("Tweaks"))
                     } label: {

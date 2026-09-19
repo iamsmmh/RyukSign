@@ -81,4 +81,5 @@ class AppNavigationManager: ObservableObject {
 
 extension Notification.Name {
     static let openIPAExplorer = Notification.Name("RyukSign.openIPAExplorer")
+    static let ryukShowOnboarding = Notification.Name("RyukSign.showOnboarding")
 }

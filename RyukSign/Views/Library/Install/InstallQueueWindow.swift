@@ -84,7 +84,19 @@ private struct InstallQueueSheet: View {
 
 	var body: some View {
 		Group {
-			if let installer = queue.installer, let current = queue.current {
+			if queue.isFinished {
+				VStack(spacing: 12) {
+					Text(.localized("Queue Finished"))
+						.font(.headline)
+					Text(.localized("%lld succeeded · %lld failed", arguments: queue.succeededCount, queue.failedCount))
+						.font(.subheadline)
+						.foregroundStyle(.secondary)
+					Button(.localized("Done")) { queue.clear() }
+						.buttonStyle(.borderedProminent)
+				}
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
+				.background(Color(UIColor.secondarySystemBackground))
+			} else if let installer = queue.installer, let current = queue.current {
 				InstallCardView(
 					installer: installer,
 					upcoming: queue.upcoming,

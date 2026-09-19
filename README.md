@@ -38,6 +38,14 @@ Added by RyukSign:
 - **Anti-Revoke** — generate a DNS-over-HTTPS configuration profile that pins the resolver used for Apple's certificate-verification hosts, for you to install yourself.
 - **Game Mode** — stops downloads and the background update pass while you play, so RyukSign uses no data and next to no battery. (Separately, Signing Options → Game Mode stamps `GCSupportsGameMode` into an app you sign.)
 - **Automation** — an opt-in scheduled pass that checks sources for updates, optionally signs and queues them, runs the cleanup sweep and posts one summary notification.
+- **Named signing profiles** — save, apply, export and import option snapshots (Settings → Signing Profiles, and the signing screen menu).
+- **Certificate health** — valid / expiring / revoked counts and a one-tap Apple status refresh on the Certificates screen.
+- **Install queue summary** — retry / skip / stop on failure, then a succeeded/failed tally when the run finishes.
+- **Source QoL** — pin sources, last-refresh / last-error, hide duplicate apps, copy IPA URL, open in browser.
+- **Download reliability** — Wi-Fi only, parallel cap, speed/ETA, resume when Game Mode turns off.
+- **Library sort** — name / date / size, On Device badge, swipe to re-sign with last settings.
+- **Storage rules** — keep only the newest signed copy, warn when Documents exceed N GB.
+- **Setup guide** — first-launch wizard for certificate import and install method.
 - **Curated repositories** and a fully configurable tab bar.
 
 ## Automation

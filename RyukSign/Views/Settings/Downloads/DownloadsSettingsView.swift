@@ -24,6 +24,15 @@ struct DownloadsSettingsView: View {
 	@AppStorage("Feather.dynamicOverlaySize")
 	private var _dynamicOverlaySize: Bool = true
 
+	@AppStorage(DownloadPreferences.wifiOnlyKey)
+	private var _wifiOnly: Bool = false
+
+	@AppStorage(DownloadPreferences.maxParallelKey)
+	private var _maxParallel: Int = 3
+
+	@AppStorage(DownloadPreferences.resumeAfterGameModeKey)
+	private var _resumeAfterGameMode: Bool = true
+
 	private let _downloadDisplayModes: [(value: String, name: String, desc: String)] = [
 		("floating", .localized("Floating Icon"), .localized("Shows a floating draggable download icon that opens up an overlay when clicked")),
 		("header", .localized("Download Header"), .localized("Shows a header at the top of the screen with download progress"))
@@ -44,6 +53,21 @@ struct DownloadsSettingsView: View {
 	// MARK: Body
 	var body: some View {
 		NBList(.localized("Downloads")) {
+			NBSection(.localized("Reliability")) {
+				Toggle(.localized("Wi-Fi Only"), isOn: $_wifiOnly)
+				Stepper(value: $_maxParallel, in: 1...8) {
+					HStack {
+						Text(.localized("Parallel downloads"))
+						Spacer()
+						Text(verbatim: "\(_maxParallel)")
+							.foregroundStyle(.secondary)
+					}
+				}
+				Toggle(.localized("Resume when Game Mode turns off"), isOn: $_resumeAfterGameMode)
+			} footer: {
+				Text(.localized("Wi-Fi only refuses cellular. Parallel cap keeps a huge IPA from starving everything else. Resume is the pair to Game Mode."))
+			}
+
 			NBSection(.localized("Display Mode")) {
 				Picker(.localized("Download Display Style"), selection: $_downloadDisplayMode) {
 					ForEach(_downloadDisplayModes, id: \.value) { mode in

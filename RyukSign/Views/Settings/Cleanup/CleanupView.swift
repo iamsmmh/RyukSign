@@ -18,6 +18,7 @@ struct CleanupView: View {
 	@AppStorage(CleanupManager.Key.enabled) private var _isEnabled: Bool = true
 	@AppStorage(CleanupManager.Key.oneTapInstall) private var _oneTapInstall: Bool = false
 	@AppStorage(StorageRules.keepOnlyLatestKey) private var _keepOnlyLatest: Bool = false
+	@AppStorage(StorageRules.warnGigabytesKey) private var _warnGB: Int = 0
 
 	@AppStorage(CleanupManager.Key.deleteAfterInstall) private var _deleteAfterInstall: Bool = false
 	@AppStorage(CleanupManager.Key.deleteDownloadedIPA) private var _deleteDownloadedIPA: Bool = false
@@ -181,8 +182,16 @@ extension CleanupView {
 	private var _rulesSection: some View {
 		NBSection(.localized("Rules")) {
 			Toggle(.localized("Keep only the newest signed copy"), isOn: $_keepOnlyLatest)
+			Stepper(value: $_warnGB, in: 0...64) {
+				HStack {
+					Text(.localized("Warn when storage exceeds"))
+					Spacer()
+					Text(_warnGB == 0 ? .localized("Off") : .localized("%lld GB", arguments: _warnGB))
+						.foregroundStyle(.secondary)
+				}
+			}
 		} footer: {
-			Text(.localized("When an app has several signed copies, the automatic sweep keeps the highest version and removes the rest."))
+			Text(.localized("When an app has several signed copies, the automatic sweep keeps the highest version and removes the rest. Certificates and pairing files are never auto-deleted. The warning is a toast on launch, not a deletion."))
 		}
 	}
 
