@@ -2,7 +2,7 @@
 //  DownloadSpeedTracker.swift
 //  VexSign
 //
-//  Created by Vex on 22.08.2026.
+//  Created by VexSign Team on 22.08.2026.
 //
 
 import Foundation

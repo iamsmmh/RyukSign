@@ -2,7 +2,7 @@
 //  PlistNodeView.swift
 //  VexSign
 //
-//  Created by Vex
+//  Created by VexSign Team
 //
 
 import SwiftUI

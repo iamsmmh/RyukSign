@@ -2,7 +2,7 @@
 //  VexSignWidgetExtensionBundle.swift
 //  VexSignWidgetExtension
 //
-//  Created by Vex Dev on 10/8/25.
+//  Created by VexSign Team Dev on 10/8/25.
 //
 
 import WidgetKit

@@ -2,7 +2,7 @@
 //  View+compatTransition.swift
 //  NimbleKit
 //
-//  Created by iamsmmh on 3.05.2025.
+//  Created by VexSign TeamSign Team on 3.05.2025.
 //
 
 import SwiftUI

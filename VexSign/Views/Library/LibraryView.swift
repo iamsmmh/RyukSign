@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 10.04.2025.
+//  Created by VexSign TeamSign Team on 10.04.2025.
 //
 
 import SwiftUI

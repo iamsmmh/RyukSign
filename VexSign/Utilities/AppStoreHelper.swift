@@ -2,7 +2,7 @@
 //  AppStoreHelper.swift
 //  VexSign
 //
-//  Created by Vex on 11.10.2025.
+//  Created by VexSign Team on 11.10.2025.
 //
 
 import Foundation

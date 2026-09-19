@@ -2,7 +2,7 @@
 //  Color+userTint.swift
 //  VexSign
 //
-//  Created by Vex on 24.08.2026.
+//  Created by VexSign Team on 24.08.2026.
 //
 
 import SwiftUI

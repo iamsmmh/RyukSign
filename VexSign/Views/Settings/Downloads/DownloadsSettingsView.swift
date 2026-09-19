@@ -2,7 +2,7 @@
 //  DownloadsSettingsView.swift
 //  VexSign
 //
-//  Created by Vex on 13.10.2025.
+//  Created by VexSign Team on 13.10.2025.
 //
 import SwiftUI
 import NimbleViews

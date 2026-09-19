@@ -2,8 +2,8 @@
 //  DylibHandler.swift
 //  vexsign
 //
-//  Created by iamsmmh on 8/17/24.
-//  Copyright (c) 2026 iamsmmh - VexSign
+//  Created by VexSign TeamSign Team on 8/17/24.
+//  Copyright (c) 2026 VexSign Team
 //
 
 import Foundation

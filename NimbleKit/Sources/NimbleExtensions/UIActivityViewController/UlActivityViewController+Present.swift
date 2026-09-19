@@ -2,7 +2,7 @@
 //  UlActivityViewController+Present.swift
 //  NimbleKit
 //
-//  Created by iamsmmh on 30.04.2025.
+//  Created by VexSign TeamSign Team on 30.04.2025.
 //
 
 import UIKit.UIActivityViewController

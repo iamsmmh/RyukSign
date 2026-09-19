@@ -2,7 +2,7 @@
 //  View+platformDrawerPlacement.swift
 //  NimbleKit
 //
-//  Created by iamsmmh on 5.05.2025.
+//  Created by VexSign TeamSign Team on 5.05.2025.
 //
 
 import SwiftUI

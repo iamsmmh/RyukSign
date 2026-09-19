@@ -2,8 +2,8 @@
 //  Certificate.swift
 //  vexsign
 //
-//  Created by iamsmmh on 5/18/24.
-//  Copyright (c) 2026 iamsmmh - VexSign
+//  Created by VexSign TeamSign Team on 5/18/24.
+//  Copyright (c) 2026 VexSign Team
 //
 
 import Foundation

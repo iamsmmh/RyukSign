@@ -2,7 +2,7 @@
 //  FRToolbarMenuStyle.swift
 //  VexSign
 //
-//  Created by iamsmmh on 14.04.2025.
+//  Created by VexSign TeamSign Team on 14.04.2025.
 //
 
 public enum NBToolbarMenuStyle {

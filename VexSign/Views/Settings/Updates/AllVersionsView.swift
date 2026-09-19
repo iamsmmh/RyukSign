@@ -2,7 +2,7 @@
 //  AllVersionsView.swift
 //  VexSign
 //
-//  Created by Vex on 05.07.2026.
+//  Created by VexSign Team on 05.07.2026.
 //
 
 import SwiftUI

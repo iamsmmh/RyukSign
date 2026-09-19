@@ -2,7 +2,7 @@
 //  AppearanceTintColorView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 14.06.2025.
+//  Created by VexSign TeamSign Team on 14.06.2025.
 //
 
 import SwiftUI

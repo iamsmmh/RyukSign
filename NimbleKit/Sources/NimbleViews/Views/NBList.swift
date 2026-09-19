@@ -2,7 +2,7 @@
 //  NBList.swift
 //  NimbleKit
 //
-//  Created by iamsmmh on 7.05.2025.
+//  Created by VexSign TeamSign Team on 7.05.2025.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  InstallationView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 3.06.2025.
+//  Created by VexSign TeamSign Team on 3.06.2025.
 //
 
 import SwiftUI

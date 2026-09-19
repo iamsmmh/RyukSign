@@ -2,7 +2,7 @@
 //  ResetView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 19.06.2025.
+//  Created by VexSign TeamSign Team on 19.06.2025.
 //
 
 import SwiftUI

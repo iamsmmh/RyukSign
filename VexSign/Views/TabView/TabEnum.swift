@@ -2,7 +2,7 @@
 //  TabEnum.swift
 //  vexsign
 //
-//  Created by iamsmmh on 22.03.2025.
+//  Created by VexSign TeamSign Team on 22.03.2025.
 //
 import SwiftUI
 import NimbleViews

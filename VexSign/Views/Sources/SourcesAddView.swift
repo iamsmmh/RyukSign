@@ -2,7 +2,7 @@
 //  SourcesAddView.swift
 //  VexSign
 //
-//  Created by iamsmmh on 1.05.2025.
+//  Created by VexSign TeamSign Team on 1.05.2025.
 //
 
 import SwiftUI
