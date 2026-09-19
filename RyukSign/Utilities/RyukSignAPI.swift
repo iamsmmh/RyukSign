@@ -15,8 +15,8 @@ import AltSourceKit
 enum RyukSignAPI {
 	// MARK: - Contact
 
-	static let telegramUsername = "@axryuk"
-	static let telegramURL = URL(string: "https://t.me/axryuk")!
+	static let telegramUsername = "@iamSMMH"
+	static let telegramURL = URL(string: "https://t.me/iamSMMH")!
 	static let contactSuffix = "Contact \(telegramUsername) on Telegram"
 
 	// MARK: - API
