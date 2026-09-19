@@ -2,7 +2,8 @@
 //  Persistence.swift
 //  VexSign
 //
-//  Created by VexSign TeamSign Team on 10.04.2025.
+//  Created by VexSign Team on 10.04.2025.
+//  Maintained by @iamsmmh — https://github.com/iamsmmh/VexSign
 //
 
 import CoreData
@@ -15,8 +16,14 @@ final class Storage: ObservableObject {
 	let container: NSPersistentContainer
 
 	private let _name: String = "VexSign"
+	private let _legacyName: String = "Feather" // For migration from old installs
 
 	init(inMemory: Bool = false) {
+		// Migrate legacy store file if exists (Feather.sqlite -> VexSign.sqlite) to preserve user data
+		if !inMemory {
+			Self._migrateLegacyStoreIfNeeded()
+		}
+
 		container = NSPersistentContainer(name: _name)
 
 		if inMemory {
@@ -65,6 +72,33 @@ final class Storage: ObservableObject {
 	func countContent<T: NSManagedObject>(for type: T.Type) -> String {
 		let request = T.fetchRequest()
 		return "\((try? context.count(for: request)) ?? 0)"
+	}
+
+	private static func _migrateLegacyStoreIfNeeded() {
+		let fm = FileManager.default
+		guard let appSupport = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return }
+		let legacyBase = appSupport.appendingPathComponent("Feather.sqlite")
+		let newBase = appSupport.appendingPathComponent("VexSign.sqlite")
+		
+		if fm.fileExists(atPath: newBase.path) { return }
+		if !fm.fileExists(atPath: legacyBase.path) { return }
+		
+		let legacyFiles = [
+			legacyBase,
+			legacyBase.deletingPathExtension().appendingPathExtension("sqlite-wal"),
+			legacyBase.deletingPathExtension().appendingPathExtension("sqlite-shm")
+		]
+		let newFiles = [
+			newBase,
+			newBase.deletingPathExtension().appendingPathExtension("sqlite-wal"),
+			newBase.deletingPathExtension().appendingPathExtension("sqlite-shm")
+		]
+		
+		for (oldFile, newFile) in zip(legacyFiles, newFiles) {
+			if fm.fileExists(atPath: oldFile.path) {
+				try? fm.moveItem(at: oldFile, to: newFile)
+			}
+		}
 	}
 
 	private func _loadPersistentStoreAggressively() {

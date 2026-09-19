@@ -42,6 +42,9 @@ struct VexSignApp: App {
     }
     
     init() {
+		// Migrate old UserDefaults keys (Feather/Ryuk) to new VexSign keys to preserve features for existing users
+		Self._migrateLegacyUserDefaults()
+
 		UserDefaults.standard.register(defaults: [
             "VexSign.serverMethod": 0, // Fully Local signing
             "VexSign.backgroundDownloadHeaderStartState": "collapsed",
@@ -60,6 +63,27 @@ struct VexSignApp: App {
             UserDefaults.standard.set(true, forKey: "com.apple.SwiftUI.IgnoreSolariumLinkedOnCheck")
         }
     }
+
+	private static func _migrateLegacyUserDefaults() {
+		let oldToNew: [String: String] = [
+			"feather.selectedCert": "vexsign.selectedCert",
+			"Feather.serverMethod": "VexSign.serverMethod",
+			"Feather.backgroundDownloadHeaderStartState": "VexSign.backgroundDownloadHeaderStartState",
+			"Feather.showDownloadHeaderInSourcesTab": "VexSign.showDownloadHeaderInSourcesTab",
+			"Feather.downloadDisplayMode": "VexSign.downloadDisplayMode",
+			"Feather.sourcesShowUpdatesAsTab": "VexSign.sourcesShowUpdatesAsTab",
+			"Feather.downloadOverlayTheme": "VexSign.downloadOverlayTheme",
+			"Feather.dynamicOverlaySize": "VexSign.dynamicOverlaySize",
+			"Feather.userInterfaceStyle": "VexSign.userInterfaceStyle",
+			"RyukSign.onboardingCompleted": "VexSign.onboardingCompleted"
+		]
+		for (oldKey, newKey) in oldToNew {
+			if UserDefaults.standard.object(forKey: newKey) == nil,
+			   let oldValue = UserDefaults.standard.object(forKey: oldKey) {
+				UserDefaults.standard.set(oldValue, forKey: newKey)
+			}
+		}
+	}
     
     var body: some Scene {
         WindowGroup {
@@ -158,7 +182,8 @@ struct VexSignApp: App {
 	
 	private func _handleURL(_ url: URL) {
 		let scheme = url.scheme?.lowercased()
-		if scheme == "vexsign" || scheme == "vexsign" {
+		// Support both new vexsign:// and legacy feather:// for backward compatibility - don't break features
+		if scheme == "vexsign" || scheme == "feather" {
 			/// vexsign://import-certificate?p12=<base64>&mobileprovision=<base64>&password=<base64>
 			if url.host == "import-certificate" {
 				guard
