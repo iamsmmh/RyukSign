@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 
 // MARK: - Class extension: Apps (Shared)
 extension Storage {

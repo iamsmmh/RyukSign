@@ -56,10 +56,10 @@ struct BackgroundAutomationPreferences {
 struct AutomationRunResult {
 	let refreshedSources: Int
 	let foundUpdates: Int
-	let signed: Int
-	let queueAdded: Int
-	let skipped: Int
-	let cleanup: CleanupSummary?
+	var signed: Int
+	var queueAdded: Int
+	var skipped: Int
+	var cleanup: CleanupSummary?
 }
 
 // MARK: - Runner

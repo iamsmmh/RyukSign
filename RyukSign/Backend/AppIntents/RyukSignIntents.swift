@@ -100,6 +100,7 @@ struct OpenIPAExplorerIntent: AppIntent {
 // MARK: - Shortcuts provider
 
 /// Binds the intents into the Shortcuts gallery.
+@available(iOS 17.0, *)
 struct RyukSignShortcutsProvider: AppShortcutsProvider {
 	@AppShortcutsBuilder
 	static var appShortcuts: [AppShortcut] {
