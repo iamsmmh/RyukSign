@@ -167,3 +167,22 @@ server items needs a device (Zsign requires real hardware).
 - Don't break the Tweak Manager: tweak injection paths (`TweakHandler`, `SigningHandler`) were not
   touched by this branch, but the File Manager can now import a `.deb`/`.dylib` from Documents into
   the Tweak Manager library, so it is worth re-testing injection after any change there.
+
+## 6. The guide's known issues, checked against this tree
+
+The guide lists five problems it ran into while merging. None of them are live here — recorded so
+a later merge does not "fix" something that is not broken:
+
+- **Concurrency-safe `apiKeyProvider`** — this fork reads the premium key through `RyukSignAPI`,
+  which is backed by the keychain (`IdentityVault`), rather than a mutable global on a fetch
+  service. There is no shared mutable state to make safe.
+- **`StorageScanner.leftovers` visibility** — `StorageCategory.leftovers` exists in
+  `StorageManager.swift` and both `StorageManager` and `CleanupManager` use it.
+- **`nonisolated` on MainActor properties** — the split is per-type, not per-property:
+  `GameMode` keeps the preference reads and the inline toast `nonisolated` and marks the
+  lifecycle + alert paths `@MainActor`; `AntiRevokeManager.buildProfile` is `nonisolated` with
+  callers hopping. The new code follows the same rule.
+- **`AltSourceKit` import guard** — already `#if canImport(AltSourceKit)` in `FR.swift`,
+  `RyukSignAPI.swift` and `SourcesAddView+Repositories.swift`. The package is a submodule, so the
+  guard matters whenever it is not checked out.
+- **`ObservedObject(wrappedValue:)`** — not used anywhere in this tree.
